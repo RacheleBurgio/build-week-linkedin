@@ -39,8 +39,8 @@
   --bs-light: #f8f9fa;
   --bs-dark: #212529;
   --bs-white: #fafafa;
-  --bs-gray: #808080;
-  --bs-gray-light: #808080;
+  --bs-gray: #4d4c4c;
+  --bs-gray-light: #4d4c4c;
   --bs-red: #ff0000;
   --bs-yellow: #ffcc00;
   --bs-gray-100: #f8f9fa;
@@ -58,8 +58,8 @@
   --bs-light-rgb: 248, 249, 250;
   --bs-dark-rgb: 33, 37, 41;
   --bs-white-rgb: 250, 250, 250;
-  --bs-gray-rgb: 128, 128, 128;
-  --bs-gray-light-rgb: 128, 128, 128;
+  --bs-gray-rgb: 77, 76, 76;
+  --bs-gray-light-rgb: 77, 76, 76;
   --bs-red-rgb: 255, 0, 0;
   --bs-yellow-rgb: 255, 204, 0;
   --bs-gray-100-rgb: 248, 249, 250;
@@ -3186,37 +3186,37 @@ textarea.form-control-lg {
 }
 
 .btn-gray {
-  --bs-btn-color: #000;
-  --bs-btn-bg: #808080;
-  --bs-btn-border-color: #808080;
-  --bs-btn-hover-color: #000;
-  --bs-btn-hover-bg: #939393;
-  --bs-btn-hover-border-color: #8d8d8d;
-  --bs-btn-focus-shadow-rgb: 109, 109, 109;
-  --bs-btn-active-color: #000;
-  --bs-btn-active-bg: #999999;
-  --bs-btn-active-border-color: #8d8d8d;
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #4d4c4c;
+  --bs-btn-border-color: #4d4c4c;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #414141;
+  --bs-btn-hover-border-color: #3e3d3d;
+  --bs-btn-focus-shadow-rgb: 104, 103, 103;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #3e3d3d;
+  --bs-btn-active-border-color: #3a3939;
   --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-  --bs-btn-disabled-color: #000;
-  --bs-btn-disabled-bg: #808080;
-  --bs-btn-disabled-border-color: #808080;
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: #4d4c4c;
+  --bs-btn-disabled-border-color: #4d4c4c;
 }
 
 .btn-gray-light {
-  --bs-btn-color: #000;
-  --bs-btn-bg: #808080;
-  --bs-btn-border-color: #808080;
-  --bs-btn-hover-color: #000;
-  --bs-btn-hover-bg: #939393;
-  --bs-btn-hover-border-color: #8d8d8d;
-  --bs-btn-focus-shadow-rgb: 109, 109, 109;
-  --bs-btn-active-color: #000;
-  --bs-btn-active-bg: #999999;
-  --bs-btn-active-border-color: #8d8d8d;
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #4d4c4c;
+  --bs-btn-border-color: #4d4c4c;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #414141;
+  --bs-btn-hover-border-color: #3e3d3d;
+  --bs-btn-focus-shadow-rgb: 104, 103, 103;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #3e3d3d;
+  --bs-btn-active-border-color: #3a3939;
   --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-  --bs-btn-disabled-color: #000;
-  --bs-btn-disabled-bg: #808080;
-  --bs-btn-disabled-border-color: #808080;
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: #4d4c4c;
+  --bs-btn-disabled-border-color: #4d4c4c;
 }
 
 .btn-red {
@@ -3509,36 +3509,36 @@ textarea.form-control-lg {
 }
 
 .btn-outline-gray {
-  --bs-btn-color: #808080;
-  --bs-btn-border-color: #808080;
-  --bs-btn-hover-color: #000;
-  --bs-btn-hover-bg: #808080;
-  --bs-btn-hover-border-color: #808080;
-  --bs-btn-focus-shadow-rgb: 128, 128, 128;
-  --bs-btn-active-color: #000;
-  --bs-btn-active-bg: #808080;
-  --bs-btn-active-border-color: #808080;
+  --bs-btn-color: #4d4c4c;
+  --bs-btn-border-color: #4d4c4c;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #4d4c4c;
+  --bs-btn-hover-border-color: #4d4c4c;
+  --bs-btn-focus-shadow-rgb: 77, 76, 76;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #4d4c4c;
+  --bs-btn-active-border-color: #4d4c4c;
   --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-  --bs-btn-disabled-color: #808080;
+  --bs-btn-disabled-color: #4d4c4c;
   --bs-btn-disabled-bg: transparent;
-  --bs-btn-disabled-border-color: #808080;
+  --bs-btn-disabled-border-color: #4d4c4c;
   --bs-gradient: none;
 }
 
 .btn-outline-gray-light {
-  --bs-btn-color: #808080;
-  --bs-btn-border-color: #808080;
-  --bs-btn-hover-color: #000;
-  --bs-btn-hover-bg: #808080;
-  --bs-btn-hover-border-color: #808080;
-  --bs-btn-focus-shadow-rgb: 128, 128, 128;
-  --bs-btn-active-color: #000;
-  --bs-btn-active-bg: #808080;
-  --bs-btn-active-border-color: #808080;
+  --bs-btn-color: #4d4c4c;
+  --bs-btn-border-color: #4d4c4c;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #4d4c4c;
+  --bs-btn-hover-border-color: #4d4c4c;
+  --bs-btn-focus-shadow-rgb: 77, 76, 76;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #4d4c4c;
+  --bs-btn-active-border-color: #4d4c4c;
   --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-  --bs-btn-disabled-color: #808080;
+  --bs-btn-disabled-color: #4d4c4c;
   --bs-btn-disabled-bg: transparent;
-  --bs-btn-disabled-border-color: #808080;
+  --bs-btn-disabled-border-color: #4d4c4c;
   --bs-gradient: none;
 }
 
@@ -7458,12 +7458,12 @@ textarea.form-control-lg {
 }
 
 .text-bg-gray {
-  color: #000 !important;
+  color: #fff !important;
   background-color: RGBA(var(--bs-gray-rgb), var(--bs-bg-opacity, 1)) !important;
 }
 
 .text-bg-gray-light {
-  color: #000 !important;
+  color: #fff !important;
   background-color: RGBA(var(--bs-gray-light-rgb), var(--bs-bg-opacity, 1)) !important;
 }
 
@@ -7593,8 +7593,8 @@ textarea.form-control-lg {
   text-decoration-color: RGBA(var(--bs-gray-rgb), var(--bs-link-underline-opacity, 1)) !important;
 }
 .link-gray:hover, .link-gray:focus {
-  color: RGBA(153, 153, 153, var(--bs-link-opacity, 1)) !important;
-  text-decoration-color: RGBA(153, 153, 153, var(--bs-link-underline-opacity, 1)) !important;
+  color: RGBA(62, 61, 61, var(--bs-link-opacity, 1)) !important;
+  text-decoration-color: RGBA(62, 61, 61, var(--bs-link-underline-opacity, 1)) !important;
 }
 
 .link-gray-light {
@@ -7602,8 +7602,8 @@ textarea.form-control-lg {
   text-decoration-color: RGBA(var(--bs-gray-light-rgb), var(--bs-link-underline-opacity, 1)) !important;
 }
 .link-gray-light:hover, .link-gray-light:focus {
-  color: RGBA(153, 153, 153, var(--bs-link-opacity, 1)) !important;
-  text-decoration-color: RGBA(153, 153, 153, var(--bs-link-underline-opacity, 1)) !important;
+  color: RGBA(62, 61, 61, var(--bs-link-opacity, 1)) !important;
+  text-decoration-color: RGBA(62, 61, 61, var(--bs-link-underline-opacity, 1)) !important;
 }
 
 .link-red {
@@ -13467,16 +13467,6 @@ body {
 
 .slick-prev,
 .slick-next {
-  display: none !important;
   position: absolute;
   top: 1.5rem;
-}
-
-#weatherPopup {
-  width: 200px;
-}
-@media screen and (min-width: 568px) {
-  #weatherPopup {
-    width: 300px;
-  }
 }/*# sourceMappingURL=custom-bootstrap.css.map */

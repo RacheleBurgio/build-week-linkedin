@@ -1,7 +1,7 @@
 import React from 'react';
 import '../assets/css/custom-bootstrap.css';
 
-const ColonnaCentraleAlto = ({ profile }) => {
+const ColonnaCentraleAlto = ({ profile, recommendedContacts, analyticsData, activityList }) => {
   return (
     <div className="container mt-4">
       <div className="card mb-4">
@@ -28,19 +28,19 @@ const ColonnaCentraleAlto = ({ profile }) => {
       </div>
 
       {/* Sezione Consigliati per Te */}
-      <RecommendedForYou />
+      <RecommendedForYou contacts={recommendedContacts} />
 
       {/* Sezione Analisi */}
-      <Analytics />
+      <Analytics data={analyticsData} />
 
       {/* Sezione Attività */}
-      <Activity />
+      <Activity activities={activityList} />
     </div>
   );
 };
 
 // Componente Consigliati per Te
-const RecommendedForYou = () => {
+const RecommendedForYou = ({ contacts }) => {
   return (
     <div className="card mb-4">
       <div className="card-header">
@@ -48,9 +48,9 @@ const RecommendedForYou = () => {
       </div>
       <div className="card-body">
         <ul className="list-group">
-          <li className="list-group-item">Contatto 1</li>
-          <li className="list-group-item">Contatto 2</li>
-          <li className="list-group-item">Contatto 3</li>
+          {contacts.map((contact, index) => (
+            <li key={index} className="list-group-item">{contact}</li>
+          ))}
         </ul>
       </div>
     </div>
@@ -58,22 +58,22 @@ const RecommendedForYou = () => {
 };
 
 // Componente Analisi
-const Analytics = () => {
+const Analytics = ({ data }) => {
   return (
     <div className="card mb-4">
       <div className="card-header">
         <h5>Analisi</h5>
       </div>
       <div className="card-body">
-        <p>Visualizzazioni del profilo: 123</p>
-        <p>Visualizzazioni dei post: 456</p>
+        <p>Visualizzazioni del profilo: {data.profileViews}</p>
+        <p>Visualizzazioni dei post: {data.postViews}</p>
       </div>
     </div>
   );
 };
 
 // Componente Attività
-const Activity = () => {
+const Activity = ({ activities }) => {
   return (
     <div className="card mb-4">
       <div className="card-header">
@@ -81,13 +81,13 @@ const Activity = () => {
       </div>
       <div className="card-body">
         <ul className="list-group">
-          <li className="list-group-item">Hai commentato un post</li>
-          <li className="list-group-item">Hai condiviso un articolo</li>
-          <li className="list-group-item">Hai aggiunto una nuova competenza</li>
+          {activities.map((activity, index) => (
+            <li key={index} className="list-group-item">{activity}</li>
+          ))}
         </ul>
       </div>
     </div>
   );
 }
 
-export default ColonnaCentraleAlto;;
+export default ColonnaCentraleAlto;

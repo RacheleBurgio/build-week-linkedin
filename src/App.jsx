@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Container } from 'react-bootstrap'
+import { Alert, Container } from 'react-bootstrap'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -16,13 +16,12 @@ import './assets/css/custom-bootstrap.css'
 import './assets/css/footer.css'
 
 import MyNav from './components/Navbar'
+import Feed from './components/Feed'
 import Sidebar from './components/Sidebar'
 import Footer from './components/Footer'
 import Profile from './components/Profile'
 import Post from './components/Post'
 import Comment from './components/Comment'
-
-import ColonnaCentrale from './components/ColonnaCentrale'
 
 // Wrapper per estrarre i parametri e passarli ai componenti
 const ProfileWrapper = () => {
@@ -39,7 +38,6 @@ const CommentWrapper = () => {
   const { id } = useParams()
   return <Comment commentId={id} />
 }
-import Footer from './components/Footer'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -53,11 +51,16 @@ function App() {
         <main>
           <Container>
             <Routes>
+              <Route path='/' element={<Feed />} />
               <Route path='/feed' element={<Feed />} />
               <Route path='/profile' element={<Profile />} />
               <Route path='/profile/:profileId' element={<ProfileWrapper />} />
               <Route path='/post/:postId' element={<PostWrapper />} />
               <Route path='/comment/:id' element={<CommentWrapper />} />
+              <Route
+                path='*'
+                element={<Alert variant='danger'>Pagina non trovata</Alert>}
+              />
             </Routes>
           </Container>
           <Sidebar />

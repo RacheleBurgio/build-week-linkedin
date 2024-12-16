@@ -1,9 +1,6 @@
+import { useEffect, useState } from 'react'
 import ProfileUp from './ProfileUp'
 import ProfileDown from './ProfileDown'
-
-useEffect(() => {
-  fetchExperiences()
-}, [props.profileId])
 
 const Profile = (props) => {
   return (

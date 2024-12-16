@@ -1,0 +1,124 @@
+@import '../scss/functions';
+@import '../scss/variables';
+
+$white: #fafafa;
+$gray: #808080;
+$gray-light: #808080;
+$red: #ff0000;
+$yellow: #ffcc00;
+
+$custom-theme-colors: (
+  'white': $white,
+  'gray': $gray,
+  'gray-light': $gray,
+  'red': $red,
+  'yellow': $yellow,
+  'gray-100': $gray-100,
+  'gray-200': $gray-200,
+  'gray-300': $gray-300,
+  'gray-400': $gray-400,
+  'gray-500': $gray-500,
+  'gray-600': $gray-600,
+);
+
+$theme-colors: map-merge($theme-colors, $custom-theme-colors);
+
+$custom-font-sizes: (
+  7: $font-size-base * 0.75,
+  8: $font-size-base * 0.5,
+  9: $font-size-base * 0.25,
+  bigtitle: $font-size-base * 4,
+);
+
+$font-sizes: map-merge($font-sizes, $custom-font-sizes);
+
+// Nuovi valori da aggiungere alla mappa "width"
+$new-width-values: (
+  5: 5%,
+  10: 10%,
+  15: 15%,
+  20: 20%,
+  25: 25%,
+  50: 50%,
+  75: 75%,
+  80: 80%,
+  85: 85%,
+  90: 90%,
+  95: 95%,
+  100: 100%,
+  auto: auto,
+);
+
+// Creo una nuova mappa di valori "width" unendo i valori esistenti con i nuovi
+$utilities: (
+  'width': (
+    property: width,
+    class: w,
+    values: $new-width-values,
+  ),
+);
+
+$custom-position-values: (
+  1: 1%,
+  2: 2%,
+  3: 3%,
+  4: 4%,
+  5: 5%,
+  6: 6%,
+  7: 7%,
+  8: 8%,
+  9: 9%,
+  10: 10%,
+  15: 15%,
+  20: 20%,
+  25: 25%,
+  30: 30%,
+  35: 35%,
+  40: 40%,
+  45: 45%,
+  50: 50%,
+  55: 55%,
+  60: 60%,
+  65: 65%,
+  70: 70%,
+  75: 75%,
+  80: 80%,
+  85: 85%,
+  90: 90%,
+  95: 95%,
+);
+
+$position-values: map-merge($position-values, $custom-position-values);
+
+// Import del Google font Inter
+@import url('http://fonts.googleapis.com/css?family=Inter:400,300,700');
+
+@import '../scss/bootstrap.scss';
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif !important;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  color: black !important;
+}
+
+.slick-prev,
+.slick-next {
+  // Comunuq li nasconso avendo spostato i controlli sulla timeline
+  display: none !important;
+  position: absolute;
+  top: 1.5rem;
+}
+
+#weatherPopup {
+  width: 200px;
+  @media screen and (min-width: 568px) {
+    width: 300px;
+  }
+}

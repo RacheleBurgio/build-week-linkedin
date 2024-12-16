@@ -39,6 +39,7 @@ const CommentWrapper = () => {
   const { id } = useParams()
   return <Comment commentId={id} />
 }
+import Footer from './components/Footer'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -52,7 +53,7 @@ function App() {
         <main>
           <Container>
             <Routes>
-              <Route path='/feed' element={<Fded />} />
+              <Route path='/feed' element={<Feed />} />
               <Route path='/profile' element={<Profile />} />
               <Route path='/profile/:profileId' element={<ProfileWrapper />} />
               <Route path='/post/:postId' element={<PostWrapper />} />
@@ -61,7 +62,9 @@ function App() {
           </Container>
           <Sidebar />
         </main>
-        <footer></footer>
+        <footer>
+          <Footer />
+        </footer>
       </>
     </Router>
   )

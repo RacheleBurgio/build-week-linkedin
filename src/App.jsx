@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import ColonnaCentrale from './components/ColonnaCentrale'
 import MyNav from './components/Navbar'
+import Footer from './components/Footer'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -21,7 +22,9 @@ function App() {
           <ColonnaCentrale />
         </Container>
       </main>
-      <footer></footer>
+      <footer>
+        <Footer />
+      </footer>
     </>
   )
 }

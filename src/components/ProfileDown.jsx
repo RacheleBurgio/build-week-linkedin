@@ -3,6 +3,7 @@ import { Card, ListGroup, Container, Row, Col } from 'react-bootstrap'
 import axios from 'axios'
 import '../assets/css/custom-bootstrap.css'
 import { MdOutlineDiamond } from 'react-icons/md'
+import { getMe } from './getMe '
 
 // Funzione per formattare la data in "Mese Anno" o "Present"
 const formatDate = (dateString) => {
@@ -101,3 +102,5 @@ const ProfileDown = (props) => {
 }
 
 export default ProfileDown
+
+const datiProfilo = getMe()

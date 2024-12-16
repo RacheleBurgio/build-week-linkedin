@@ -13,9 +13,11 @@ import {
 } from 'react-router-dom'
 
 import './assets/css/custom-bootstrap.css'
+import './assets/css/footer.css'
 
 import MyNav from './components/Navbar'
-import Home from './components/Home'
+import Sidebar from './components/Sidebar'
+import Footer from './components/Footer'
 import Profile from './components/Profile'
 import Post from './components/Post'
 import Comment from './components/Comment'
@@ -57,6 +59,7 @@ function App() {
               <Route path='/comment/:id' element={<CommentWrapper />} />
             </Routes>
           </Container>
+          <Sidebar />
         </main>
         <footer></footer>
       </>

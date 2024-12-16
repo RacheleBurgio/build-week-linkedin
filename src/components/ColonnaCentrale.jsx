@@ -1,6 +1,6 @@
 import React from 'react'
-import ColonnaCentraleAlto from './ColonnaCentraleAlto'
-import ColonnaCentraleBasso from './ColonnaCentraleBasso'
+import ColonnaCentraleAlto from './ProfileUp'
+import ColonnaCentraleBasso from './ProfileDown'
 import { Container } from 'react-bootstrap'
 
 const ColonnaCentrale = () => {

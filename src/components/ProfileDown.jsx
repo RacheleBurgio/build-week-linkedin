@@ -56,7 +56,7 @@ const ExperienceCard = ({
 }
 
 // Componente principale per visualizzare la sezione dinamica
-const ColonnaCentraleBasso = (props) => {
+const ProfileDown = (props) => {
   const [experiences, setExperiences] = useState([]) // Stato locale per le esperienze
 
   // Recupera la API key dalle variabili d'ambiente
@@ -66,7 +66,7 @@ const ColonnaCentraleBasso = (props) => {
   const fetchExperiences = async () => {
     try {
       const response = await axios.get(
-        `https://striveschool-api.herokuapp.com/api/profile/${props.userId}/experiences`,
+        `https://striveschool-api.herokuapp.com/api/profile/${props.profileId}/experiences`,
         {
           headers: {
             Authorization: `Bearer ${apiKey}`,
@@ -82,7 +82,7 @@ const ColonnaCentraleBasso = (props) => {
   // useEffect per richiamare la fetch al caricamento del componente o al cambio di userId
   useEffect(() => {
     fetchExperiences()
-  }, [props.userId])
+  }, [props.profileId])
 
   return (
     <Container className='mt-4 border rounded border-1 p-2'>
@@ -100,4 +100,4 @@ const ColonnaCentraleBasso = (props) => {
   )
 }
 
-export default ColonnaCentraleBasso
+export default ProfileDown

@@ -6,4 +6,4 @@ const ColonnaCentralBasso = () => {
   )
 }
 
-export default ColonnaCentraleBasso
+export default ColonnaCentralBasso

@@ -7,18 +7,18 @@ const ImpostazioniProfilo = () => {
 
     return(
         
-        <Container className='bg-white'>
-            <Row>
-               <Col sm={8}>Lingua del profilo</Col>
-               <Col sm={4}><i className="bi bi-pencil"></i></Col>
-               <Col sm={8}>Italiano</Col>
-               <Col sm={4}></Col>
+        <Container className='bg-white border rounded mb-4'>
+            <Row className='p-2'>
+               <Col sm={10} className='h6 fw-bold'>Lingua del profilo</Col>
+               <Col sm={2}><i className="bi bi-pencil"></i></Col>
+               <Col sm={10}className='fs-7 text-secondary'>Italiano</Col>
+               <Col sm={2}></Col>
             </Row>
-            <Row>
-                <Col sm={8}>Profilo pubblico e URL</Col>
-               <Col sm={4}><i className="bi bi-pencil"></i></Col>
-               <Col sm={8}>www.linkedin.com/in/annatokky/idUtente</Col>
-               <Col sm={4}></Col>
+            <Row className='p-2'>
+                <Col sm={10} className='h6 fw-bold'>Profilo pubblico e URL</Col>
+               <Col sm={2}><i className="bi bi-pencil "></i></Col>
+               <Col sm={10} className='fs-7 text-secondary'>www.linkedin.com/in/annatokky/idUtente</Col>
+               <Col sm={2}></Col>
             </Row>
         </Container>
         

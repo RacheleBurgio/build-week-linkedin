@@ -51,28 +51,34 @@ const ProfiliPerTe = () => {
   }
 
   return (
-    <Container>
+    <Container className="p-0 mt-2 border rounded">
       <Row className="justify-content-center">
         {profiles.map((profile) => (
-          <Col key={profile._id} md={4} className="mb-4">
-            <Card className="text-center shadow-sm border-0">
+          <Col key={profile._id} sm={12} className="mb-4">
+            <Card className="text-center border-0">
               <Card.Body>
+             <Row>
+               <Col sm={2}> 
                 <img
                   src={profile.image || "https://via.placeholder.com/100"}
                   alt={`${profile.name} ${profile.surname}`}
                   className="rounded-circle mb-2"
-                  width="80"
-                  height="80"
+                  width="60"
+                  height="60" 
                 />
-                <Card.Title className="fw-bold">
+               </Col>
+               <Col sm={10}>
+                <Card.Title className="h6 fw-bold">
                   {profile.name} {profile.surname}
                 </Card.Title>
                 <Card.Text className="text-muted">
                   {profile.title || "Titolo non disponibile"}
                 </Card.Text>
-                <Button variant="outline-dark" size="sm">
+                <Button variant="outline-dark rounded-pill" size="sm">
                   Visualizza profilo
                 </Button>
+               </Col>
+               </Row>
               </Card.Body>
             </Card>
           </Col>

@@ -32,25 +32,30 @@ const CommentWrapper = () => {
   const { id } = useParams()
   return <Comment commentId={id} />
 }
+import MyNav from './components/Navbar'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <Router>
-      <Container>
-        <header></header>
+      <>
+        <header>
+          <MyNav />
+        </header>
         <main>
-          <Routes>
-            <Route path='/' element={<ColonnaCentrale />} />
-            <Route path='/profile' element={<Profile />} />
-            <Route path='/profile/:profileId' element={<ProfileWrapper />} />
-            <Route path='/post/:postId' element={<PostWrapper />} />
-            <Route path='/comment/:id' element={<CommentWrapper />} />
-          </Routes>
+          <Container>
+            <Routes>
+              <Route path='/' element={<ColonnaCentrale />} />
+              <Route path='/profile' element={<Profile />} />
+              <Route path='/profile/:profileId' element={<ProfileWrapper />} />
+              <Route path='/post/:postId' element={<PostWrapper />} />
+              <Route path='/comment/:id' element={<CommentWrapper />} />
+            </Routes>
+          </Container>
         </main>
         <footer></footer>
-      </Container>
+      </>
     </Router>
   )
 }

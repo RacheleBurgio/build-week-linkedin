@@ -6,18 +6,23 @@ import './assets/css/custom-bootstrap.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import ColonnaCentrale from './components/ColonnaCentrale'
+import MyNav from './components/Navbar'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <Container>
-      <header></header>
+    <>
+      <header>
+        <MyNav />
+      </header>
       <main>
-        <ColonnaCentrale />
+        <Container>
+          <ColonnaCentrale />
+        </Container>
       </main>
       <footer></footer>
-    </Container>
+    </>
   )
 }
 

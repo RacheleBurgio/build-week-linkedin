@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 import { useEffect, useState } from 'react'
 import { Alert, Container, Row, Col } from 'react-bootstrap'
 import 'slick-carousel/slick/slick.css'
@@ -19,10 +18,6 @@ import './assets/css/custom-bootstrap.css'
 import './assets/css/footer.css'
 
 import MyNav from './components/Navbar'
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
 import Feed from './components/Feed'
 import Sidebar from './components/Sidebar'
 import Footer from './components/Footer'
@@ -63,10 +58,6 @@ const CommentWrapper = () => {
   const { id } = useParams()
   return <Comment commentId={id} />
 }
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
 
 function App() {
   const dispatch = useDispatch()
@@ -77,10 +68,6 @@ function App() {
   }, [dispatch])
 
   return (
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
     <Router>
       <>
         <header>
@@ -139,10 +126,6 @@ function App() {
         </footer>
       </>
     </Router>
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
   )
 }
 

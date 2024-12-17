@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Alert, Container } from 'react-bootstrap'
+import { Alert, Container, Row, Col } from 'react-bootstrap'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -75,20 +75,29 @@ function App() {
         </header>
         <main>
           <Container>
-            <Routes>
-              <Route path='/' element={<Feed />} />
-              <Route path='/feed' element={<Feed />} />
-              <Route path='/profile' element={<ProfileWrapper />} />
-              <Route path='/profile/:profileId' element={<ProfileWrapper />} />
-              <Route path='/post/:postId' element={<PostWrapper />} />
-              <Route path='/comment/:id' element={<CommentWrapper />} />
-              <Route
-                path='*'
-                element={<Alert variant='danger'>Pagina non trovata</Alert>}
-              />
-            </Routes>
+            <Row>
+              <Col>
+                <Routes>
+                  <Route path='/' element={<Feed />} />
+                  <Route path='/feed' element={<Feed />} />
+                  <Route path='/profile' element={<ProfileWrapper />} />
+                  <Route
+                    path='/profile/:profileId'
+                    element={<ProfileWrapper />}
+                  />
+                  <Route path='/post/:postId' element={<PostWrapper />} />
+                  <Route path='/comment/:id' element={<CommentWrapper />} />
+                  <Route
+                    path='*'
+                    element={<Alert variant='danger'>Pagina non trovata</Alert>}
+                  />
+                </Routes>
+              </Col>
+              <Col>
+                <Sidebar />
+              </Col>
+            </Row>
           </Container>
-          <Sidebar />
         </main>
         <footer>
           <Footer />
@@ -99,3 +108,4 @@ function App() {
 }
 
 export default App
+

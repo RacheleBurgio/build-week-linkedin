@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { Card, ListGroup, Container, Row, Col } from 'react-bootstrap'
 
 import '../assets/css/custom-bootstrap.css'
-import { MdOutlineDiamond } from 'react-icons/md'
-// import getMe from '../getMe '
 
 // Funzione per formattare la data in "Mese Anno" o "Present"
 const formatDate = (dateString) => {

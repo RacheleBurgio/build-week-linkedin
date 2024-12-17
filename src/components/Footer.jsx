@@ -62,8 +62,8 @@ const Footer = () => {
         <Col>
           <ul>
             <li>
-              <div>
-                <HiMiniQuestionMarkCircle />
+              <div className="item">
+                <HiMiniQuestionMarkCircle className="footer-icon" />
                 <div>
                   <a href="#">Domande?</a>
                   <p>Visita il nostro Centro assistenza.</p>
@@ -71,8 +71,8 @@ const Footer = () => {
               </div>
             </li>
             <li>
-              <div>
-                <IoMdSettings />
+              <div className="item">
+                <IoMdSettings className="footer-icon" />
                 <div>
                   <a href="#">Gestisci il tuo account e la tua privacy</a>
                   <p>Vai alle impostazioni</p>
@@ -80,8 +80,8 @@ const Footer = () => {
               </div>
             </li>
             <li>
-              <div>
-                <MdOutlineImportContacts />
+              <div className="item">
+                <MdOutlineImportContacts className="footer-icon" />
                 <div>
                   <a href="#">Trasparenza sui contenuti consigliati</a>
                   <p>Scopri di più sui contenuti consigliati.</p>

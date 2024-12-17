@@ -6,12 +6,12 @@ import { Link } from 'react-router-dom'
 
 const apiKey = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzVmZmQwZDBlYTI4NjAwMTUyOGI5NDYiLCJpYXQiOjE3MzQzNDM5NTAsImV4cCI6MTczNTU1MzU1MH0.VyBDNibtSyY_vJnvWCb5kRjmi71qS5zSGNwkr4qBW98`
 
-const ProfiliSidebar = (props) => {
+const ProfiliPerTe = () => {
   const [profiles, setProfiles] = useState([])
   const [loading, setLoading] = useState(true)
 
   // Funzione per ottenere 3 profili casuali evitando duplicati
-  const getRandomProfiles = (allProfiles, count = props.profileNumber) => {
+  const getRandomProfiles = (allProfiles, count = 3) => {
     const result = new Set()
     while (result.size < count) {
       const randomIndex = Math.floor(Math.random() * allProfiles.length)
@@ -50,42 +50,39 @@ const ProfiliSidebar = (props) => {
   }, [])
 
   if (loading) {
-    return <p className="text-center mt-5">Caricamento in corso...</p>
+    return <p className='text-center mt-5'>Caricamento in corso...</p>
   }
 
   return (
-    <Container fluid className="p-0 mt-2 border rounded">
-      <h3>{props.title}</h3>
-      <Row className="justify-content-center">
+    <Container className='p-0 mt-2 border rounded'>
+      <Row className='justify-content-center'>
         {profiles.map((profile) => (
-          <Col key={profile._id} sm={12} className="mb-4">
-            <Card className="text-center border-0">
+          <Col key={profile._id} sm={12} className='mb-4'>
+            <Card className='text-center border-0'>
               <Card.Body>
                 <Row>
-                  <Col xs={2}>
+                  <Col sm={2}>
                     <img
                       src={profile.image || 'https://via.placeholder.com/100'}
                       alt={`${profile.name} ${profile.surname}`}
-                      className="rounded-circle mb-2"
-                      width="60"
-                      height="60"
+                      className='rounded-circle mb-2'
+                      width='60'
+                      height='60'
                     />
                   </Col>
-                  <Col xs={9}>
-                    <Card.Title className="h6 fw-bold">
+                  <Col sm={10}>
+                    <Card.Title className='h6 fw-bold'>
                       {profile.name} {profile.surname}
                     </Card.Title>
-                    <Card.Text className="text-muted">
+                    <Card.Text className='text-muted'>
                       {profile.title || 'Titolo non disponibile'}
                     </Card.Text>
-                    <Button variant="outline-dark rounded-pill" size="sm">
-                      {props.type === 'consigliati' && (
-                        <>
-                          <i className="bi bi-person-plus-fill"></i> Collegati
-                        </>
-                      )}
-                      {props.type === 'perTe' && 'Visualizza Profilo'}
-                    </Button>
+                    <Link
+                      to={`/profile/${profile._id}`}
+                      className='btn border border-dark rounded-pill'
+                    >
+                      Visualizza profilo
+                    </Link>
                   </Col>
                 </Row>
               </Card.Body>
@@ -97,4 +94,4 @@ const ProfiliSidebar = (props) => {
   )
 }
 
-export default ProfiliSidebar
+export default ProfiliPerTe

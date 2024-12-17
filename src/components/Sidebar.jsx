@@ -4,15 +4,23 @@ import 'bootstrap-icons/font/bootstrap-icons.css'
 import ImpostazioniProfilo from './ImpostazioniProfilo'
 import ProfiliSidebar from './ProfiliSidebar'
 
-const Sidebar = () => {
+const Sidebar = (props) => {
 
-    return(
+  if(props.type === "sx") { 
+    return (
+      <h2>Componente Sidebar { props.type}</h2>)
+  }
+
+  if (props.type === "dx") {
+
+    return (
       <div>
-        <ImpostazioniProfilo/>
-         <ProfiliSidebar title='Altri Profili Per Te' profileNumber={3}  type='perTe'/>
-         <ProfiliSidebar title='Profili Consigliati' profileNumber={10}  type='consigliati'/>
+        <ImpostazioniProfilo />
+        <ProfiliSidebar title='Altri Profili Per Te' profileNumber={3} type='perTe' />
+        <ProfiliSidebar title='Profili Consigliati' profileNumber={10} type='consigliati' />
       </div>
     )
+  }
 }
 
 export default Sidebar

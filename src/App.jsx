@@ -76,7 +76,10 @@ function App() {
         <main>
           <Container>
             <Row>
-              <Col>
+              <Col className='col-3'>
+                <Sidebar type="sx"/>
+              </Col>
+              <Col className='col-6'>
                 <Routes>
                   <Route path="/" element={<Feed />} />
                   <Route path="/feed" element={<Feed />} />
@@ -93,8 +96,8 @@ function App() {
                   />
                 </Routes>
               </Col>
-              <Col>
-                <Sidebar />
+              <Col className='col-3'>
+                <Sidebar type="dx"/>
               </Col>
             </Row>
           </Container>

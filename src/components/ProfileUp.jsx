@@ -1,40 +1,35 @@
+import React from 'react';
+import { Container, Card, Button, ListGroup, Row, Col } from 'react-bootstrap';
+import '../assets/css/custom-bootstrap.css';
 
-import React from 'react'
-import '../assets/css/custom-bootstrap.css'
-import Profile from './Profile'
-
-const ProfileUp = ({
-  profile,
-  recommendedContacts,
-  analyticsData,
-  activityList,
-}) => {
+// Componente principale per visualizzare il profilo
+const ColonnaCentraleAlto = ({ profile, recommendedContacts, analyticsData, activityList }) => {
   return (
-    <div className='container mt-4'>
-      <div className='card mb-4'>
-        <div className='card-body'>
-          <div className='d-flex align-items-center'>
-            <img
-              src={profile.image || 'https://via.placeholder.com/150'}
-              alt={`${profile.name} ${profile.surname}`}
-              className='rounded-circle me-3'
-              style={{ width: '100px', height: '100px' }}
-            />
-            <div>
-              <h1 className='h5'>
-                {profile.name} {profile.surname}
-              </h1>
-              <h2 className='h6 text-muted'>{profile.title}</h2>
-              <p className='mb-1'>{profile.bio}</p>
-              <p className='text-primary'>{profile.area}</p>
-            </div>
-          </div>
-          <div className='mt-3'>
-            <button className='btn btn-primary me-2'>Connect</button>
-            <button className='btn btn-outline-primary'>Message</button>
-          </div>
-        </div>
-      </div>
+    <Container className="mt-4">
+      <Card className="mb-4">
+        <Card.Body>
+          <Row className="d-flex align-items-center">
+            <Col xs="auto">
+              <img
+                src={profile.image || 'https://via.placeholder.com/150'}
+                alt={`${profile.name} ${profile.surname}`}
+                className="rounded-circle"
+                style={{ width: '100px', height: '100px' }}
+              />
+            </Col>
+            <Col>
+              <h1 className="h5">{profile.name} {profile.surname}</h1>
+              <h2 className="h6 text-muted">{profile.title}</h2>
+              <p className="mb-1">{profile.bio}</p>
+              <p className="text-primary">{profile.area}</p>
+              <div className="mt-3">
+                <Button variant="primary" className="me-2">Connect</Button>
+                <Button variant="outline-primary">Message</Button>
+              </div>
+            </Col>
+          </Row>
+        </Card.Body>
+      </Card>
 
       {/* Sezione Consigliati per Te */}
       <RecommendedForYou contacts={recommendedContacts} />
@@ -44,64 +39,59 @@ const ProfileUp = ({
 
       {/* Sezione Attività */}
       <Activity activities={activityList} />
-    </div>
-  )
-}
+    </Container>
+  );
+};
 
 // Componente Consigliati per Te
 const RecommendedForYou = ({ contacts }) => {
   return (
-    <div className='card mb-4'>
-      <div className='card-header'>
+    <Card className="mb-4">
+      <Card.Header>
         <h5>Consigliati per te</h5>
-      </div>
-      <div className='card-body'>
-        <ul className='list-group'>
+      </Card.Header>
+      <Card.Body>
+        <ListGroup>
           {contacts.map((contact, index) => (
-            <li key={index} className='list-group-item'>
-              {contact}
-            </li>
+            <ListGroup.Item key={index}>{contact}</ListGroup.Item>
           ))}
-        </ul>
-      </div>
-    </div>
-  )
-}
+        </ListGroup>
+      </Card.Body>
+    </Card>
+  );
+};
 
 // Componente Analisi
 const Analytics = ({ data }) => {
   return (
-    <div className='card mb-4'>
-      <div className='card-header'>
+    <Card className="mb-4">
+      <Card.Header>
         <h5>Analisi</h5>
-      </div>
-      <div className='card-body'>
+      </Card.Header>
+      <Card.Body>
         <p>Visualizzazioni del profilo: {data.profileViews}</p>
         <p>Visualizzazioni dei post: {data.postViews}</p>
-      </div>
-    </div>
-  )
-}
+      </Card.Body>
+    </Card>
+  );
+};
 
 // Componente Attività
 const Activity = ({ activities }) => {
   return (
-    <div className='card mb-4'>
-      <div className='card-header'>
+    <Card className="mb-4">
+      <Card.Header>
         <h5>Attività</h5>
-      </div>
-      <div className='card-body'>
-        <ul className='list-group'>
+      </Card.Header>
+      <Card.Body>
+        <ListGroup>
           {activities.map((activity, index) => (
-            <li key={index} className='list-group-item'>
-              {activity}
-            </li>
+            <ListGroup.Item key={index}>{activity}</ListGroup.Item>
           ))}
-        </ul>
-      </div>
-    </div>
-  )
-}
+        </ListGroup>
+      </Card.Body>
+    </Card>
+  );
+};
 
-export default ProfileUp
-
+export default ColonnaCentraleAlto;

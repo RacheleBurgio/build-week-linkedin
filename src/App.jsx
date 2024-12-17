@@ -76,25 +76,28 @@ function App() {
         <main>
           <Container fluid>
             <Row>
-              <Col className='col-8'>
+              <Col className='col-3'>
+                <Sidebar type='sx' />
+              </Col>
+              <Col className='col-6'>
                 <Routes>
-                  <Route path="/" element={<Feed />} />
-                  <Route path="/feed" element={<Feed />} />
-                  <Route path="/profile" element={<ProfileWrapper />} />
+                  <Route path='/' element={<Feed />} />
+                  <Route path='/feed' element={<Feed />} />
+                  <Route path='/profile' element={<ProfileWrapper />} />
                   <Route
-                    path="/profile/:profileId"
+                    path='/profile/:profileId'
                     element={<ProfileWrapper />}
                   />
-                  <Route path="/post/:postId" element={<PostWrapper />} />
-                  <Route path="/comment/:id" element={<CommentWrapper />} />
+                  <Route path='/post/:postId' element={<PostWrapper />} />
+                  <Route path='/comment/:id' element={<CommentWrapper />} />
                   <Route
-                    path="*"
-                    element={<Alert variant="danger">Pagina non trovata</Alert>}
+                    path='*'
+                    element={<Alert variant='danger'>Pagina non trovata</Alert>}
                   />
                 </Routes>
               </Col>
-              <Col className='col-4'>
-                <Sidebar />
+              <Col className='col-3'>
+                <Sidebar type='dx' />
               </Col>
             </Row>
           </Container>

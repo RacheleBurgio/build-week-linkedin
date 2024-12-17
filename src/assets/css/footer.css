@@ -11966,3 +11966,48 @@ textarea.form-control-lg {
     display: none !important;
   }
 }/*# sourceMappingURL=footer.css.map */
+
+.item {
+  display: flex;
+  align-items: flex-start;
+}
+
+ul {
+  list-style-type: none;
+}
+
+ul li {
+  display: flex;
+  align-items: center;
+  color: #00000078;
+  margin: 1em 0;
+}
+
+.footer-icon {
+  font-size: 50px;
+  margin-right: 10px;
+}
+
+.item div {
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  text-decoration: none;
+  font-size: 15px;
+  color: #000;
+}
+
+a:hover {
+  color: #007bff;
+}
+
+.item div p {
+  font-size: 12px;
+}
+
+li a {
+  font-size: 12px;
+}
+

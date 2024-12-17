@@ -2,17 +2,15 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 
 import ImpostazioniProfilo from './ImpostazioniProfilo'
-import ProfiliSidebar from './ProfiliSidebar'
+import ProfiliPerTe from './ProfiliPerTe'
 
 const Sidebar = () => {
-
-    return(
-      <div>
-        <ImpostazioniProfilo/>
-         <ProfiliSidebar title='Profili Per Te' profileNumber= {3}  type='perTe'/>
-         <ProfiliSidebar title='Profili Consigliati' profileNumber= {10}  type='consigliati'/>
-      </div>
-    )
+  return (
+    <div>
+      <ImpostazioniProfilo />
+      <ProfiliPerTe />
+    </div>
+  )
 }
 
 export default Sidebar

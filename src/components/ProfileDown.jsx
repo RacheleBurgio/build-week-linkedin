@@ -90,7 +90,7 @@ const ProfileDown = (props) => {
           {props.section.charAt(0).toUpperCase() + props.section.slice(1)}
         </h3>
         {experiences
-          .filter((exp) => exp.company.includes(`#${props.section}#`))
+          .filter((exp) => exp.company.includes(`#${props.section}#`) || exp)
           .map((exp, index) => (
             <ExperienceCard key={index} {...exp} />
           ))}

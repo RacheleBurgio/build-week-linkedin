@@ -69,14 +69,14 @@ function App() {
 
   return (
     <Router>
-      <>
+      <Container>
         <header>
           <MyNav />
         </header>
         <main>
-          <Container>
+          <Container fluid>
             <Row>
-              <Col>
+              <Col className='col-8'>
                 <Routes>
                   <Route path='/' element={<Feed />} />
                   <Route path='/feed' element={<Feed />} />
@@ -93,29 +93,7 @@ function App() {
                   />
                 </Routes>
               </Col>
-              <Col>
-                <Sidebar />
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <Routes>
-                  <Route path='/' element={<Feed />} />
-                  <Route path='/feed' element={<Feed />} />
-                  <Route path='/profile' element={<ProfileWrapper />} />
-                  <Route
-                    path='/profile/:profileId'
-                    element={<ProfileWrapper />}
-                  />
-                  <Route path='/post/:postId' element={<PostWrapper />} />
-                  <Route path='/comment/:id' element={<CommentWrapper />} />
-                  <Route
-                    path='*'
-                    element={<Alert variant='danger'>Pagina non trovata</Alert>}
-                  />
-                </Routes>
-              </Col>
-              <Col>
+              <Col className='col-4'>
                 <Sidebar />
               </Col>
             </Row>
@@ -124,7 +102,7 @@ function App() {
         <footer>
           <Footer />
         </footer>
-      </>
+      </Container>
     </Router>
   )
 }

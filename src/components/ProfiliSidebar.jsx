@@ -55,7 +55,7 @@ const ProfiliSidebar = (props) => {
 
   return (
     <Container fluid className="p-0 mt-2 border rounded">
-      <h3>{props.title}</h3>
+      <h5 className='mt-2 ms-4 text-bold'>{props.title}</h5>
       <Row className="justify-content-center">
         {profiles.map((profile) => (
           <Col key={profile._id} sm={12} className="mb-4">
@@ -67,8 +67,8 @@ const ProfiliSidebar = (props) => {
                       src={profile.image || 'https://via.placeholder.com/100'}
                       alt={`${profile.name} ${profile.surname}`}
                       className="rounded-circle mb-2"
-                      width="60"
-                      height="60"
+                      width="50"
+                      height="50"
                     />
                   </Col>
                   <Col xs={9}>
@@ -78,14 +78,16 @@ const ProfiliSidebar = (props) => {
                     <Card.Text className="text-muted">
                       {profile.title || 'Titolo non disponibile'}
                     </Card.Text>
-                    <Button variant="outline-dark rounded-pill" size="sm">
+                    <a href={props.type === 'consigliati' ? '/collegati' : '/visualizza-profilo'}
+                       className="btn btn-outline-dark rounded-pill btn-sm" 
+                    >
                       {props.type === 'consigliati' && (
                         <>
                           <i className="bi bi-person-plus-fill"></i> Collegati
                         </>
                       )}
                       {props.type === 'perTe' && 'Visualizza Profilo'}
-                    </Button>
+                    </a>
                   </Col>
                 </Row>
               </Card.Body>

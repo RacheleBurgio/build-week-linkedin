@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-icons/font/bootstrap-icons.css'
-import { Container, Row, Col, Card, Button } from 'react-bootstrap'
+import { Container, Row, Col, Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import { IoMdPersonAdd } from "react-icons/io";
 
-const apiKey = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzVmZmQwZDBlYTI4NjAwMTUyOGI5NDYiLCJpYXQiOjE3MzQzNDM5NTAsImV4cCI6MTczNTU1MzU1MH0.VyBDNibtSyY_vJnvWCb5kRjmi71qS5zSGNwkr4qBW98`
+// Recupera la API key dalle variabili d'ambiente
+const apiKey = import.meta.env.VITE_LINKEDIN_API_KEY
+
 
 const ProfiliSidebar = (props) => {
   const [profiles, setProfiles] = useState([])
@@ -20,7 +23,7 @@ const ProfiliSidebar = (props) => {
     return Array.from(result)
   }
 
-  const fetchRandomProfiles = async () => {
+  const fecthProfiles = async () => {
     try {
       const response = await fetch(
         'https://striveschool-api.herokuapp.com/api/profile/',
@@ -33,8 +36,7 @@ const ProfiliSidebar = (props) => {
 
       if (response.ok) {
         const allProfiles = await response.json()
-        const randomProfiles = getRandomProfiles(allProfiles, 3)
-        setProfiles(randomProfiles)
+        setProfiles(allProfiles)
       } else {
         console.error('Errore durante il fetch dei profili')
       }
@@ -46,18 +48,22 @@ const ProfiliSidebar = (props) => {
   }
 
   useEffect(() => {
-    fetchRandomProfiles()
+    fecthProfiles()
   }, [])
 
   if (loading) {
     return <p className="text-center mt-5">Caricamento in corso...</p>
   }
 
+  const randomProfiles = getRandomProfiles(profiles, props.profileNumber)
+
   return (
     <Container fluid className="p-0 mt-2 border rounded">
       <h5 className='mt-2 ms-4 text-bold'>{props.title}</h5>
       <Row className="justify-content-center">
-        {profiles.map((profile) => (
+        {
+          
+          randomProfiles.map((profile) => (
           <Col key={profile._id} sm={12} className="mb-4">
             <Card className="text-center border-0">
               <Card.Body>
@@ -78,16 +84,14 @@ const ProfiliSidebar = (props) => {
                     <Card.Text className="text-muted">
                       {profile.title || 'Titolo non disponibile'}
                     </Card.Text>
-                    <a href={props.type === 'consigliati' ? '/collegati' : '/visualizza-profilo'}
-                       className="btn btn-outline-dark rounded-pill btn-sm" 
-                    >
-                      {props.type === 'consigliati' && (
-                        <>
-                          <i className="bi bi-person-plus-fill"></i> Collegati
-                        </>
-                      )}
-                      {props.type === 'perTe' && 'Visualizza Profilo'}
-                    </a>
+
+                    {props.type === 'consigliati' &&
+                      (<Link to={`/profile/${profile._id}`} className="btn btn-outline-dark rounded-pill btn-sm"><IoMdPersonAdd />
+Collegati</Link>)}
+                    {props.type === 'perTe' &&
+                      (<Link to={`/profile/${profile._id}`} className = "btn btn-outline-dark rounded-pill btn-sm">Visualizza Profilo</Link>)}
+                
+
                   </Col>
                 </Row>
               </Card.Body>

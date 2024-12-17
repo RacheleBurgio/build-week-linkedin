@@ -78,18 +78,18 @@ function App() {
             <Row>
               <Col>
                 <Routes>
-                  <Route path='/' element={<Feed />} />
-                  <Route path='/feed' element={<Feed />} />
-                  <Route path='/profile' element={<ProfileWrapper />} />
+                  <Route path="/" element={<Feed />} />
+                  <Route path="/feed" element={<Feed />} />
+                  <Route path="/profile" element={<ProfileWrapper />} />
                   <Route
-                    path='/profile/:profileId'
+                    path="/profile/:profileId"
                     element={<ProfileWrapper />}
                   />
-                  <Route path='/post/:postId' element={<PostWrapper />} />
-                  <Route path='/comment/:id' element={<CommentWrapper />} />
+                  <Route path="/post/:postId" element={<PostWrapper />} />
+                  <Route path="/comment/:id" element={<CommentWrapper />} />
                   <Route
-                    path='*'
-                    element={<Alert variant='danger'>Pagina non trovata</Alert>}
+                    path="*"
+                    element={<Alert variant="danger">Pagina non trovata</Alert>}
                   />
                 </Routes>
               </Col>
@@ -108,4 +108,3 @@ function App() {
 }
 
 export default App
-

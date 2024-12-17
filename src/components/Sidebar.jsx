@@ -5,13 +5,12 @@ import ImpostazioniProfilo from './ImpostazioniProfilo'
 import ProfiliPerTe from './ProfiliPerTe'
 
 const Sidebar = () => {
-
-    return(
-      <div>
-        <ImpostazioniProfilo/>
-        <ProfiliPerTe/>
-      </div>
-    )
+  return (
+    <div>
+      <ImpostazioniProfilo />
+      <ProfiliPerTe />
+    </div>
+  )
 }
 
 export default Sidebar

@@ -4,15 +4,25 @@ import 'bootstrap-icons/font/bootstrap-icons.css'
 import { Container, Row, Col, Card, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
+<<<<<<< Updated upstream:src/components/ProfiliPerTe.jsx
 const apiKey = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzVmZmQwZDBlYTI4NjAwMTUyOGI5NDYiLCJpYXQiOjE3MzQzNDM5NTAsImV4cCI6MTczNTU1MzU1MH0.VyBDNibtSyY_vJnvWCb5kRjmi71qS5zSGNwkr4qBW98`
+=======
 
-const ProfiliPerTe = () => {
+const apiKey = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzVmZmQwZDBlYTI4NjAwMTUyOGI5NDYiLCJpYXQiOjE3MzQzNDM5NTAsImV4cCI6MTczNTU1MzU1MH0.VyBDNibtSyY_vJnvWCb5kRjmi71qS5zSGNwkr4qBW98`;
+>>>>>>> Stashed changes:src/components/ProfiliSidebar.jsx
+
+const ProfiliSidebar = (props) => {
   const [profiles, setProfiles] = useState([])
   const [loading, setLoading] = useState(true)
 
   // Funzione per ottenere 3 profili casuali evitando duplicati
+<<<<<<< Updated upstream:src/components/ProfiliPerTe.jsx
   const getRandomProfiles = (allProfiles, count = 3) => {
     const result = new Set()
+=======
+  const getRandomProfiles = (allProfiles, count = props.profileNumber) => {
+    const result = new Set();
+>>>>>>> Stashed changes:src/components/ProfiliSidebar.jsx
     while (result.size < count) {
       const randomIndex = Math.floor(Math.random() * allProfiles.length)
       result.add(allProfiles[randomIndex])
@@ -54,12 +64,19 @@ const ProfiliPerTe = () => {
   }
 
   return (
+<<<<<<< Updated upstream:src/components/ProfiliPerTe.jsx
     <Container className='p-0 mt-2 border rounded'>
       <Row className='justify-content-center'>
+=======
+    <Container fluid className="p-0 mt-2 border rounded" >
+      <h3>{props.title}</h3>
+      <Row className="justify-content-center">
+>>>>>>> Stashed changes:src/components/ProfiliSidebar.jsx
         {profiles.map((profile) => (
           <Col key={profile._id} sm={12} className='mb-4'>
             <Card className='text-center border-0'>
               <Card.Body>
+<<<<<<< Updated upstream:src/components/ProfiliPerTe.jsx
                 <Row>
                   <Col sm={2}>
                     <img
@@ -85,6 +102,34 @@ const ProfiliPerTe = () => {
                     </Link>
                   </Col>
                 </Row>
+=======
+             <Row>
+               <Col xs={2}> 
+                <img
+                  src={profile.image || "https://via.placeholder.com/100"}
+                  alt={`${profile.name} ${profile.surname}`}
+                  className="rounded-circle mb-2"
+                  width="60"
+                  height="60" 
+                />
+               </Col>
+               <Col xs={9}>
+                <Card.Title className="h6 fw-bold">
+                  {profile.name} {profile.surname}
+                </Card.Title>
+                <Card.Text className="text-muted">
+                  {profile.title || "Titolo non disponibile"}
+                </Card.Text>
+                <Button variant="outline-dark rounded-pill" size="sm">
+                  {props.type === 'consigliati' && 
+                 (<><i className="bi bi-person-plus-fill"></i> Collegati</>)}
+                  {props.type === 'perTe' && 
+                 ('Visualizza Profilo')}
+                </Button>
+               </Col>
+            
+               </Row>
+>>>>>>> Stashed changes:src/components/ProfiliSidebar.jsx
               </Card.Body>
             </Card>
           </Col>
@@ -94,4 +139,4 @@ const ProfiliPerTe = () => {
   )
 }
 
-export default ProfiliPerTe
+export default ProfiliSidebar

@@ -6,9 +6,18 @@ import NavDropdown from 'react-bootstrap/NavDropdown'
 
 function MyNav() {
   return (
-    <Navbar bg="light" expand="lg" className="mb-3">
+    <Navbar
+      bg="light"
+      expand="lg"
+      className="mb-3"
+      style={{ minHeight: '60px' }}
+    >
       <Container>
-        <img src="/assets/imgs/logo.svg" alt="Logo" />
+        <img
+          src="/assets/imgs/logo.svg"
+          alt="Logo"
+          style={{ height: '40px' }}
+        />
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <div className="d-flex w-100 justify-content-between align-items-center">
@@ -29,25 +38,40 @@ function MyNav() {
 
             {/* Navigation Icons */}
             <Nav className="d-flex align-items-center">
-              <Nav.Link href="#action1" className="d-column">
-                <i className="bi bi-house-door-fill fs-3"></i>
-                <span>Home</span>
+              <Nav.Link
+                href="#action1"
+                className="d-flex flex-column align-items-center"
+              >
+                <i className="bi bi-house-door-fill fs-5"></i>
+                <span className="small mt-0">Home</span>
               </Nav.Link>
-              <Nav.Link href="#action2">
-                <i className="bi bi-people fs-2"></i>
-                <span>Rete</span>
+              <Nav.Link
+                href="#action2"
+                className="d-flex flex-column align-items-center"
+              >
+                <i className="bi bi-people fs-5"></i>
+                <span className="small mt-0">Rete</span>
               </Nav.Link>
-              <Nav.Link href="#action3">
-                <i className="bi bi-briefcase-fill fs-4"></i>
-                <span>Lavoro</span>
+              <Nav.Link
+                href="#action3"
+                className="d-flex flex-column align-items-center"
+              >
+                <i className="bi bi-briefcase-fill fs-5"></i>
+                <span className="small mt-0">Lavoro</span>
               </Nav.Link>
-              <Nav.Link href="#action4">
-                <i className="bi bi-chat-dots-fill fs-4"></i>
-                <span>Messaggistica</span>
+              <Nav.Link
+                href="#action4"
+                className="d-flex flex-column align-items-center"
+              >
+                <i className="bi bi-chat-dots-fill fs-5"></i>
+                <span className="small mt-0">Messaggistica</span>
               </Nav.Link>
-              <Nav.Link href="#action5">
+              <Nav.Link
+                href="#action5"
+                className="d-flex flex-column align-items-center"
+              >
                 <i className="bi bi-bell-fill fs-4"></i>
-                <span>Notifiche</span>
+                <span className="small mt-0">Notifiche</span>
               </Nav.Link>
 
               {/* Profile Dropdown */}
@@ -84,6 +108,45 @@ function MyNav() {
                   Something else here
                 </NavDropdown.Item>
               </NavDropdown>
+
+              {/* Line Divider */}
+              <div
+                className="border-start mx-2"
+                style={{ height: '100%' }}
+              ></div>
+
+              {/* Aziende Dropdown */}
+              <NavDropdown
+                title={
+                  <div className="d-flex flex-column align-items-center">
+                    <i className="bi bi-microsoft"></i>
+                    <span className="small mt-0">Per le aziende</span>
+                  </div>
+                }
+                id="azienda-nav-dropdown"
+              >
+                <NavDropdown.Item href="#azienda1">
+                  Servizi per aziende
+                </NavDropdown.Item>
+                <NavDropdown.Item href="#azienda2">
+                  Soluzioni Premium
+                </NavDropdown.Item>
+                <NavDropdown.Item href="#azienda3">Pubblicità</NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item href="#azienda4">
+                  Gestione aziendale
+                </NavDropdown.Item>
+              </NavDropdown>
+
+              {/* Prova Premium */}
+              <Nav.Link
+                href="#action7"
+                className="d-flex flex-column align-items-center"
+              >
+                <span className="small mt-0 text-center">
+                  Prova Premium <br /> per 0 EUR
+                </span>
+              </Nav.Link>
             </Nav>
           </div>
         </Navbar.Collapse>

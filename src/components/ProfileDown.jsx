@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Card, ListGroup, Container, Row, Col } from 'react-bootstrap'
-import axios from 'axios'
+
 import '../assets/css/custom-bootstrap.css'
 import { MdOutlineDiamond } from 'react-icons/md'
 // import getMe from '../getMe '
@@ -22,10 +22,10 @@ const ExperienceCard = ({
   area,
 }) => {
   return (
-    <ListGroup variant='flush'>
+    <ListGroup variant="flush">
       <ListGroup.Item>
-        <Row className='border border-0 border-bottom border-1'>
-          <Col className='d-flex justify-content-center align-items-start col-auto p-1'>
+        <Row className="border border-0 border-bottom border-1">
+          <Col className="d-flex justify-content-center align-items-start col-auto p-1">
             {company.image ? (
               <img
                 style={{ width: '50px' }}
@@ -42,13 +42,13 @@ const ExperienceCard = ({
               />
             )}
           </Col>
-          <Col className='d-flex flex-column align-items-start justify-content-start p-1'>
-            <div className='fs-7 fw-bold'>{role}</div>
-            <div className='fs-7 text-secondary'>{company.split(' #')[0]}</div>
-            <div className='fs-7 text-secondary'>
+          <Col className="d-flex flex-column align-items-start justify-content-start p-1">
+            <div className="fs-7 fw-bold">{role}</div>
+            <div className="fs-7 text-secondary">{company.split(' #')[0]}</div>
+            <div className="fs-7 text-secondary">
               {formatDate(startDate)} - {formatDate(endDate)} • {area}
             </div>
-            <div className='fs-7 my-3'>{description}</div>
+            <div className="fs-7 my-3">{description}</div>
           </Col>
         </Row>
       </ListGroup.Item>
@@ -86,9 +86,9 @@ const ProfileDown = (props) => {
   }, [props.profileId])
 
   return (
-    <Container className='mt-4 border rounded border-1 p-2'>
+    <Container className="mt-4 border rounded border-1 p-2">
       <section id={props.section}>
-        <h3 className='mb-4 fs-6 fw-bold'>
+        <h3 className="mb-4 fs-6 fw-bold">
           {props.section.charAt(0).toUpperCase() + props.section.slice(1)}
         </h3>
         {experiences

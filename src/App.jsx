@@ -10,6 +10,7 @@ import {
   Route,
   Routes,
   useParams,
+  useLocation,
 } from 'react-router-dom'
 
 import { useDispatch, useSelector } from 'react-redux'
@@ -24,10 +25,11 @@ import Footer from './components/Footer'
 import Profile from './components/Profile'
 import Post from './components/Post'
 import Comment from './components/Comment'
-
+import JobPage from './components/JobPage'
 
 // Wrapper per il profilo
 const ProfileWrapper = () => {
+  const location = useLocation()
   const { profileId: paramProfileId } = useParams()
   const [profileId, setProfileId] = useState(null) // Stato locale per il profileId
   const me = useSelector((state) => state.profile.me)
@@ -69,45 +71,40 @@ function App() {
   }, [dispatch])
 
   return (
-    <Router>
-      <>
-        <header>
-          <MyNav />
-        </header>
-        <main>
-          <Container>
-            <Row>
-              <Col className='col-3'>
-                <Sidebar type="sx"/>
-              </Col>
-              <Col className='col-6'>
-                <Routes>
-                  <Route path="/" element={<Feed />} />
-                  <Route path="/feed" element={<Feed />} />
-                  <Route path="/profile" element={<ProfileWrapper />} />
-                  <Route
-                    path="/profile/:profileId"
-                    element={<ProfileWrapper />}
-                  />
-                  <Route path="/post/:postId" element={<PostWrapper />} />
-                  <Route path="/comment/:id" element={<CommentWrapper />} />
-                  <Route
-                    path="*"
-                    element={<Alert variant="danger">Pagina non trovata</Alert>}
-                  />
-                </Routes>
-              </Col>
-              <Col className='col-3'>
-                <Sidebar type="dx"/>
-              </Col>
-            </Row>
-          </Container>
-        </main>
-        <footer>
-          <Footer />
-        </footer>
-      </>
-    </Router>
+    <>
+      <header>
+        <MyNav />
+      </header>
+      <main>
+        <Container>
+          <Row>
+            <Sidebar type="sx" />
+            <Col className={location.pathname === '/jobs' ? 'col-12' : 'col-6'}>
+              <Routes>
+                <Route path="/" element={<Feed />} />
+                <Route path="/feed" element={<Feed />} />
+                <Route path="/profile" element={<ProfileWrapper />} />
+                <Route
+                  path="/profile/:profileId"
+                  element={<ProfileWrapper />}
+                />
+                <Route path="/post/:postId" element={<PostWrapper />} />
+                <Route path="/comment/:id" element={<CommentWrapper />} />
+                <Route
+                  path="*"
+                  element={<Alert variant="danger">Pagina non trovata</Alert>}
+                />
+                <Route path="/jobs" element={<JobPage />} />
+              </Routes>
+            </Col>
+            <Sidebar type="dx" />
+          </Row>
+        </Container>
+      </main>
+      <footer>
+        <Footer />
+      </footer>
+    </>
   )
 }
 

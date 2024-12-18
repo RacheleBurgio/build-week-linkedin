@@ -35,12 +35,22 @@ const ProfiloSidebar = () => {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
+  const position = {
+    width:'60px',
+    marginLeft: '58px',
+    position: 'absolute',
+    top: '10%'
+  }
+
   return (
-   <Container>
-    <Card style={{ width: '15rem' }}>
-      <Card.Img variant="top" src={profile.image} alt="Profile Picture" />
-      <Card.Body>
-        <Card.Title className='text-center fw-bold fs-6'>{profile.name} {profile.surname}</Card.Title>
+   <Container className='mt-3'>
+    <Card style={{ width: '15rem' }} className='border border-rounded'>
+        <div className='profile-background' style={{ backgroundColor: '#6495ed', padding: '30px', borderRadius:'5px 5px 0px 0px' }}>
+            <Card.Img variant="top" className='rounded-circle border border-white' style={position} src={profile.image} alt="Profile Picture" />
+        </div>
+      
+      <Card.Body >
+        <Card.Title className='text-center fw-bold fs-6 pt-4'>{profile.name} {profile.surname}</Card.Title>
         <Card.Subtitle className="mb-2 fs-7 text-muted text-center">{profile.title}</Card.Subtitle>
         <Card.Text>{profile.bio}</Card.Text>
       </Card.Body>

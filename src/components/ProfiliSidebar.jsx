@@ -59,7 +59,7 @@ const ProfiliSidebar = (props) => {
 
   return (
     <Container fluid className="p-0 mt-2 bg-white border rounded">
-      <h5 className='mt-2 ms-4 text-bold'>{props.title}</h5>
+      <div className='mt-2 fs-6 ms-3  fw-bold'>{props.title}</div>
       <Row className="justify-content-center">
         {
           

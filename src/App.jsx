@@ -27,7 +27,7 @@ import Post from './components/Post'
 import Comment from './components/Comment'
 import JobPage from './components/JobPage'
 import { Display } from 'react-bootstrap-icons'
-import ProfiloSidebar from './components/SidebarSx'
+
 
 
 // Wrapper per il profilo

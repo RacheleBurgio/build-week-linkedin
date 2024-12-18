@@ -58,7 +58,7 @@ const ProfiliSidebar = (props) => {
   const randomProfiles = getRandomProfiles(profiles, props.profileNumber)
 
   return (
-    <Container fluid className="p-0 mt-2 border rounded">
+    <Container fluid className="p-0 mt-2 bg-white border rounded">
       <h5 className='mt-2 ms-4 text-bold'>{props.title}</h5>
       <Row className="justify-content-center">
         {

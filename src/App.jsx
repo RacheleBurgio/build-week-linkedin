@@ -24,6 +24,9 @@ import Footer from './components/Footer'
 import Profile from './components/Profile'
 import Post from './components/Post'
 import Comment from './components/Comment'
+import ProfilePictureUpload from './components/ProfilePictureUpload';
+import ExperiencePictureUpload from './components/ExperiencePictureUpload';
+import PostPictureUpload from './components/PostPictureUpload';
 
 // Wrapper per il profilo
 const ProfileWrapper = () => {

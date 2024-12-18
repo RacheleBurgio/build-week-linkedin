@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Form, Button, Container } from 'react-bootstrap';
-import ProfilePictureUpload from './ProfilePictureUpload'; // Assicurati di importare il componente per l'upload dell'immagine
+import ProfilePictureUpload from './ProfilePictureUpload';
+import ExperiencePictureUpload from './ExperiencePictureUpload';
+import PostPictureUpload from './PostPictureUpload';
 
 const ProfileUp = ({ profileId }) => {
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const apiKey = import.meta.env.VITE_LINKEDIN_API_KEY;
+  const apiKey = import.meta.env.VITE_API_KEY;
 
   // Funzione per recuperare i dettagli del profilo
   const fetchProfile = async () => {

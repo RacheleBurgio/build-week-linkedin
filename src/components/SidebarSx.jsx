@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Card, Button, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Card, ListGroup, ListGroupItem, Container } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import getMe from './_getProfile';
 
@@ -36,22 +36,25 @@ const ProfiloSidebar = () => {
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <Card style={{ width: '18rem' }}>
+   <Container>
+    <Card style={{ width: '15rem' }}>
       <Card.Img variant="top" src={profile.image} alt="Profile Picture" />
       <Card.Body>
-        <Card.Title>{profile.name} {profile.surname}</Card.Title>
-        <Card.Subtitle className="mb-2 text-muted">{profile.title}</Card.Subtitle>
+        <Card.Title className='text-center fw-bold fs-6'>{profile.name} {profile.surname}</Card.Title>
+        <Card.Subtitle className="mb-2 fs-7 text-muted text-center">{profile.title}</Card.Subtitle>
         <Card.Text>{profile.bio}</Card.Text>
       </Card.Body>
       <ListGroup className="list-group-flush">
-        <ListGroupItem>Username: {profile.username}</ListGroupItem>
-        <ListGroupItem>Email: {profile.email}</ListGroupItem>
-        <ListGroupItem>Area: {profile.area}</ListGroupItem>
+        <ListGroupItem className='fs-7 text-muted'>Collegamenti
+            <div className='fs-7 fw-bold text-dark'>Espandi la tua rete</div>
+        </ListGroupItem>
+        <ListGroupItem className='fs-7 fw-bold text-dark'>
+            <div className='fs-7 text-muted'>Raggiungi i tuoi obiettivi di carriera</div>
+            <i className='bi bi-square-fill me-2'></i>Prova Premium ora</ListGroupItem>
+        <ListGroupItem className='fs-7 fw-bold text-dark'>Elementi salvati</ListGroupItem>
       </ListGroup>
-      <Card.Body>
-        <Button variant="primary">Prova Premium ora</Button>
-      </Card.Body>
     </Card>
+    </Container>
   );
 };
 

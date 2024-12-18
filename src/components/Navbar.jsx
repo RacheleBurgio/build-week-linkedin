@@ -3,15 +3,11 @@ import Form from 'react-bootstrap/Form'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import NavDropdown from 'react-bootstrap/NavDropdown'
+import { Link } from 'react-router'
 
 function MyNav() {
   return (
-    <Navbar
-      bg="light"
-      expand="lg"
-      className="mb-3"
-      style={{ minHeight: '60px' }}
-    >
+    <Navbar bg="light" expand="lg" style={{ minHeight: '60px' }}>
       <Container>
         <img
           src="/assets/imgs/logo.svg"
@@ -55,6 +51,8 @@ function MyNav() {
               <Nav.Link
                 href="#action3"
                 className="d-flex flex-column align-items-center"
+                as={Link}
+                to="/jobs"
               >
                 <i className="bi bi-briefcase-fill fs-5"></i>
                 <span className="small mt-0">Lavoro</span>

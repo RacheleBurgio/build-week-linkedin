@@ -7,12 +7,7 @@ import { Link } from 'react-router'
 
 function MyNav() {
   return (
-    <Navbar
-      bg="light"
-      expand="lg"
-      className="mb-3"
-      style={{ minHeight: '60px' }}
-    >
+    <Navbar bg="light" expand="lg" style={{ minHeight: '60px' }}>
       <Container>
         <img
           src="/assets/imgs/logo.svg"

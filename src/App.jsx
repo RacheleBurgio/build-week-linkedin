@@ -75,7 +75,7 @@ function App() {
       <header>
         <MyNav />
       </header>
-      <main>
+      <main style={{ backgroundColor: '#F4F2EE' }}>
         <Container>
           <Row>
             <Sidebar type="sx" />

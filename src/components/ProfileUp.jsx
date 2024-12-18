@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { Form, Button, Container } from 'react-bootstrap';
 import ProfilePictureUpload from './ProfilePictureUpload';
-
 
 const ProfileUp = ({ profileId }) => {
   const [profile, setProfile] = useState(null);
@@ -13,12 +11,16 @@ const ProfileUp = ({ profileId }) => {
   // Funzione per recuperare i dettagli del profilo
   const fetchProfile = async () => {
     try {
-      const response = await axios.get(`https://striveschool-api.herokuapp.com/api/profile/${profileId}`, {
+      const response = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${profileId}`, {
         headers: {
           Authorization: `Bearer ${apiKey}`,
         },
       });
-      setProfile(response.data);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      setProfile(data);
       setLoading(false);
     } catch (err) {
       setError(err);
@@ -35,12 +37,19 @@ const ProfileUp = ({ profileId }) => {
   const handleProfileUpdate = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put(`https://striveschool-api.herokuapp.com/api/profile/${profileId}`, profile, {
+      const response = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${profileId}`, {
+        method: 'PUT',
         headers: {
+          'Content-Type': 'application/json',
           Authorization: `Bearer ${apiKey}`,
         },
+        body: JSON.stringify(profile),
       });
-      setProfile(response.data); // Aggiorna il profilo con i dati modificati
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const updatedProfile = await response.json();
+      setProfile(updatedProfile); // Aggiorna il profilo con i dati modificati
     } catch (error) {
       console.error('Error updating profile:', error);
     }

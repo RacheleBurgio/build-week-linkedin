@@ -25,6 +25,7 @@ import Profile from './components/Profile'
 import Post from './components/Post'
 import Comment from './components/Comment'
 
+
 // Wrapper per il profilo
 const ProfileWrapper = () => {
   const { profileId: paramProfileId } = useParams()

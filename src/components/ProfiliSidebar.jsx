@@ -62,10 +62,10 @@ const ProfiliSidebar = (props) => {
       <Row className='justify-content-center'>
         {randomProfiles.map((profile) => (
           <Col key={profile._id} sm={12} className='mb-4'>
-            <Card className='text-center border-0'>
+            <Card className=' border-0'>
               <Card.Body>
                 <Row>
-                  <Col xs={2}>
+                  <Col xs={3}>
                     <img
                       src={profile.image || 'https://via.placeholder.com/100'}
                       alt={`${profile.name} ${profile.surname}`}

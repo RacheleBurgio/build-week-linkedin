@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Form, Button, Container } from 'react-bootstrap';
 import ProfilePictureUpload from './ProfilePictureUpload';
-import ExperiencePictureUpload from './ExperiencePictureUpload';
-import PostPictureUpload from './PostPictureUpload';
+
 
 const ProfileUp = ({ profileId }) => {
   const [profile, setProfile] = useState(null);

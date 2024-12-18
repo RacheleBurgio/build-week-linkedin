@@ -29,7 +29,6 @@ import JobPage from './components/JobPage'
 
 // Wrapper per il profilo
 const ProfileWrapper = () => {
-  const location = useLocation()
   const { profileId: paramProfileId } = useParams()
   const [profileId, setProfileId] = useState(null) // Stato locale per il profileId
   const me = useSelector((state) => state.profile.me)
@@ -64,6 +63,7 @@ const CommentWrapper = () => {
 
 function App() {
   const dispatch = useDispatch()
+  const location = useLocation()
 
   useEffect(() => {
     // Carica i dati del profilo all'avvio dell'app

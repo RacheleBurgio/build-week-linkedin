@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import { Container, Row, Col, Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import { IoMdPersonAdd } from "react-icons/io";
+import { IoMdPersonAdd } from "react-icons/io"
 
 // Recupera la API key dalle variabili d'ambiente
 const apiKey = import.meta.env.VITE_LINKEDIN_API_KEY
@@ -87,11 +87,9 @@ const ProfiliSidebar = (props) => {
 
                     {props.type === 'consigliati' &&
                       (<Link to={`/profile/${profile._id}`} className="btn btn-outline-dark rounded-pill btn-sm"><IoMdPersonAdd />
-Collegati</Link>)}
+                        Collegati</Link>)}
                     {props.type === 'perTe' &&
                       (<Link to={`/profile/${profile._id}`} className = "btn btn-outline-dark rounded-pill btn-sm">Visualizza Profilo</Link>)}
-                
-
                   </Col>
                 </Row>
               </Card.Body>

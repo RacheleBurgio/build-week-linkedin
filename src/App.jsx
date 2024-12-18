@@ -24,6 +24,7 @@ import Footer from './components/Footer'
 import Profile from './components/Profile'
 import Post from './components/Post'
 import Comment from './components/Comment'
+import ProfiloSidebar from './components/SidebarSx'
 
 
 // Wrapper per il profilo
@@ -78,7 +79,7 @@ function App() {
           <Container>
             <Row>
               <Col className='col-3'>
-                <Sidebar type="sx"/>
+                <ProfiloSidebar/>
               </Col>
               <Col className='col-6'>
                 <Routes>

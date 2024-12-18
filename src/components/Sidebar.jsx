@@ -6,10 +6,10 @@ import ProfiliSidebar from './ProfiliSidebar'
 
 const Sidebar = (props) => {
 
-  if(props.type === "sx") { 
-    return (
-      <h2>Componente Sidebar { props.type}</h2>)
-  }
+  //if(props.type === "sx") { 
+    //return (
+     // <h2>Componente Sidebar { props.type}</h2>)
+ // }
 
   if (props.type === "dx") {
 

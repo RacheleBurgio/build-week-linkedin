@@ -6,7 +6,7 @@ import { MdOutlineImportContacts } from 'react-icons/md'
 
 const Footer = () => {
   return (
-    <Container>
+    <Container className="main-container my-5">
       <Row>
         <Col>
           <ul>
@@ -92,8 +92,8 @@ const Footer = () => {
         </Col>
         <Col>
           <form>
-            <label>Seleziona lingua</label>
-            <select>
+            <label className='label'>Seleziona lingua</label>
+            <select className='select'>
               <option>Italiano</option>
               <option>English</option>
               <option>Español</option>
@@ -105,7 +105,7 @@ const Footer = () => {
       </Row>
       <Row>
         <Col>
-          <p>LinkedIn Corporation © 2024</p>
+          <p className="fine">LinkedIn Corporation © 2024</p>
         </Col>
       </Row>
     </Container>

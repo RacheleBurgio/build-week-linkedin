@@ -12011,3 +12011,21 @@ li a {
   font-size: 12px;
 }
 
+.fine {
+  font-size: 10px;
+  margin-left: 3em;
+}
+
+.select {
+  width: 200px;
+  padding: 5px;
+  margin-top: 1em;
+}
+
+.label {
+  font-size: 12px;
+}
+
+.item div a {
+  font-size: 15px;
+}

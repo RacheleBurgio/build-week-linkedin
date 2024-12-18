@@ -90,11 +90,9 @@ const ProfileDown = (props) => {
         <h3 className='mb-4 fs-6 fw-bold'>
           {props.section.charAt(0).toUpperCase() + props.section.slice(1)}
         </h3>
-        {experiences
-          .filter((exp) => exp.company.includes(`#${props.section}#`) || exp)
-          .map((exp, index) => (
-            <ExperienceCard key={index} {...exp} />
-          ))}
+        {experiences.map((exp, index) => (
+          <ExperienceCard key={index} {...exp} />
+        ))}
       </section>
     </Container>
   )

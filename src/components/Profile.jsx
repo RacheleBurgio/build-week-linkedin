@@ -9,9 +9,11 @@ const Profile = (props) => {
   return (
     <>
       <ProfileUp profileId={profileId} />
+
       <ProfileDown profileId={profileId} section='experiences' />
+      {/* <ProfileDown profileId={profileId} section='experiences' />
       <ProfileDown profileId={profileId} section='education' />
-      <ProfileDown profileId={profileId} section='courses' />
+      <ProfileDown profileId={profileId} section='courses' /> */}
     </>
   )
 }

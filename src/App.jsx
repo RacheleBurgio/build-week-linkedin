@@ -102,15 +102,11 @@ function App() {
           </Row>
         </Container>
       </main>
-      <footer>
-        <Footer
-          style={
-            location.pathname === '/jobs'
-              ? { display: 'none' }
-              : { display: 'block' }
-          }
-        />
-      </footer>
+      {location.pathname !== '/jobs' && (
+        <footer>
+          <Footer />
+        </footer>
+      )}
     </>
   )
 }

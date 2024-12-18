@@ -4,7 +4,7 @@ import { Button, Form } from 'react-bootstrap';
 
 const ProfilePictureUpload = ({ userId, onUpload }) => {
   const [file, setFile] = useState(null);
-  const apiKey = import.meta.env.VITE_API_KEY; // Assicurati di avere la tua API key
+  const apiKey = import.meta.env.VITE_API_KEY; 
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);

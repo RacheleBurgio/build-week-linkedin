@@ -1,7 +1,7 @@
 import {  useEffect } from 'react'
 import { Card, ListGroup, ListGroupItem, Container } from 'react-bootstrap'
 import {  useSelector } from 'react-redux'
-
+import { Link } from 'react-router-dom'
 
 const ProfiloSidebar = () => {
   const profile = useSelector((state) => state.profile.me)

@@ -15,11 +15,13 @@ function MyNav() {
   return (
     <Navbar bg='light' expand='lg' style={{ minHeight: '60px' }}>
       <Container>
-        <img
-          src='/assets/imgs/logo.svg'
-          alt='Logo'
-          style={{ height: '40px' }}
-        />
+        <Link to={'/'}>
+          <img
+            src='/assets/imgs/logo.svg'
+            alt='Logo'
+            style={{ height: '40px' }}
+          />
+        </Link>
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
         <Navbar.Collapse id='basic-navbar-nav'>
           <div className='d-flex w-100 justify-content-between align-items-center'>

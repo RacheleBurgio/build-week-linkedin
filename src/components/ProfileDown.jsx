@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { Card, ListGroup, Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col, Button, Form } from 'react-bootstrap'
 import axios from 'axios'
+import { useSelector } from 'react-redux'
 
 import '../assets/css/custom-bootstrap.css'
+
+import { MdEdit, MdAdd } from 'react-icons/md'
 
 // Funzione per formattare la data in "Mese Anno" o "Present"
 const formatDate = (dateString) => {
@@ -11,58 +14,200 @@ const formatDate = (dateString) => {
   return new Date(dateString).toLocaleDateString('it-IT', options)
 }
 
-// Componente per la singola card di esperienza
+// Componente per la singola esperienza
 const ExperienceCard = ({
-  role,
-  company,
-  startDate,
-  endDate,
-  description,
-  area,
+  experience,
+  onDelete,
+  onUpdate,
+  isEditing,
+  isAdding, // Nuova prop per distinguere la modalità aggiunta
+  setEditingId,
+  isMyProfile,
 }) => {
+  const [editedExperience, setEditedExperience] = useState(experience)
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target
+    setEditedExperience({ ...editedExperience, [name]: value })
+  }
+
+  const handleSave = () => {
+    onUpdate(editedExperience)
+    if (isAdding) {
+      // Se siamo in modalità aggiunta, chiudiamo direttamente il form
+      onDelete()
+    } else {
+      setEditingId(null)
+    }
+  }
+
+  const handleCancel = () => {
+    if (isAdding) {
+      onDelete() // Chiude il form in modalità aggiunta
+    } else {
+      setEditingId(null)
+    }
+  }
+
   return (
-    <ListGroup variant='flush'>
-      <ListGroup.Item>
-        <Row className='border border-0 border-bottom border-1'>
-          <Col className='d-flex justify-content-center align-items-start col-auto p-1'>
-            {company.image ? (
+    <div className='mb-3 border-bottom pb-3'>
+      {isEditing ? (
+        <Form className='fs-7'>
+          {/* Form per modificare o aggiungere l'esperienza */}
+          <Form.Group className='mb-3'>
+            <Form.Label>Ruolo</Form.Label>
+            <Form.Control
+              className='fs-7'
+              type='text'
+              name='role'
+              value={editedExperience.role}
+              onChange={handleInputChange}
+            />
+          </Form.Group>
+          <Form.Group className='mb-3'>
+            <Form.Label>Azienda</Form.Label>
+            <Form.Control
+              className='fs-7'
+              type='text'
+              name='company'
+              value={editedExperience.company}
+              onChange={handleInputChange}
+            />
+          </Form.Group>
+          <Form.Group className='mb-3'>
+            <Form.Label>Data Inizio</Form.Label>
+            <Form.Control
+              className='fs-7'
+              type='date'
+              name='startDate'
+              value={editedExperience.startDate}
+              onChange={handleInputChange}
+            />
+          </Form.Group>
+          <Form.Group className='mb-3'>
+            <Form.Label>Data Fine</Form.Label>
+            <Form.Control
+              className='fs-7'
+              type='date'
+              name='endDate'
+              value={editedExperience.endDate}
+              onChange={handleInputChange}
+            />
+          </Form.Group>
+          <Form.Group className='mb-3'>
+            <Form.Label>Descrizione</Form.Label>
+            <Form.Control
+              className='fs-7'
+              as='textarea'
+              rows={3}
+              name='description'
+              value={editedExperience.description}
+              onChange={handleInputChange}
+            />
+          </Form.Group>
+          <Form.Group className='mb-3'>
+            <Form.Label>Area</Form.Label>
+            <Form.Control
+              className='fs-7'
+              type='text'
+              name='area'
+              value={editedExperience.area}
+              onChange={handleInputChange}
+            />
+          </Form.Group>
+          <Form.Group className='mb-3'>
+            <Form.Label>URL Immagine</Form.Label>
+            <Form.Control
+              className='fs-7'
+              type='text'
+              name='image'
+              value={editedExperience.image}
+              onChange={handleInputChange}
+            />
+          </Form.Group>
+          <Button
+            variant='success'
+            onClick={handleSave}
+            size='sm'
+            className='me-2'
+          >
+            Salva
+          </Button>
+          <Button
+            variant='secondary'
+            onClick={handleCancel}
+            size='sm'
+            className='me-2'
+          >
+            Annulla
+          </Button>
+          {!isAdding && (
+            <Button
+              variant='danger'
+              size='sm'
+              onClick={() => onDelete(experience._id)}
+            >
+              Elimina
+            </Button>
+          )}
+        </Form>
+      ) : (
+        <div className='d-flex flex-column'>
+          {isMyProfile && (
+            <div className='d-flex justify-content-end mb-2'>
+              <Button
+                variant='link'
+                className='p-0 text-decoration-none'
+                onClick={() => setEditingId(experience._id)}
+              >
+                <MdEdit />
+              </Button>
+            </div>
+          )}
+          <div className='d-flex align-items-start mb-2'>
+            {experience.image ? (
               <img
-                style={{ width: '50px' }}
-                src={company.image}
-                alt={`company-logo: ${company}`}
+                style={{ width: '50px', marginRight: '10px' }}
+                src={experience.image}
+                alt={`company-logo: ${experience.company}`}
               />
             ) : (
               <img
-                style={{ width: '50px' }}
+                style={{ width: '50px', marginRight: '10px' }}
                 src={`https://placehold.co/250x250/000000/00FF00/?text=${
-                  company.split(' #')[0]
+                  experience.company.split(' #')[0]
                 }`}
-                alt={`company-logo: ${company}`}
+                alt={`company-logo: ${experience.company}`}
               />
             )}
-          </Col>
-          <Col className='d-flex flex-column align-items-start justify-content-start p-1'>
-            <div className='fs-7 fw-bold'>{role}</div>
-            <div className='fs-7 text-secondary'>{company.split(' #')[0]}</div>
-            <div className='fs-7 text-secondary'>
-              {formatDate(startDate)} - {formatDate(endDate)} • {area}
+            <div>
+              <div className='fs-7 fw-bold'>{experience.role}</div>
+              <div className='fs-7 text-secondary'>
+                {experience.company.split(' #')[0]}
+              </div>
+              <div className='fs-7 text-secondary'>
+                {formatDate(experience.startDate)} -{' '}
+                {formatDate(experience.endDate)} • {experience.area}
+              </div>
             </div>
-            <div className='fs-7 my-3'>{description}</div>
-          </Col>
-        </Row>
-      </ListGroup.Item>
-    </ListGroup>
+          </div>
+          <div className='fs-7 mb-3'>{experience.description}</div>
+        </div>
+      )}
+    </div>
   )
 }
 
 // Componente principale per visualizzare la sezione dinamica
 const ProfileDown = (props) => {
-  const [experiences, setExperiences] = useState([]) // Stato locale per le esperienze
+  const [experiences, setExperiences] = useState([])
+  const [editingId, setEditingId] = useState(null)
+  const [addingExperience, setAddingExperience] = useState(false)
 
-  // Recupera la API key dalle variabili d'ambiente
+  const myProfileId = useSelector((state) => state.profile.me._id)
+
   const apiKey = import.meta.env.VITE_LINKEDIN_API_KEY
 
-  // Funzione per recuperare le esperienze dall'API
   const fetchExperiences = async () => {
     try {
       const response = await axios.get(
@@ -73,25 +218,124 @@ const ProfileDown = (props) => {
           },
         }
       )
-      setExperiences(response.data) // Aggiorna lo stato con i dati ricevuti
+      setExperiences(response.data)
     } catch (error) {
       console.error('Error fetching experiences:', error)
     }
   }
 
-  // useEffect per richiamare la fetch al caricamento del componente o al cambio di userId
+  const addExperience = async (newExperience) => {
+    try {
+      const response = await axios.post(
+        `https://striveschool-api.herokuapp.com/api/profile/${props.profileId}/experiences`,
+        newExperience,
+        {
+          headers: {
+            Authorization: `Bearer ${apiKey}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      )
+      setExperiences([...experiences, response.data]) // Aggiungi la nuova esperienza alla lista
+      setAddingExperience(false)
+    } catch (error) {
+      console.error('Error adding experience:', error)
+    }
+  }
+
+  const updateExperience = async (updatedExperience) => {
+    try {
+      await axios.put(
+        `https://striveschool-api.herokuapp.com/api/profile/${props.profileId}/experiences/${updatedExperience._id}`,
+        updatedExperience,
+        {
+          headers: {
+            Authorization: `Bearer ${apiKey}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      )
+      setExperiences((prev) =>
+        prev.map((exp) =>
+          exp._id === updatedExperience._id ? updatedExperience : exp
+        )
+      ) // Aggiorna solo l'esperienza modificata
+    } catch (error) {
+      console.error('Error updating experience:', error)
+    }
+  }
+
+  const deleteExperience = async (id) => {
+    try {
+      await axios.delete(
+        `https://striveschool-api.herokuapp.com/api/profile/${props.profileId}/experiences/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${apiKey}`,
+          },
+        }
+      )
+      fetchExperiences()
+    } catch (error) {
+      console.error('Error deleting experience:', error)
+    }
+  }
+
   useEffect(() => {
     fetchExperiences()
   }, [props.profileId])
 
+  const handleAddClick = () => {
+    setAddingExperience(true)
+  }
+
   return (
     <Container className='mt-4 border rounded border-1 p-2'>
       <section id={props.section}>
-        <h3 className='mb-4 fs-6 fw-bold'>
+        <h3 className='mb-4 fs-6 fw-bold d-flex align-items-center justify-content-between'>
           {props.section.charAt(0).toUpperCase() + props.section.slice(1)}
+          {props.profileId === myProfileId && (
+            <Button
+              variant='link'
+              className='p-0 text-decoration-none'
+              onClick={handleAddClick}
+            >
+              <MdAdd size={20} />
+            </Button>
+          )}
         </h3>
-        {experiences.map((exp, index) => (
-          <ExperienceCard key={index} {...exp} />
+        {addingExperience && (
+          <ExperienceCard
+            experience={{
+              role: '',
+              company: '',
+              startDate: '',
+              endDate: '',
+              description: '',
+              area: '',
+              image: '',
+            }}
+            onUpdate={(newExperience) => {
+              addExperience(newExperience)
+            }}
+            onDelete={() => setAddingExperience(false)} // Chiude il form
+            isEditing={true}
+            isAdding={true} // Indica che è una nuova esperienza
+            setEditingId={() => {}}
+            isMyProfile={true}
+          />
+        )}
+
+        {experiences.map((exp) => (
+          <ExperienceCard
+            key={exp._id}
+            experience={exp}
+            onUpdate={updateExperience}
+            onDelete={deleteExperience}
+            isEditing={editingId === exp._id}
+            setEditingId={setEditingId}
+            isMyProfile={props.profileId === myProfileId}
+          />
         ))}
       </section>
     </Container>

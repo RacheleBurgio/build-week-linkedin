@@ -1,15 +1,26 @@
-import React, { useState } from 'react'
-import { Form, Button, Card } from 'react-bootstrap'
-import PostPictureUpload from './PostPictureUpload'
+import React, { useState } from 'react';
+import { Form, Button, Card, Modal, Image, Alert, Spinner } from 'react-bootstrap';
+import PostPictureUpload from './PostPictureUpload';
 
-const NewPost = ({ onPostCreated }) => {
-  const [postText, setPostText] = useState('')
-  const [postImage, setPostImage] = useState(null)
-  const apiKey = import.meta.env.VITE_LINKEDIN_API_KEY
+const NewPost = ({ onPostCreated, userProfileImage }) => {
+  const [postText, setPostText] = useState('');
+  const [postImage, setPostImage] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [loading, setLoading] = useState(false);
+  const apiKey = import.meta.env.VITE_LINKEDIN_API_KEY;
 
   const handleCreatePost = async (e) => {
-    e.preventDefault()
-    if (!postText) return
+    e.preventDefault();
+    if (!postText) return;
+
+    const body = {
+      text: postText,
+      ...(postImage && { image: postImage }), // Conditionally add image
+    };
+
+    setLoading(true);
+    setErrorMessage(''); // Clear previous error messages
 
     try {
       const response = await fetch(
@@ -20,50 +31,75 @@ const NewPost = ({ onPostCreated }) => {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${apiKey}`,
           },
-          body: JSON.stringify({ text: postText, image: postImage }),
+          body: JSON.stringify(body),
         }
-      )
+      );
 
       if (!response.ok) {
-        throw new Error('Network response was not ok')
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Network response was not ok');
       }
 
-      const newPost = await response.json()
-      onPostCreated(newPost)
-      setPostText('')
-      setPostImage(null)
+      const newPost = await response.json();
+      onPostCreated(newPost);
+      resetForm();
     } catch (error) {
-      console.error('Error creating post:', error)
+      console.error('Error creating post:', error);
+      setErrorMessage('Errore nella creazione del post. Riprova.'); // Set error message
+    } finally {
+      setLoading(false);
     }
-  }
+  };
+
+  const resetForm = () => {
+    setPostText('');
+    setPostImage(null);
+    setShowModal(false);
+  };
 
   const handleImageUpload = (imageUrl) => {
-    setPostImage(imageUrl)
-  }
+    setPostImage(imageUrl);
+  };
 
   return (
-    <Card className="mb-4">
-      <Card.Body>
-        <h2>Crea un nuovo post</h2>
-        <PostPictureUpload onUpload={handleImageUpload} />
-        <Form onSubmit={handleCreatePost}>
-          <Form.Group controlId="newPost">
-            <Form.Control
-              as="textarea"
-              rows={3}
-              value={postText}
-              onChange={(e) => setPostText(e.target.value)}
-              placeholder="Scrivi qualcosa..."
-              required
-            />
-          </Form.Group>
-          <Button variant="primary" type="submit">
-            Pubblica
-          </Button>
-        </Form>
+    <Card className="mb-4" onClick={() => setShowModal(true)} style={{ cursor: 'pointer' }}>
+      <Card.Body className='button' style={{ display: 'flex', alignItems: 'center' }}>
+        <Image
+          src={userProfileImage}
+          roundedCircle
+          style={{ width: '40px', height: '40px', marginRight: '10px' }}
+          alt="User  Profile"
+        />
+        <p style={{ margin: 0 }}>Crea un nuovo post</p>
       </Card.Body>
-    </Card>
-  )
-}
 
-export default NewPost
+      <Modal show={showModal} onHide={() => setShowModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Nuovo post</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {errorMessage && <Alert variant="danger">{errorMessage}</Alert>} {/* Display error message */}
+          <PostPictureUpload onUpload={handleImageUpload} />
+          <Form onSubmit={handleCreatePost}>
+            <Form.Group controlId="newPost">
+              <Form.Control
+                as="textarea"
+                rows={3}
+                value={postText}
+                onChange={(e) => setPostText(e.target.value)}
+                placeholder="Scrivi qualcosa..."
+                required
+                aria-label="Post content"
+              />
+            </Form.Group>
+            <Button variant="primary" type="submit" disabled={loading}>
+              {loading ? <Spinner animation="border" size="sm" /> : 'Pubblica'}
+            </Button>
+          </Form>
+        </Modal.Body>
+      </Modal>
+    </Card>
+  );
+};
+
+export default NewPost;

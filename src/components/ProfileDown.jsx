@@ -4,7 +4,8 @@ import axios from 'axios'
 import { useSelector } from 'react-redux'
 
 import '../assets/css/custom-bootstrap.css'
-import { MdEdit } from 'react-icons/md'
+
+import { MdEdit, MdAdd } from 'react-icons/md'
 
 // Funzione per formattare la data in "Mese Anno" o "Present"
 const formatDate = (dateString) => {
@@ -16,10 +17,10 @@ const formatDate = (dateString) => {
 // Componente per la singola esperienza
 const ExperienceCard = ({
   experience,
-  onEdit,
   onDelete,
   onUpdate,
   isEditing,
+  isAdding, // Nuova prop per distinguere la modalità aggiunta
   setEditingId,
   isMyProfile,
 }) => {
@@ -32,18 +33,27 @@ const ExperienceCard = ({
 
   const handleSave = () => {
     onUpdate(editedExperience)
-    setEditingId(null)
+    if (isAdding) {
+      // Se siamo in modalità aggiunta, chiudiamo direttamente il form
+      onDelete()
+    } else {
+      setEditingId(null)
+    }
   }
 
   const handleCancel = () => {
-    setEditedExperience(experience)
-    setEditingId(null)
+    if (isAdding) {
+      onDelete() // Chiude il form in modalità aggiunta
+    } else {
+      setEditingId(null)
+    }
   }
 
   return (
     <div className='mb-3 border-bottom pb-3'>
       {isEditing ? (
         <Form className='fs-7'>
+          {/* Form per modificare o aggiungere l'esperienza */}
           <Form.Group className='mb-3'>
             <Form.Label>Ruolo</Form.Label>
             <Form.Control
@@ -131,13 +141,15 @@ const ExperienceCard = ({
           >
             Annulla
           </Button>
-          <Button
-            variant='danger'
-            size='sm'
-            onClick={() => onDelete(experience._id)}
-          >
-            Elimina
-          </Button>
+          {!isAdding && (
+            <Button
+              variant='danger'
+              size='sm'
+              onClick={() => onDelete(experience._id)}
+            >
+              Elimina
+            </Button>
+          )}
         </Form>
       ) : (
         <div className='d-flex flex-column'>
@@ -190,6 +202,8 @@ const ExperienceCard = ({
 const ProfileDown = (props) => {
   const [experiences, setExperiences] = useState([])
   const [editingId, setEditingId] = useState(null)
+  const [addingExperience, setAddingExperience] = useState(false)
+
   const myProfileId = useSelector((state) => state.profile.me._id)
 
   const apiKey = import.meta.env.VITE_LINKEDIN_API_KEY
@@ -210,18 +224,42 @@ const ProfileDown = (props) => {
     }
   }
 
+  const addExperience = async (newExperience) => {
+    try {
+      const response = await axios.post(
+        `https://striveschool-api.herokuapp.com/api/profile/${props.profileId}/experiences`,
+        newExperience,
+        {
+          headers: {
+            Authorization: `Bearer ${apiKey}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      )
+      setExperiences([...experiences, response.data]) // Aggiungi la nuova esperienza alla lista
+      setAddingExperience(false)
+    } catch (error) {
+      console.error('Error adding experience:', error)
+    }
+  }
+
   const updateExperience = async (updatedExperience) => {
     try {
       await axios.put(
         `https://striveschool-api.herokuapp.com/api/profile/${props.profileId}/experiences/${updatedExperience._id}`,
-        JSON.stringify(updatedExperience),
+        updatedExperience,
         {
           headers: {
             Authorization: `Bearer ${apiKey}`,
+            'Content-Type': 'application/json',
           },
         }
       )
-      fetchExperiences()
+      setExperiences((prev) =>
+        prev.map((exp) =>
+          exp._id === updatedExperience._id ? updatedExperience : exp
+        )
+      ) // Aggiorna solo l'esperienza modificata
     } catch (error) {
       console.error('Error updating experience:', error)
     }
@@ -247,12 +285,47 @@ const ProfileDown = (props) => {
     fetchExperiences()
   }, [props.profileId])
 
+  const handleAddClick = () => {
+    setAddingExperience(true)
+  }
+
   return (
     <Container className='mt-4 border rounded border-1 p-2'>
       <section id={props.section}>
-        <h3 className='mb-4 fs-6 fw-bold'>
+        <h3 className='mb-4 fs-6 fw-bold d-flex align-items-center justify-content-between'>
           {props.section.charAt(0).toUpperCase() + props.section.slice(1)}
+          {props.profileId === myProfileId && (
+            <Button
+              variant='link'
+              className='p-0 text-decoration-none'
+              onClick={handleAddClick}
+            >
+              <MdAdd size={20} />
+            </Button>
+          )}
         </h3>
+        {addingExperience && (
+          <ExperienceCard
+            experience={{
+              role: '',
+              company: '',
+              startDate: '',
+              endDate: '',
+              description: '',
+              area: '',
+              image: '',
+            }}
+            onUpdate={(newExperience) => {
+              addExperience(newExperience)
+            }}
+            onDelete={() => setAddingExperience(false)} // Chiude il form
+            isEditing={true}
+            isAdding={true} // Indica che è una nuova esperienza
+            setEditingId={() => {}}
+            isMyProfile={true}
+          />
+        )}
+
         {experiences.map((exp) => (
           <ExperienceCard
             key={exp._id}

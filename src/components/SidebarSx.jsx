@@ -27,7 +27,7 @@ const ProfiloSidebar = () => {
             borderRadius: '5px 5px 0px 0px',
           }}
         >
-          <Link to={`/profile/${profile.id}`}>
+          <Link to={`/profile/${profile._id}`}>
             <Card.Img
               variant='top'
               className='rounded-circle border border-white'
@@ -40,7 +40,7 @@ const ProfiloSidebar = () => {
 
         <Card.Body>
           <Card.Title className='text-center fw-bold fs-6 pt-4'>
-            <Link to={`/profile/${profile.id}`}>
+            <Link to={`/profile/${profile._id}`}>
               {profile.name} {profile.surname}
             </Link>
           </Card.Title>

@@ -26,6 +26,7 @@ import Profile from './components/Profile'
 import Post from './components/Post'
 import Comment from './components/Comment'
 import JobPage from './components/JobPage'
+import NewPostHome from './components/NewPostHome'
 
 // Wrapper per il profilo
 const ProfileWrapper = () => {
@@ -101,6 +102,12 @@ function App() {
             <Sidebar type='sx' />
             <Col className={location.pathname === '/jobs' ? 'col-12' : 'col-6'}>
               <Routes>
+              <Route path='/' element={
+        <>
+            <NewPostHome /> {}
+            <Feed />
+        </>
+    }/>
                 <Route path='/' element={<Feed />} />
                 <Route path='/feed' element={<Feed />} />
                 <Route path='/profile' element={<ProfileWrapper />} />

@@ -1,7 +1,6 @@
-import { useState, useEffect } from 'react'
+import {  useEffect } from 'react'
 import { Card, ListGroup, ListGroupItem, Container } from 'react-bootstrap'
-import { useParams } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import {  useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 const ProfiloSidebar = () => {
@@ -30,7 +29,7 @@ const ProfiloSidebar = () => {
             />
           </Link>
         </div>
-
+      
         <Card.Body>
           <Card.Title className='text-center fw-bold fs-6 pt-4'>
             <Link to={`/profile/${profile._id}`}>
@@ -40,7 +39,7 @@ const ProfiloSidebar = () => {
           <Card.Subtitle className='mb-2 fs-7 text-muted text-center'>
             {profile.title}
           </Card.Subtitle>
-          <Card.Text>{profile.bio}</Card.Text>
+          <Card.Text className='mb-2 fs-7 text-muted text-center'>{profile.bio}</Card.Text>
         </Card.Body>
         <ListGroup className='list-group-flush'>
           <ListGroupItem className='fs-7 text-muted'>
@@ -54,7 +53,7 @@ const ProfiloSidebar = () => {
             <i className='bi bi-square-fill me-2'></i>Prova Premium ora
           </ListGroupItem>
           <ListGroupItem className='fs-7 fw-bold text-dark'>
-            Elementi salvati
+          <i className='bi bi-bookmark-fill me-2'></i> Elementi salvati
           </ListGroupItem>
         </ListGroup>
       </Card>

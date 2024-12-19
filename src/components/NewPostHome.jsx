@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Button, Card, Modal, Image, Alert } from 'react-bootstrap';
+import { Form, Button, Card, Modal, Image, Alert, Spinner } from 'react-bootstrap';
 import PostPictureUpload from './PostPictureUpload';
 
 const NewPost = ({ onPostCreated, userProfileImage }) => {
@@ -7,6 +7,7 @@ const NewPost = ({ onPostCreated, userProfileImage }) => {
   const [postImage, setPostImage] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [loading, setLoading] = useState(false);
   const apiKey = import.meta.env.VITE_LINKEDIN_API_KEY;
 
   const handleCreatePost = async (e) => {
@@ -15,10 +16,11 @@ const NewPost = ({ onPostCreated, userProfileImage }) => {
 
     const body = {
       text: postText,
+      ...(postImage && { image: postImage }), // Conditionally add image
     };
-    if (postImage) {
-      body.image = postImage;
-    }
+
+    setLoading(true);
+    setErrorMessage(''); // Clear previous error messages
 
     try {
       const response = await fetch(
@@ -34,19 +36,25 @@ const NewPost = ({ onPostCreated, userProfileImage }) => {
       );
 
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Network response was not ok');
       }
 
       const newPost = await response.json();
       onPostCreated(newPost);
-      setPostText('');
-      setPostImage(null);
-      setShowModal(false);
-      setErrorMessage(''); // Clear any previous error messages
+      resetForm();
     } catch (error) {
       console.error('Error creating post:', error);
       setErrorMessage('Errore nella creazione del post. Riprova.'); // Set error message
+    } finally {
+      setLoading(false);
     }
+  };
+
+  const resetForm = () => {
+    setPostText('');
+    setPostImage(null);
+    setShowModal(false);
   };
 
   const handleImageUpload = (imageUrl) => {
@@ -60,6 +68,7 @@ const NewPost = ({ onPostCreated, userProfileImage }) => {
           src={userProfileImage}
           roundedCircle
           style={{ width: '40px', height: '40px', marginRight: '10px' }}
+          alt="User  Profile"
         />
         <p style={{ margin: 0 }}>Crea un nuovo post</p>
       </Card.Body>
@@ -80,10 +89,11 @@ const NewPost = ({ onPostCreated, userProfileImage }) => {
                 onChange={(e) => setPostText(e.target.value)}
                 placeholder="Scrivi qualcosa..."
                 required
+                aria-label="Post content"
               />
             </Form.Group>
-            <Button variant="primary" type="submit">
-              Pubblica
+            <Button variant="primary" type="submit" disabled={loading}>
+              {loading ? <Spinner animation="border" size="sm" /> : 'Pubblica'}
             </Button>
           </Form>
         </Modal.Body>

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Card, ListGroup, ListGroupItem, Container } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 const ProfiloSidebar = () => {
   const profile = useSelector((state) => state.profile.me)
@@ -26,18 +27,22 @@ const ProfiloSidebar = () => {
             borderRadius: '5px 5px 0px 0px',
           }}
         >
-          <Card.Img
-            variant='top'
-            className='rounded-circle border border-white'
-            style={position}
-            src={profile.image}
-            alt='Profile Picture'
-          />
+          <Link to={`/profile/${profile.id}`}>
+            <Card.Img
+              variant='top'
+              className='rounded-circle border border-white'
+              style={position}
+              src={profile.image}
+              alt='Profile Picture'
+            />
+          </Link>
         </div>
 
         <Card.Body>
           <Card.Title className='text-center fw-bold fs-6 pt-4'>
-            {profile.name} {profile.surname}
+            <Link to={`/profile/${profile.id}`}>
+              {profile.name} {profile.surname}
+            </Link>
           </Card.Title>
           <Card.Subtitle className='mb-2 fs-7 text-muted text-center'>
             {profile.title}

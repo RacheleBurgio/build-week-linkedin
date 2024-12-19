@@ -5,6 +5,7 @@ import { Container, Row, Col, Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { IoMdPersonAdd } from 'react-icons/io'
 
+
 // Recupera la API key dalle variabili d'ambiente
 const apiKey = import.meta.env.VITE_LINKEDIN_API_KEY
 
@@ -57,7 +58,7 @@ const ProfiliSidebar = (props) => {
   const randomProfiles = getRandomProfiles(profiles, props.profileNumber)
 
   return (
-    <Container fluid className='p-0 mt-2 bg-white border rounded'>
+    <Container fluid className='p-0 mt-3 bg-white border rounded'>
       <div className='mt-2 fs-6 ms-3  fw-bold'>{props.title}</div>
       <Row className='justify-content-center'>
         {randomProfiles.map((profile) => (

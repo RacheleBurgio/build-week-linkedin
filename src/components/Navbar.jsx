@@ -109,7 +109,9 @@ function MyNav() {
                 }
                 id="basic-nav-dropdown"
               >
-                <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/profile">
+                  Vai al profilo
+                </NavDropdown.Item>
                 <NavDropdown.Item href="#action4"></NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="#action5">

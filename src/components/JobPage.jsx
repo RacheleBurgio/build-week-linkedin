@@ -1,10 +1,19 @@
 import { useEffect, useState } from 'react'
-import { Container, Row, Col, Button, Spinner, Alert } from 'react-bootstrap'
+import {
+  Container,
+  Row,
+  Col,
+  Button,
+  Spinner,
+  Alert,
+  Form,
+} from 'react-bootstrap'
 
 const JobPage = () => {
   const [jobs, setJobs] = useState([])
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
+  const [searchTerm, setSearchTerm] = useState('dev')
 
   const btn = {
     backgroundColor: 'transparent',
@@ -17,16 +26,19 @@ const JobPage = () => {
   }
 
   // Funzione per ottenere i dati dall'API
-  const fetchJobs = async () => {
+  const fetchJobs = async (category) => {
+    setLoading(true)
+    setError(null)
     try {
       const response = await fetch(
-        'https://strive-benchmark.herokuapp.com/api/jobs?category=writing&limit=10'
+        `https://strive-benchmark.herokuapp.com/api/jobs?category=${category}&limit=10`
       )
       if (response.ok) {
-        console.log(response)
+        const data = await response.json()
+        setJobs(data.data)
+      } else {
+        throw new Error('Errore durante il recupero delle offerte di lavoro.')
       }
-      const data = await response.json()
-      setJobs(data.data)
     } catch (error) {
       setError(error.message)
     } finally {
@@ -35,8 +47,13 @@ const JobPage = () => {
   }
 
   useEffect(() => {
-    fetchJobs()
+    fetchJobs(searchTerm)
   }, [])
+
+  const handleSearch = (e) => {
+    e.preventDefault()
+    fetchJobs(searchTerm)
+  }
 
   const truncateDescription = (description, length = 200) => {
     if (description.length > length) {
@@ -53,15 +70,15 @@ const JobPage = () => {
           <Col xs={3}>
             <div className="bg-white p-1 rounded shadow-sm h-100">
               <ul className="list-unstyled ps-4">
-                <li>
+                <li className="mt-2">
                   <i className="bi bi-list-stars me-2"></i>
                   Preferenze
                 </li>
-                <li>
+                <li className="mt-2">
                   <i className="bi bi-bookmark-fill me-2"></i>Le mie offerte di
                   lavoro
                 </li>
-                <li>
+                <li className="mt-2">
                   <i className="bi bi-square-fill me-2"></i>Le mie informazioni
                   sulla <br />
                   carriera
@@ -84,6 +101,19 @@ const JobPage = () => {
                 In base al tuo profilo, alle tue preferenze e ad attività come
                 candidature, ricerche e salvataggi
               </p>
+
+              {/* Barra di ricerca */}
+              <Form onSubmit={handleSearch} className="d-flex mb-3">
+                <Form.Control
+                  type="text"
+                  placeholder="Cerca una categoria di lavoro"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+                <Button type="submit" style={{ marginLeft: '10px' }}>
+                  Cerca
+                </Button>
+              </Form>
             </div>
 
             {error && <Alert variant="danger">{error}</Alert>}
@@ -102,7 +132,7 @@ const JobPage = () => {
                     >
                       <h6>{job.title}</h6>
                       <p className="text-body-tertiary">{job.company_name}</p>
-                      {/* Dettagli del lavoro */}
+
                       <p>
                         <strong>Category</strong> {job.category}
                       </p>

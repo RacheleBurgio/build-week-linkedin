@@ -1,11 +1,9 @@
-
 import React, { useState } from 'react';
-import axios from 'axios';
 import { Button, Form } from 'react-bootstrap';
 
-const PostPictureUpload = ({ postId, onUpload }) => {
+const PostPictureUpload = ({ onUpload }) => {
   const [file, setFile] = useState(null);
-  const apiKey = import.meta.env.VITE_API_KEY; 
+  const apiKey = import.meta.env.VITE_API_KEY; // Assicurati di avere il tuo Bearer Token
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -16,16 +14,23 @@ const PostPictureUpload = ({ postId, onUpload }) => {
     if (!file) return;
 
     const formData = new FormData();
-    formData.append('post', file);
+    formData.append('image', file); // Aggiungi il file all'oggetto FormData
 
     try {
-      const response = await axios.post(`https://striveschool-api.herokuapp.com/api/posts/${postId}`, formData, {
+      const response = await fetch('https://api.imgur.com/3/image', {
+        method: 'POST',
         headers: {
-          Authorization: `Bearer ${apiKey}`,
-          'Content-Type': 'multipart/form-data',
+          Authorization: `Client-ID ${apiKey}`, // Usa il tuo Client ID di Imgur
         },
+        body: formData,
       });
-      onUpload(response.data); // Chiamata a funzione per gestire l'upload
+
+      if (!response.ok) {
+        throw new Error('Failed to upload image');
+      }
+
+      const data = await response.json();
+      onUpload(data.data.link); // Passa il link dell'immagine al componente genitore
       setFile(null); // Resetta il file dopo l'upload
     } catch (error) {
       console.error('Error uploading post picture:', error);

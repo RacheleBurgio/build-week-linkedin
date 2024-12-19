@@ -26,6 +26,9 @@ import Profile from './components/Profile'
 import Post from './components/Post'
 import Comment from './components/Comment'
 import JobPage from './components/JobPage'
+import { Display } from 'react-bootstrap-icons'
+
+
 
 // Wrapper per il profilo
 const ProfileWrapper = () => {
@@ -101,9 +104,11 @@ function App() {
           </Row>
         </Container>
       </main>
-      <footer>
-        <Footer />
-      </footer>
+      {location.pathname !== '/jobs' && (
+        <footer>
+          <Footer />
+        </footer>
+      )}
     </>
   )
 }

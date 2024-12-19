@@ -57,8 +57,8 @@ const ProfiliSidebar = (props) => {
   const randomProfiles = getRandomProfiles(profiles, props.profileNumber)
 
   return (
-    <Container fluid className='p-0 mt-2 border rounded'>
-      <h5 className='mt-2 ms-4 text-bold'>{props.title}</h5>
+    <Container fluid className='p-0 mt-2 bg-white border rounded'>
+      <div className='mt-2 fs-6 ms-3  fw-bold'>{props.title}</div>
       <Row className='justify-content-center'>
         {randomProfiles.map((profile) => (
           <Col key={profile._id} sm={12} className='mb-4'>

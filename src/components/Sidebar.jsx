@@ -3,6 +3,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css'
 
 import ImpostazioniProfilo from './ImpostazioniProfilo'
 import ProfiliSidebar from './ProfiliSidebar'
+import ProfiloSidebar from './SidebarSx'
 import { useLocation } from 'react-router'
 import { Col } from 'react-bootstrap'
 
@@ -16,7 +17,7 @@ const Sidebar = (props) => {
   if (props.type === 'sx') {
     return (
       <Col className="col-3">
-        <h2>Componente Sidebar {props.type}</h2>
+        <ProfiloSidebar/>
       </Col>
     )
   }

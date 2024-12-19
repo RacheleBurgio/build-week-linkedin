@@ -1,6 +1,11 @@
-import { Container, Row, Col, Button } from 'react-bootstrap'
+import { useEffect, useState } from 'react'
+import { Container, Row, Col, Button, Spinner, Alert } from 'react-bootstrap'
 
 const JobPage = () => {
+  const [jobs, setJobs] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+
   const btn = {
     backgroundColor: 'transparent',
     border: '2px solid #004182',
@@ -10,24 +15,54 @@ const JobPage = () => {
     fontSize: '16px',
     cursor: 'pointer',
   }
+
+  // Funzione per ottenere i dati dall'API
+  const fetchJobs = async () => {
+    try {
+      const response = await fetch(
+        'https://strive-benchmark.herokuapp.com/api/jobs?category=writing&limit=10'
+      )
+      if (response.ok) {
+        console.log(response)
+      }
+      const data = await response.json()
+      setJobs(data.data)
+    } catch (error) {
+      setError(error.message)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    fetchJobs()
+  }, [])
+
+  const truncateDescription = (description, length = 200) => {
+    if (description.length > length) {
+      return description.slice(0, length) + '...'
+    }
+    return description
+  }
+
   return (
     <>
-      <Container>
+      <Container className="mt-3">
         <Row className="d-flex justify-content-between align-items-start">
           {/* Colonna sinistra */}
           <Col xs={3}>
-            <div className="bg-white p-3 rounded shadow-sm h-100">
-              <ul className="list-unstyled">
+            <div className="bg-white p-1 rounded shadow-sm h-100">
+              <ul className="list-unstyled ps-4">
                 <li>
-                  <i class="bi bi-list-stars me-2"></i>
+                  <i className="bi bi-list-stars me-2"></i>
                   Preferenze
                 </li>
                 <li>
-                  <i class="bi bi-bookmark-fill me-2"></i>Le mie offerte di
+                  <i className="bi bi-bookmark-fill me-2"></i>Le mie offerte di
                   lavoro
                 </li>
                 <li>
-                  <i class="bi bi-square-fill me-2"></i>Le mie informazioni
+                  <i className="bi bi-square-fill me-2"></i>Le mie informazioni
                   sulla <br />
                   carriera
                 </li>
@@ -35,7 +70,7 @@ const JobPage = () => {
             </div>
             <div className="mt-3">
               <Button style={btn}>
-                <i class="bi bi-pencil-square me-2"></i>Pubblica offerta
+                <i className="bi bi-pencil-square me-2"></i>Pubblica offerta
                 gratuita
               </Button>
             </div>
@@ -50,49 +85,98 @@ const JobPage = () => {
                 candidature, ricerche e salvataggi
               </p>
             </div>
-            <div className="bg-white p-3 rounded shadow-sm h-100">
-              <h6 className="mb-3">
-                <i className="bi bi-currency-exchange "></i> P R E M I U M
-              </h6>
-              <h5>
-                Offerte di Lavoro per cui rientri fra i migliori candidati
-              </h5>
-              <p className="text-body-tertiary">
-                In base alle tue probabilità di ricevere una risposta
-              </p>
-            </div>
-            <div className="bg-white p-3 rounded shadow-sm h-100">
-              <h5>Esplora offerte di lavoro per te</h5>
-              <p className="text-body-tertiary">
-                In base al tuo profilo, alle tue preferenze e ad attività come
-                candidature, ricerche e salvataggi
-              </p>
-            </div>
+
+            {error && <Alert variant="danger">{error}</Alert>}
+
+            {loading ? (
+              <div className="text-center">
+                <Spinner animation="border" />
+              </div>
+            ) : (
+              <>
+                {jobs.length > 0 ? (
+                  jobs.map((job) => (
+                    <div
+                      className="bg-white p-3 mt-3 rounded shadow-sm h-100"
+                      key={job._id}
+                    >
+                      <h6>{job.title}</h6>
+                      <p className="text-body-tertiary">{job.company_name}</p>
+                      {/* Dettagli del lavoro */}
+                      <p>
+                        <strong>Category</strong> {job.category}
+                      </p>
+                      <p>
+                        <strong>Job Type:</strong> {job.job_type}
+                      </p>
+                      <p>
+                        <strong>Publication Date:</strong>{' '}
+                        {job.publication_date}
+                      </p>
+                      <p>
+                        <strong>Location:</strong>{' '}
+                        {job.candidate_required_location || 'Non specificato'}
+                      </p>
+                      <p>
+                        <strong>Salary:</strong>{' '}
+                        {job.salary || 'Non specificato'}
+                      </p>
+                      {/* Descrizione del lavoro */}
+                      <p
+                        dangerouslySetInnerHTML={{
+                          __html: truncateDescription(job.description),
+                        }}
+                      />
+                    </div>
+                  ))
+                ) : (
+                  <Alert variant="info">
+                    Nessuna offerta di lavoro disponibile al momento.
+                  </Alert>
+                )}
+              </>
+            )}
           </Col>
 
           {/* Colonna destra */}
-          <Col xs={3} className="d-flex justify-content-end text-center">
-            <ul className="list-inline">
-              <li className="list-inline-item m-0 me-2 my-1">Informazioni</li>
-              <li className="list-inline-item m-0 me-2 my-1">Accessibilità</li>
-              <li className="list-inline-item m-0 me-2 my-1">
-                Centro assistenza
-              </li>
-              <li className="list-inline-item m-0 me-2 my-1">
+          <Col xs={3} style={{ fontSize: '14px' }} className="text-center">
+            <ul className="list-unstyled d-flex flex-wrap justify-content-center align-items-center">
+              <li className="me-3 my-1">Informazioni</li>
+              <li className="me-3 my-1">Accessibilità</li>
+              <li className="me-3 my-1">Centro assistenza</li>
+              <li className="me-3 my-1">
                 Privacy e condizioni
+                <i
+                  className="bi bi-caret-down-fill"
+                  style={{ fontSize: '12px' }}
+                ></i>
               </li>
-              <li className="list-inline-item m-0 me-2 my-1">
+              <li className="me-3 my-1">
                 Opzioni per gli annunci pubblicitari
               </li>
-              <li className="list-inline-item m-0 me-2 my-1">Pubblicità</li>
-              <li className="list-inline-item m-0 me-2 my-1">
+              <li className="me-3 my-1">Pubblicità</li>
+              <li className="me-3 my-1">
                 Servizi alle aziende
+                <i
+                  className="bi bi-caret-down-fill"
+                  style={{ fontSize: '12px' }}
+                ></i>
               </li>
-              <li className="list-inline-item m-0 me-2 my-1">
-                Scarica l'app LinkedIn
-              </li>
-              <li className="list-inline-item m-0 me-2 my-1">Altro</li>
+              <li className="me-3 my-1">Scarica l'app LinkedIn</li>
+              <li className="me-3 my-1">Altro</li>
             </ul>
+
+            {/* Immagine LinkedIn sotto la lista */}
+            <div className="mt-3">
+              <img
+                src="/assets/imgs/LinkedIn-Logo.svg"
+                alt="LinkedIn logo"
+                style={{ width: '5em' }}
+              />{' '}
+              <span className="text-body-tertiary" style={{ fontSize: '10px' }}>
+                LinkedIn Corporation © 2024
+              </span>
+            </div>
           </Col>
         </Row>
       </Container>

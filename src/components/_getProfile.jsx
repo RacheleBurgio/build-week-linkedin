@@ -24,7 +24,7 @@ async function getMe(action = null, profileId = null) {
         case 'get': {
               // Esegui la fetch
   try {
-    const response = await fetch(apiUrl, {
+    const response = await fetch(apiUrl + localStorageKey, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${apiKey}`,
@@ -46,6 +46,25 @@ async function getMe(action = null, profileId = null) {
     // Salva i dati aggiornati nel localStorage
     localStorage.setItem(localStorageKey, JSON.stringify(resultWithTimestamp))
     console.log('Dati aggiornati nel localStorage:', resultWithTimestamp)
+    if (cachedData && action !== 'force') {
+      const parsedData = JSON.parse(cachedData)
+      const now = new Date().getTime()
+      const cacheTime = new Date(parsedData.timestamp).getTime()
+  
+      // Se i dati sono più vecchi di 5 minuti, esegui la fetch
+      if (now - cacheTime < cacheExpiration) {
+        console.log('Dati recuperati dal localStorage:', parsedData)
+        return parsedData
+      }
+    }
+  
+  
+  
+      return resultWithTimestamp
+    } catch (error) {
+      console.error('Errore nella fetch:', error)
+      return null
+    }
 
          }
         case 'force':{
@@ -62,25 +81,7 @@ async function getMe(action = null, profileId = null) {
 
   // Controllo cache nel localStorage
 
-  if (cachedData && action !== 'force') {
-    const parsedData = JSON.parse(cachedData)
-    const now = new Date().getTime()
-    const cacheTime = new Date(parsedData.timestamp).getTime()
-
-    // Se i dati sono più vecchi di 5 minuti, esegui la fetch
-    if (now - cacheTime < cacheExpiration) {
-      console.log('Dati recuperati dal localStorage:', parsedData)
-      return parsedData
-    }
-  }
-
-
-
-    return resultWithTimestamp
-  } catch (error) {
-    console.error('Errore nella fetch:', error)
-    return null
-  }
+  
 }
 
 export default getMe

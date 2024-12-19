@@ -5,7 +5,6 @@ import { Container, Row, Col, Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { IoMdPersonAdd } from 'react-icons/io'
 
-
 // Recupera la API key dalle variabili d'ambiente
 const apiKey = import.meta.env.VITE_LINKEDIN_API_KEY
 
@@ -52,41 +51,41 @@ const ProfiliSidebar = (props) => {
   }, [])
 
   if (loading) {
-    return <p className='text-center mt-5'>Caricamento in corso...</p>
+    return <p className="text-center mt-5">Caricamento in corso...</p>
   }
 
   const randomProfiles = getRandomProfiles(profiles, props.profileNumber)
 
   return (
-    <Container fluid className='p-0 mt-3 bg-white border rounded'>
-      <div className='mt-2 fs-6 ms-3  fw-bold'>{props.title}</div>
-      <Row className='justify-content-center'>
+    <Container fluid className="p-0 mt-3 bg-white border rounded">
+      <div className="mt-2 fs-6 ms-3  fw-bold">{props.title}</div>
+      <Row className="justify-content-center">
         {randomProfiles.map((profile) => (
-          <Col key={profile._id} sm={12} className='mb-4'>
-            <Card className=' border-0'>
+          <Col key={profile._id} sm={12} className="mb-4">
+            <Card className=" border-0">
               <Card.Body>
                 <Row>
                   <Col xs={3}>
                     <img
                       src={profile.image || 'https://via.placeholder.com/100'}
                       alt={`${profile.name} ${profile.surname}`}
-                      className='rounded rounded-circle'
-                      width='50px'
-                      height='50px'
+                      className="rounded rounded-circle"
+                      width="50px"
+                      height="50px"
                     />
                   </Col>
                   <Col xs={9}>
-                    <Card.Title className='h6 fw-bold'>
+                    <Card.Title className="h6 fw-bold">
                       {profile.name} {profile.surname}
                     </Card.Title>
-                    <Card.Text className='text-muted'>
+                    <Card.Text className="text-muted">
                       {profile.title || 'Titolo non disponibile'}
                     </Card.Text>
 
                     {props.type === 'consigliati' && (
                       <Link
                         to={`/profile/${profile._id}`}
-                        className='btn btn-outline-dark rounded-pill btn-sm'
+                        className="btn btn-outline-dark rounded-pill btn-sm"
                       >
                         <IoMdPersonAdd />
                         Collegati
@@ -95,7 +94,7 @@ const ProfiliSidebar = (props) => {
                     {props.type === 'perTe' && (
                       <Link
                         to={`/profile/${profile._id}`}
-                        className='btn btn-outline-dark rounded-pill btn-sm'
+                        className="btn btn-outline-dark rounded-pill btn-sm"
                       >
                         Visualizza Profilo
                       </Link>

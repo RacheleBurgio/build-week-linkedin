@@ -18,8 +18,8 @@ const Sidebar = (props) => {
   if (props.type === 'sx') {
     return (
       <Col className="col-3">
-        <ProfiloSidebar/>
-        <ProfiloSidebar2/>
+        <ProfiloSidebar />
+        <ProfiloSidebar2 />
       </Col>
     )
   }

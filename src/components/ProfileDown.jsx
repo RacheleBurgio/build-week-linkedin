@@ -50,101 +50,101 @@ const ExperienceCard = ({
   }
 
   return (
-    <div className='mb-3 border-bottom pb-3'>
+    <div className="mb-3 border-bottom pb-3">
       {isEditing ? (
-        <Form className='fs-7'>
+        <Form className="fs-7">
           {/* Form per modificare o aggiungere l'esperienza */}
-          <Form.Group className='mb-3'>
+          <Form.Group className="mb-3">
             <Form.Label>Ruolo</Form.Label>
             <Form.Control
-              className='fs-7'
-              type='text'
-              name='role'
+              className="fs-7"
+              type="text"
+              name="role"
               value={editedExperience.role}
               onChange={handleInputChange}
             />
           </Form.Group>
-          <Form.Group className='mb-3'>
+          <Form.Group className="mb-3">
             <Form.Label>Azienda</Form.Label>
             <Form.Control
-              className='fs-7'
-              type='text'
-              name='company'
+              className="fs-7"
+              type="text"
+              name="company"
               value={editedExperience.company}
               onChange={handleInputChange}
             />
           </Form.Group>
-          <Form.Group className='mb-3'>
+          <Form.Group className="mb-3">
             <Form.Label>Data Inizio</Form.Label>
             <Form.Control
-              className='fs-7'
-              type='date'
-              name='startDate'
+              className="fs-7"
+              type="date"
+              name="startDate"
               value={editedExperience.startDate}
               onChange={handleInputChange}
             />
           </Form.Group>
-          <Form.Group className='mb-3'>
+          <Form.Group className="mb-3">
             <Form.Label>Data Fine</Form.Label>
             <Form.Control
-              className='fs-7'
-              type='date'
-              name='endDate'
+              className="fs-7"
+              type="date"
+              name="endDate"
               value={editedExperience.endDate}
               onChange={handleInputChange}
             />
           </Form.Group>
-          <Form.Group className='mb-3'>
+          <Form.Group className="mb-3">
             <Form.Label>Descrizione</Form.Label>
             <Form.Control
-              className='fs-7'
-              as='textarea'
+              className="fs-7"
+              as="textarea"
               rows={3}
-              name='description'
+              name="description"
               value={editedExperience.description}
               onChange={handleInputChange}
             />
           </Form.Group>
-          <Form.Group className='mb-3'>
+          <Form.Group className="mb-3">
             <Form.Label>Area</Form.Label>
             <Form.Control
-              className='fs-7'
-              type='text'
-              name='area'
+              className="fs-7"
+              type="text"
+              name="area"
               value={editedExperience.area}
               onChange={handleInputChange}
             />
           </Form.Group>
-          <Form.Group className='mb-3'>
+          <Form.Group className="mb-3">
             <Form.Label>URL Immagine</Form.Label>
             <Form.Control
-              className='fs-7'
-              type='text'
-              name='image'
+              className="fs-7"
+              type="text"
+              name="image"
               value={editedExperience.image}
               onChange={handleInputChange}
             />
           </Form.Group>
           <Button
-            variant='success'
+            variant="success"
             onClick={handleSave}
-            size='sm'
-            className='me-2'
+            size="sm"
+            className="me-2"
           >
             Salva
           </Button>
           <Button
-            variant='secondary'
+            variant="secondary"
             onClick={handleCancel}
-            size='sm'
-            className='me-2'
+            size="sm"
+            className="me-2"
           >
             Annulla
           </Button>
           {!isAdding && (
             <Button
-              variant='danger'
-              size='sm'
+              variant="danger"
+              size="sm"
               onClick={() => onDelete(experience._id)}
             >
               Elimina
@@ -152,19 +152,19 @@ const ExperienceCard = ({
           )}
         </Form>
       ) : (
-        <div className='d-flex flex-column'>
+        <div className="d-flex flex-column">
           {isMyProfile && (
-            <div className='d-flex justify-content-end mb-2'>
+            <div className="d-flex justify-content-end mb-2">
               <Button
-                variant='link'
-                className='p-0 text-decoration-none'
+                variant="link"
+                className="p-0 text-decoration-none"
                 onClick={() => setEditingId(experience._id)}
               >
                 <MdEdit />
               </Button>
             </div>
           )}
-          <div className='d-flex align-items-start mb-2'>
+          <div className="d-flex align-items-start mb-2">
             {experience.image ? (
               <img
                 style={{ width: '50px', marginRight: '10px' }}
@@ -181,17 +181,17 @@ const ExperienceCard = ({
               />
             )}
             <div>
-              <div className='fs-7 fw-bold'>{experience.role}</div>
-              <div className='fs-7 text-secondary'>
+              <div className="fs-7 fw-bold">{experience.role}</div>
+              <div className="fs-7 text-secondary">
                 {experience.company.split(' #')[0]}
               </div>
-              <div className='fs-7 text-secondary'>
+              <div className="fs-7 text-secondary">
                 {formatDate(experience.startDate)} -{' '}
                 {formatDate(experience.endDate)} • {experience.area}
               </div>
             </div>
           </div>
-          <div className='fs-7 mb-3'>{experience.description}</div>
+          <div className="fs-7 mb-3">{experience.description}</div>
         </div>
       )}
     </div>
@@ -290,14 +290,14 @@ const ProfileDown = (props) => {
   }
 
   return (
-    <Container className='mt-4 border rounded border-1 p-2'>
+    <Container className="mt-4 border rounded border-1 p-2">
       <section id={props.section}>
-        <h3 className='mb-4 fs-6 fw-bold d-flex align-items-center justify-content-between'>
+        <h3 className="mb-4 fs-6 fw-bold d-flex align-items-center justify-content-between">
           {props.section.charAt(0).toUpperCase() + props.section.slice(1)}
           {props.profileId === myProfileId && (
             <Button
-              variant='link'
-              className='p-0 text-decoration-none'
+              variant="link"
+              className="p-0 text-decoration-none"
               onClick={handleAddClick}
             >
               <MdAdd size={20} />

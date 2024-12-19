@@ -92,8 +92,8 @@ const Footer = () => {
         </Col>
         <Col>
           <form>
-            <label className='label'>Seleziona lingua</label>
-            <select className='select'>
+            <label className="label">Seleziona lingua</label>
+            <select className="select">
               <option>Italiano</option>
               <option>English</option>
               <option>Español</option>

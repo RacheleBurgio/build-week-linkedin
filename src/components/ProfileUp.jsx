@@ -1,43 +1,42 @@
-
-import React, { useState } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import ProfilePictureUpload from './ProfilePictureUpload';
-import { FaEdit } from 'react-icons/fa';
-
+import React, { useState } from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import ProfilePictureUpload from './ProfilePictureUpload'
+import { FaEdit } from 'react-icons/fa'
 
 const ProfileUp = () => {
   const [user, setUser] = useState({
-    name: "Mario Rossi",
-    title: "Sviluppatore Frontend",
-    description: "Appassionato di tecnologia e innovazione. Sempre alla ricerca di nuove sfide.",
-    profileImage: "https://via.placeholder.com/150", // Sostituisci con l'URL dell'immagine del profilo
-  });
+    name: 'Mario Rossi',
+    title: 'Sviluppatore Frontend',
+    description:
+      'Appassionato di tecnologia e innovazione. Sempre alla ricerca di nuove sfide.',
+    profileImage: 'https://via.placeholder.com/150', // Sostituisci con l'URL dell'immagine del profilo
+  })
 
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState(false)
 
   // Esempio di elementi raccomandati (sostituisci con dati reali)
   const recommendedItems = [
-    { id: 1, title: "Giovanni Bianchi", link: "#" },
-    { id: 2, title: "Laura Verdi", link: "#" },
-    { id: 3, title: "Marco Neri", link: "#" },
-  ];
+    { id: 1, title: 'Giovanni Bianchi', link: '#' },
+    { id: 2, title: 'Laura Verdi', link: '#' },
+    { id: 3, title: 'Marco Neri', link: '#' },
+  ]
 
   const handleImageChange = (newImage) => {
-    setUser({ ...user, profileImage: newImage });
-  };
+    setUser({ ...user, profileImage: newImage })
+  }
 
   const handleSave = (event) => {
-    event.preventDefault();
-    const formData = new FormData(event.target);
+    event.preventDefault()
+    const formData = new FormData(event.target)
     const updatedUser = {
       ...user,
       name: formData.get('name'),
       title: formData.get('title'),
       description: formData.get('description'),
-    };
-    setUser(updatedUser);
-    setIsEditing(false);
-  };
+    }
+    setUser(updatedUser)
+    setIsEditing(false)
+  }
 
   return (
     <div className=" p-4 rounded-top">
@@ -62,30 +61,65 @@ const ProfileUp = () => {
         <form onSubmit={handleSave} className="mt-3">
           <ProfilePictureUpload onImageChange={handleImageChange} />
           <div className="mb-3">
-            <label htmlFor="name" className="form-label">Nome:</label>
-            <input type="text" className="form-control" id="name" name="name" defaultValue={user.name} required />
+            <label htmlFor="name" className="form-label">
+              Nome:
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="name"
+              name="name"
+              defaultValue={user.name}
+              required
+            />
           </div>
           <div className="mb-3">
-            <label htmlFor="title" className="form-label">Titolo:</label>
-            <input type="text" className="form-control" id="title" name="title" defaultValue={user.title} required />
+            <label htmlFor="title" className="form-label">
+              Titolo:
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="title"
+              name="title"
+              defaultValue={user.title}
+              required
+            />
           </div>
           <div className="mb-3">
-            <label htmlFor="description" className="form-label">Descrizione:</label>
-            <textarea className="form-control" id="description" name="description" defaultValue={user.description} required />
+            <label htmlFor="description" className="form-label">
+              Descrizione:
+            </label>
+            <textarea
+              className="form-control"
+              id="description"
+              name="description"
+              defaultValue={user.description}
+              required
+            />
           </div>
-          <button type="submit" className="btn btn-success">Salva</button>
-          <button type="button" className="btn btn-secondary ms-2" onClick={() => setIsEditing(false)}>Annulla</button>
+          <button type="submit" className="btn btn-success">
+            Salva
+          </button>
+          <button
+            type="button"
+            className="btn btn-secondary ms-2"
+            onClick={() => setIsEditing(false)}
+          >
+            Annulla
+          </button>
         </form>
       )}
-      
 
       {/* Sezione Consigliati per te */}
       <div className="mt-4">
         <h3 className="h5">Consigliati per te</h3>
         <ul className=" card">
-          {recommendedItems.map(item => (
+          {recommendedItems.map((item) => (
             <li key={item.id} className="list-group-item">
-              <a href={item.link} className="text-decoration-none text-primary">{item.title}</a>
+              <a href={item.link} className="text-decoration-none text-primary">
+                {item.title}
+              </a>
             </li>
           ))}
         </ul>
@@ -96,11 +130,21 @@ const ProfileUp = () => {
         <h3 className="h5">Analisi del Profilo</h3>
         <div className="card">
           <div className="card-body">
-            <p><strong>Visibilità del Profilo:</strong> 85%</p>
-            <p><strong>Connessioni:</strong> 150</p>
-            <p><strong>Articoli Pubblicati:</strong> 5</p>
-            <p><strong>Competenze Aggiunte:</strong> 10</p>
-            <p><strong>Feedback Positivi:</strong> 95%</p>
+            <p>
+              <strong>Visibilità del Profilo:</strong> 85%
+            </p>
+            <p>
+              <strong>Connessioni:</strong> 150
+            </p>
+            <p>
+              <strong>Articoli Pubblicati:</strong> 5
+            </p>
+            <p>
+              <strong>Competenze Aggiunte:</strong> 10
+            </p>
+            <p>
+              <strong>Feedback Positivi:</strong> 95%
+            </p>
           </div>
         </div>
       </div>
@@ -109,16 +153,25 @@ const ProfileUp = () => {
       <div className="mt-4 ">
         <h3 className="h5">Attività Recenti</h3>
         <ul className="card">
-          <li className="list-group-item">Commentato su "Le ultime tendenze nel frontend".</li>
-          <li className="list-group-item">Pubblicato un articolo: "Introduzione a React Hooks".</li>
-          <li className="list-group-item">Condiviso un post su LinkedIn riguardo le nuove tecnologie.</li>
-          <li className="list-group-item">Partecipato a un webinar su Sviluppo Web.</li>
-          <li className="list-group-item">Aggiornato le competenze: "TypeScript" e "GraphQL".</li>
+          <li className="list-group-item">
+            Commentato su "Le ultime tendenze nel frontend".
+          </li>
+          <li className="list-group-item">
+            Pubblicato un articolo: "Introduzione a React Hooks".
+          </li>
+          <li className="list-group-item">
+            Condiviso un post su LinkedIn riguardo le nuove tecnologie.
+          </li>
+          <li className="list-group-item">
+            Partecipato a un webinar su Sviluppo Web.
+          </li>
+          <li className="list-group-item">
+            Aggiornato le competenze: "TypeScript" e "GraphQL".
+          </li>
         </ul>
       </div>
     </div>
-  );
-};
-
+  )
+}
 
 export default ProfileUp

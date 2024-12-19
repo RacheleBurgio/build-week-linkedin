@@ -3,9 +3,6 @@ import 'bootstrap-icons/font/bootstrap-icons.css'
 
 import { Container, Row, Col, Card } from 'react-bootstrap'
 
-const SidebarHomeDx = () => {
-
-
-}
+const SidebarHomeDx = () => {}
 
 export default SidebarHomeDx

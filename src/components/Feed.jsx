@@ -1,5 +1,4 @@
-import CardHome from "./CardHome"
-
+import CardHome from './CardHome'
 
 const Feed = () => {
   return (

@@ -61,7 +61,7 @@ const ProfiloSidebar = () => {
         <ListGroupItem className='fs-7 fw-bold text-dark'>
             <div className='fs-7 text-muted'>Raggiungi i tuoi obiettivi di carriera</div>
             <i className='bi bi-square-fill me-2'></i>Prova Premium ora</ListGroupItem>
-        <ListGroupItem className='fs-7 fw-bold text-dark'>Elementi salvati</ListGroupItem>
+        <ListGroupItem className='fs-7 fw-bold text-dark'><i className='bi bi-bookmark-fill me-2'></i>Elementi salvati</ListGroupItem>
       </ListGroup>
     </Card>
     </Container>

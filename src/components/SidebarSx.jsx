@@ -9,18 +9,11 @@ const ProfiloSidebar = () => {
   console.log('Profile Sidebar', profile)
   useEffect(() => {}, [profile])
 
-  const position = {
-    width: '60px',
-    marginLeft: '58px',
-    position: 'absolute',
-    top: '10%',
-  }
-
   return (
     <Container className='mt-3'>
       <Card style={{ width: '15rem' }} className='border border-rounded'>
         <div
-          className='profile-background'
+          className='profile-background  position-relative'
           style={{
             backgroundColor: '#6495ed',
             padding: '30px',
@@ -30,10 +23,10 @@ const ProfiloSidebar = () => {
           <Link to={`/profile/${profile._id}`}>
             <Card.Img
               variant='top'
-              className='rounded-circle border border-white'
-              style={position}
+              className='border border-white rounded-circle position-absolute top-100 start-50 translate-middle'
               src={profile.image}
               alt='Profile Picture'
+              style={{ width: '60px', height: '60px' }}
             />
           </Link>
         </div>

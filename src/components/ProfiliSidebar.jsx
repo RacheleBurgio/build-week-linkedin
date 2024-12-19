@@ -69,9 +69,9 @@ const ProfiliSidebar = (props) => {
                     <img
                       src={profile.image || 'https://via.placeholder.com/100'}
                       alt={`${profile.name} ${profile.surname}`}
-                      className='rounded-circle mb-2'
-                      width='50'
-                      height='50'
+                      className='rounded rounded-circle'
+                      width='50px'
+                      height='50px'
                     />
                   </Col>
                   <Col xs={9}>

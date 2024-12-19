@@ -3,7 +3,7 @@ import { Button, Form } from 'react-bootstrap';
 
 const PostPictureUpload = ({ onUpload }) => {
   const [file, setFile] = useState(null);
-  const apiKey = import.meta.env.VITE_API_KEY; // Assicurati di avere il tuo Bearer Token
+  const apiKey = import.meta.env.VITE_LINKEDIN_API_KEY; 
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);

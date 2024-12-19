@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Alert, Container, Row, Col } from 'react-bootstrap'
+import { Alert, Container, Row, Col, Spinner } from 'react-bootstrap'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -26,9 +26,6 @@ import Profile from './components/Profile'
 import Post from './components/Post'
 import Comment from './components/Comment'
 import JobPage from './components/JobPage'
-import { Display } from 'react-bootstrap-icons'
-
-
 
 // Wrapper per il profilo
 const ProfileWrapper = () => {
@@ -46,7 +43,14 @@ const ProfileWrapper = () => {
   }, [paramProfileId, me])
 
   if (!profileId) {
-    return <div>Caricamento profilo...</div> // Renderizza un loader temporaneo
+    return (
+      <div
+        className='d-flex justify-content-center align-items-center'
+        style={{ height: '100vh' }}
+      >
+        <Spinner animation='border' variant='primary' />
+      </div>
+    )
   }
 
   return <Profile profileId={profileId} />
@@ -67,11 +71,24 @@ const CommentWrapper = () => {
 function App() {
   const dispatch = useDispatch()
   const location = useLocation()
+  const me = useSelector((state) => state.profile.me)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     // Carica i dati del profilo all'avvio dell'app
-    dispatch(getMe())
+    dispatch(getMe()).finally(() => setLoading(false))
   }, [dispatch])
+
+  if (loading) {
+    return (
+      <div
+        className='d-flex justify-content-center align-items-center'
+        style={{ height: '100vh' }}
+      >
+        <Spinner animation='border' variant='primary' />
+      </div>
+    )
+  }
 
   return (
     <>
@@ -81,26 +98,26 @@ function App() {
       <main style={{ backgroundColor: '#F4F2EE' }}>
         <Container>
           <Row>
-            <Sidebar type="sx" />
+            <Sidebar type='sx' />
             <Col className={location.pathname === '/jobs' ? 'col-12' : 'col-6'}>
               <Routes>
-                <Route path="/" element={<Feed />} />
-                <Route path="/feed" element={<Feed />} />
-                <Route path="/profile" element={<ProfileWrapper />} />
+                <Route path='/' element={<Feed />} />
+                <Route path='/feed' element={<Feed />} />
+                <Route path='/profile' element={<ProfileWrapper />} />
                 <Route
-                  path="/profile/:profileId"
+                  path='/profile/:profileId'
                   element={<ProfileWrapper />}
                 />
-                <Route path="/post/:postId" element={<PostWrapper />} />
-                <Route path="/comment/:id" element={<CommentWrapper />} />
+                <Route path='/post/:postId' element={<PostWrapper />} />
+                <Route path='/comment/:id' element={<CommentWrapper />} />
                 <Route
-                  path="*"
-                  element={<Alert variant="danger">Pagina non trovata</Alert>}
+                  path='*'
+                  element={<Alert variant='danger'>Pagina non trovata</Alert>}
                 />
-                <Route path="/jobs" element={<JobPage />} />
+                <Route path='/jobs' element={<JobPage />} />
               </Routes>
             </Col>
-            <Sidebar type="dx" />
+            <Sidebar type='dx' />
           </Row>
         </Container>
       </main>

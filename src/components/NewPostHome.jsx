@@ -5,7 +5,7 @@ import PostPictureUpload from './PostPictureUpload'
 const NewPost = ({ onPostCreated }) => {
   const [postText, setPostText] = useState('')
   const [postImage, setPostImage] = useState(null)
-  const apiKey = import.meta.env.VITE_API_KEY
+  const apiKey = import.meta.env.VITE_LINKEDIN_API_KEY
 
   const handleCreatePost = async (e) => {
     e.preventDefault()

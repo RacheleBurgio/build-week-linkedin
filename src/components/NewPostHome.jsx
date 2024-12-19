@@ -1,16 +1,24 @@
 import React, { useState } from 'react';
-import { Form, Button, Card, Modal, Image } from 'react-bootstrap';
+import { Form, Button, Card, Modal, Image, Alert } from 'react-bootstrap';
 import PostPictureUpload from './PostPictureUpload';
 
-const NewPost = ({ onPostCreated, userProfileImage }) => { // Aggiungi una prop per l'immagine del profilo
+const NewPost = ({ onPostCreated, userProfileImage }) => {
   const [postText, setPostText] = useState('');
   const [postImage, setPostImage] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const apiKey = import.meta.env.VITE_LINKEDIN_API_KEY;
 
   const handleCreatePost = async (e) => {
     e.preventDefault();
     if (!postText) return;
+
+    const body = {
+      text: postText,
+    };
+    if (postImage) {
+      body.image = postImage;
+    }
 
     try {
       const response = await fetch(
@@ -21,7 +29,7 @@ const NewPost = ({ onPostCreated, userProfileImage }) => { // Aggiungi una prop 
             'Content-Type': 'application/json',
             Authorization: `Bearer ${apiKey}`,
           },
-          body: JSON.stringify({ text: postText, image: postImage }),
+          body: JSON.stringify(body),
         }
       );
 
@@ -34,8 +42,10 @@ const NewPost = ({ onPostCreated, userProfileImage }) => { // Aggiungi una prop 
       setPostText('');
       setPostImage(null);
       setShowModal(false);
+      setErrorMessage(''); // Clear any previous error messages
     } catch (error) {
       console.error('Error creating post:', error);
+      setErrorMessage('Errore nella creazione del post. Riprova.'); // Set error message
     }
   };
 
@@ -46,22 +56,20 @@ const NewPost = ({ onPostCreated, userProfileImage }) => { // Aggiungi una prop 
   return (
     <Card className="mb-4" onClick={() => setShowModal(true)} style={{ cursor: 'pointer' }}>
       <Card.Body className='button' style={{ display: 'flex', alignItems: 'center' }}>
-        {/** Immagine del profilo */}
         <Image
-          src={userProfileImage} // Percorso dell'immagine del profilo
+          src={userProfileImage}
           roundedCircle
-          style={{ width: '40px', height: '40px', marginRight: '10px' }} // Dimensioni e margine
-         
+          style={{ width: '40px', height: '40px', marginRight: '10px' }}
         />
         <p style={{ margin: 0 }}>Crea un nuovo post</p>
       </Card.Body>
 
-      {/* Modal per la creazione del post */}
       <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Nuovo post</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          {errorMessage && <Alert variant="danger">{errorMessage}</Alert>} {/* Display error message */}
           <PostPictureUpload onUpload={handleImageUpload} />
           <Form onSubmit={handleCreatePost}>
             <Form.Group controlId="newPost">

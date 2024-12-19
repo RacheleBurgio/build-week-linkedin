@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import ProfilePictureUpload from './ProfilePictureUpload';
 import { FaEdit } from 'react-icons/fa';
 
+
 const ProfileUp = () => {
   const [user, setUser] = useState({
     name: "Mario Rossi",
@@ -39,8 +40,8 @@ const ProfileUp = () => {
   };
 
   return (
-    <div className="p-4 rounded-top">
-      <div className="d-flex align-items-center">
+    <div className=" p-4 rounded-top">
+      <div className="card p-5 d-flex ">
         <img
           src={user.profileImage}
           alt={`${user.name}'s profile`}
@@ -48,7 +49,7 @@ const ProfileUp = () => {
           style={{ width: '100px', height: '100px' }}
         />
         <div className="text-left flex-grow-1">
-          <h1 className="h4">{user.name}</h1>
+          <h1 className="h4 pt-2">{user.name}</h1>
           <h2 className="h6">{user.title}</h2>
           <p>{user.description}</p>
         </div>
@@ -76,11 +77,12 @@ const ProfileUp = () => {
           <button type="button" className="btn btn-secondary ms-2" onClick={() => setIsEditing(false)}>Annulla</button>
         </form>
       )}
+      
 
       {/* Sezione Consigliati per te */}
       <div className="mt-4">
         <h3 className="h5">Consigliati per te</h3>
-        <ul className="list-group">
+        <ul className=" card">
           {recommendedItems.map(item => (
             <li key={item.id} className="list-group-item">
               <a href={item.link} className="text-decoration-none text-primary">{item.title}</a>
@@ -104,9 +106,9 @@ const ProfileUp = () => {
       </div>
 
       {/* Sezione Attività del Profilo */}
-      <div className="mt-4">
+      <div className="mt-4 ">
         <h3 className="h5">Attività Recenti</h3>
-        <ul className="list-group">
+        <ul className="card">
           <li className="list-group-item">Commentato su "Le ultime tendenze nel frontend".</li>
           <li className="list-group-item">Pubblicato un articolo: "Introduzione a React Hooks".</li>
           <li className="list-group-item">Condiviso un post su LinkedIn riguardo le nuove tecnologie.</li>

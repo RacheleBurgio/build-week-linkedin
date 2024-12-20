@@ -74,11 +74,7 @@ const CardHome = () => {
     <Container className="p-0">
       {posts.map((post) => (
         <Card key={post._id} className="post-card my-3">
-          <Card.Img
-            variant="top"
-            src={`https://picsum.photos/500/200?random=${post._id}`}
-            alt={post._id}
-          />
+          <Card.Img variant="top" src={post.image} />
           <Card.Header className="d-flex justify-content-between align-items-center">
             <div className="d-flex align-items-center">
               <Image

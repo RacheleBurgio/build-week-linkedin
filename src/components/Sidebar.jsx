@@ -59,6 +59,13 @@ const Sidebar = (props) => {
       </Col>
     );
   }
+  if (props.type === "sx" && location.pathname === "/profile") {
+    return (
+      <Col className="col-3">
+        <h1 className="text-white">ciao</h1>
+      </Col>
+    );
+  }
 };
 
 export default Sidebar;

@@ -1,8 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-icons/font/bootstrap-icons.css'
-import React, { useState } from "react";
+import { useState } from "react";
 
-import { Container, Row, Col, Card } from 'react-bootstrap'
+import { Container, Row, Col, Card, Button } from 'react-bootstrap'
 import { SlArrowRight } from "react-icons/sl";
 import { BsGrid3X3GapFill } from "react-icons/bs";
 import { PiGridFourFill } from "react-icons/pi";

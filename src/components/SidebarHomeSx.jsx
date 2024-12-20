@@ -1,22 +1,22 @@
-import { useEffect } from 'react'
-import { Card, ListGroup, ListGroupItem, Container } from 'react-bootstrap'
-import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { useEffect } from "react";
+import { Card, ListGroup, ListGroupItem, Container } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const ProfiloSidebar = () => {
-  const profile = useSelector((state) => state.profile.me)
-  console.log('Profile Sidebar', profile)
-  useEffect(() => {}, [profile])
+  const profile = useSelector((state) => state.profile.me);
+  console.log("Profile Sidebar", profile);
+  useEffect(() => {}, [profile]);
 
   return (
     <Container className="mt-3">
-      <Card style={{ width: '15rem' }} className="border border-rounded">
+      <Card style={{ width: "15rem" }} className="border border-rounded">
         <div
           className="profile-background  position-relative"
           style={{
-            backgroundColor: '#6495ed',
-            padding: '30px',
-            borderRadius: '5px 5px 0px 0px',
+            backgroundColor: "#6495ed",
+            padding: "30px",
+            borderRadius: "5px 5px 0px 0px",
           }}
         >
           <Link to={`/profile/${profile._id}`}>
@@ -25,7 +25,7 @@ const ProfiloSidebar = () => {
               className="border border-white rounded-circle position-absolute top-100 start-50 translate-middle"
               src={profile.image}
               alt="Profile Picture"
-              style={{ width: '60px', height: '60px' }}
+              style={{ width: "60px", height: "60px" }}
             />
           </Link>
         </div>
@@ -44,7 +44,7 @@ const ProfiloSidebar = () => {
           </Card.Text>
         </Card.Body>
         <ListGroup className="list-group-flush">
-          <ListGroupItem className="fs-7 text-muted">
+          <ListGroupItem className="fs-7 text-muted fw-bold">
             Collegamenti
             <div className="fs-7 fw-bold text-dark">Espandi la tua rete</div>
           </ListGroupItem>
@@ -60,7 +60,7 @@ const ProfiloSidebar = () => {
         </ListGroup>
       </Card>
     </Container>
-  )
-}
+  );
+};
 
-export default ProfiloSidebar
+export default ProfiloSidebar;

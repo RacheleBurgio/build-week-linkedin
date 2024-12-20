@@ -72,7 +72,7 @@ const NewPost = () => {
   return (
     <>
       <Card
-        className="mb-4 mt-3"
+        className="mb-3 mt-3"
         onClick={() => setShowModal(true)}
         style={{ cursor: "pointer" }}
       >

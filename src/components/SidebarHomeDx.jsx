@@ -2,6 +2,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { IoChevronDown } from "react-icons/io5";
+import { IoChevronUp } from "react-icons/io5";
 
 import {
   Container,
@@ -71,17 +73,23 @@ const SidebarHomeDx = () => {
     <Container style={{ width: "18rem" }} className="mt-3">
       <Card>
         <Card.Body>
-          <Card.Title>In primo piano</Card.Title>
-          <Card.Subtitle className="pb-3">
+          <Card.Title className="fw-bold">In primo piano</Card.Title>
+          <Card.Subtitle className="pb-3 fs-6 text-muted">
             a cura di Linkedin Notizie
           </Card.Subtitle>
           {/* Post */}
           {posts.slice(0, visiblePosts).map((post, index) => (
             <div key={index} className="mb-2">
-              <strong>{post.text.slice(0, 35)}...</strong>
+              <strong
+                style={{
+                  fontSize: "0.85rem",
+                }}
+              >
+                {post.text.slice(0, 35)}...
+              </strong>
               <div>
-                <small>
-                  {`${daySinceDate(post.createdAt)} giorni fa`} &nbsp;
+                <small className="fs-7 fw-bold text-muted ">
+                  {`${daySinceDate(post.createdAt)} giorni fa`} &nbsp;• &nbsp;
                   {`${randomReaders()} lettori`}
                 </small>
               </div>
@@ -90,34 +98,55 @@ const SidebarHomeDx = () => {
 
           {/* Pulsante "Vedi Altro" o "Meno dettagli" */}
           {visiblePosts < 10 ? (
-            <Button variant="link" onClick={loadMore}>
-              Vedi Altro
+            <Button
+              variant="link"
+              onClick={loadMore}
+              style={{ textDecoration: "none", fontSize: "0.85rem" }}
+              className="text-dark fw-bold ps-0"
+            >
+              Vedi Altro <IoChevronDown />
             </Button>
           ) : (
-            <Button variant="link" onClick={showLess}>
-              Meno dettagli
+            <Button
+              variant="link"
+              onClick={showLess}
+              style={{ textDecoration: "none", fontSize: "0.85rem" }}
+              className="text-dark fw-bold ps-0"
+            >
+              Meno dettagli&nbsp;
+              <IoChevronUp />
             </Button>
           )}
-          <div>I giochi di oggi</div>
-          <Row>
+          <div className="fw-bold text-muted pt-2">I giochi di oggi</div>
+          <Row className="mt-2">
             <Col className="col-2">
-              <PiGridFourFill />
+              <img src="/assets/imgs/quad.png" />
             </Col>
-            <Col className="col-8">
-              Tango #74
-              <div>Armonizza la griglia</div>
+            <Col
+              className="col-8 ps-4"
+              style={{
+                fontSize: "0.85rem",
+              }}
+            >
+              <div className="fw-bold">Tango #74</div>
+              <div className="fs-7 text-muted">Armonizza la griglia</div>
             </Col>
             <Col className="col-2">
               <SlArrowRight />
             </Col>
           </Row>
-          <Row>
+          <Row className="mt-1">
             <Col className="col-2">
-              <BsGrid3X3GapFill />
+              <img src="/assets/imgs/rubik.png" />
             </Col>
-            <Col className="col-8">
-              Queens #234
-              <div>Incorona ogni regione</div>
+            <Col
+              className="col-8 ps-4"
+              style={{
+                fontSize: "0.85rem",
+              }}
+            >
+              <div className="fw-bold">Queens #234</div>
+              <div className="fs-7 text-muted">Incorona ogni regione</div>
             </Col>
             <Col className="col-2">
               <SlArrowRight />

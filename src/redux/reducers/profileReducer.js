@@ -26,8 +26,6 @@ const profileReducers = (state = initialState, action) => {
         isError: action.payload,
       }
     }
-    // case GET_PROFILE: { }
-    // case SET_PROFILE: { }
     default:
       return state
   }

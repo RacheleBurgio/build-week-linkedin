@@ -190,7 +190,7 @@ const ProfileUp = ({ profileId }) => {
 
       <div className="mt-4">
         <div className="card">
-          <h3 className="fs-6 fw-bold">Analisi del Profilo</h3>
+          <h3 className="fs-6 ps-2 pt-2 fw-bold">Analisi del Profilo</h3>
           <div className="card-body">
             <p>
               <strong
@@ -247,49 +247,52 @@ const ProfileUp = ({ profileId }) => {
       </div>
 
       <div className="mt-4">
-        <ul className="card">
-          <h3 className="fs-6 fw-bold">Attività Recenti</h3>
-          <li
-            className="list-group-item"
-            style={{
-              fontSize: "0.85rem",
-            }}
-          >
-            Commentato su "Le ultime tendenze nel frontend".
-          </li>
-          <li
-            className="list-group-item"
-            style={{
-              fontSize: "0.85rem",
-            }}
-          >
-            Pubblicato un articolo: "Introduzione a React Hooks".
-          </li>
-          <li
-            className="list-group-item"
-            style={{
-              fontSize: "0.85rem",
-            }}
-          >
-            Condiviso un post su LinkedIn riguardo le nuove tecnologie.
-          </li>
-          <li
-            className="list-group-item"
-            style={{
-              fontSize: "0.85rem",
-            }}
-          >
-            Partecipato a un webinar su Sviluppo Web.
-          </li>
-          <li
-            className="list-group-item"
-            style={{
-              fontSize: "0.85rem",
-            }}
-          >
-            Aggiornato le competenze: "TypeScript" e "GraphQL".
-          </li>
-        </ul>
+        <div className="card">
+          <h3 className="fs-6 ps-2 pt-2 fw-bold ">Attività Recenti</h3>
+
+          <ul>
+            <li
+              className="list-group-item"
+              style={{
+                fontSize: "0.85rem",
+              }}
+            >
+              Commentato su "Le ultime tendenze nel frontend".
+            </li>
+            <li
+              className="list-group-item"
+              style={{
+                fontSize: "0.85rem",
+              }}
+            >
+              Pubblicato un articolo: "Introduzione a React Hooks".
+            </li>
+            <li
+              className="list-group-item"
+              style={{
+                fontSize: "0.85rem",
+              }}
+            >
+              Condiviso un post su LinkedIn riguardo le nuove tecnologie.
+            </li>
+            <li
+              className="list-group-item"
+              style={{
+                fontSize: "0.85rem",
+              }}
+            >
+              Partecipato a un webinar su Sviluppo Web.
+            </li>
+            <li
+              className="list-group-item"
+              style={{
+                fontSize: "0.85rem",
+              }}
+            >
+              Aggiornato le competenze: "TypeScript" e "GraphQL".
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   );

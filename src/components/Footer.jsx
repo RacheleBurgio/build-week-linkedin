@@ -3,10 +3,11 @@ import { Container, Col, Row } from 'react-bootstrap'
 import { HiMiniQuestionMarkCircle } from 'react-icons/hi2'
 import { IoMdSettings } from 'react-icons/io'
 import { MdOutlineImportContacts } from 'react-icons/md'
+import '../assets/css/footer.scss'
 
 const Footer = () => {
   return (
-    <Container className="main-container my-5">
+    <Container className="main-container my-5 ">
       <Row>
         <Col>
           <ul>

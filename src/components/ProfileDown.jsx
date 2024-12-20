@@ -327,7 +327,7 @@ const ProfileDown = (props) => {
   }
 
   return (
-    <Container className='mt-4 border rounded border-1 p-2 bg-white'>
+    <Container className='m-4border rounded border-1 p-2 bg-white'>
       <section id={props.section}>
         <h3 className='mb-4 fs-6 fw-bold d-flex align-items-center justify-content-between'>
           {props.section.charAt(0).toUpperCase() + props.section.slice(1)}

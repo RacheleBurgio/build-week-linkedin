@@ -114,7 +114,7 @@ const ProfileContributes = ({ profileId }) => {
   }
 
   return (
-    <Container className='mt-4 border rounded border-1 p-2 bg-white'>
+    <Container className='m-4 border rounded border-1 p-2 bg-white'>
       <h3 className='mb-4 fs-6 fw-bold d-flex align-items-center justify-content-between'>
         Posts dell'utente
         {/* {profileId === me._id && (
@@ -127,7 +127,7 @@ const ProfileContributes = ({ profileId }) => {
           </Button>
         )} */}
       </h3>
-      <ListGroup>
+      <ListGroup variant='flush'>
         {posts.map((post) => (
           <ListGroup.Item key={post._id} className='mb-3'>
             {editingId === post._id ? (

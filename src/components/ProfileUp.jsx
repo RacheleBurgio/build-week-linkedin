@@ -1,31 +1,49 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
+import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import ProfilePictureUpload from './ProfilePictureUpload'
 import { FaEdit } from 'react-icons/fa'
+import { Spinner, Alert } from 'react-bootstrap'
 
-const ProfileUp = () => {
+const ProfileUp = ({ profileId }) => {
   const me = useSelector((state) => state.profile.me)
-  // const [user, setUser] = useState({
-  //   name: 'Mario Rossi',
-  //   title: 'Sviluppatore Frontend',
-  //   bio:
-  //     'Appassionato di tecnologia e innovazione. Sempre alla ricerca di nuove sfide.',
-  //   image: 'https://via.placeholder.com/150', // Sostituisci con l'URL dell'immagine del profilo
-  // })
-
-  const [user, setUser] = useState(me)
+  const [user, setUser] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
   const [isEditing, setIsEditing] = useState(false)
 
-  // Esempio di elementi raccomandati (sostituisci con dati reali)
-  const recommendedItems = [
-    { id: 1, title: 'Giovanni Bianchi', link: '#' },
-    { id: 2, title: 'Laura Verdi', link: '#' },
-    { id: 3, title: 'Marco Neri', link: '#' },
-  ]
+  useEffect(() => {
+    const fetchUser = async () => {
+      setLoading(true)
+      if (me._id !== profileId) {
+        try {
+          const apiKey = import.meta.env.VITE_LINKEDIN_API_KEY
+          const baseEndpoint =
+            'https://striveschool-api.herokuapp.com/api/profile'
+          const response = await axios.get(`${baseEndpoint}/${profileId}`, {
+            headers: {
+              Authorization: `Bearer ${apiKey}`,
+            },
+          })
+          setUser(response.data)
+          setError(null)
+        } catch (error) {
+          console.error('Error fetching user profile:', error)
+          setError(error)
+        } finally {
+          setLoading(false)
+        }
+      } else {
+        setUser(me)
+        setLoading(false)
+      }
+    }
+    fetchUser()
+  }, [me._id, profileId])
 
   const handleImageChange = (newImage) => {
-    setUser({ ...user, image: newImage })
+    setUser((prevUser) => ({ ...prevUser, image: newImage }))
   }
 
   const handleSave = (event) => {
@@ -41,9 +59,44 @@ const ProfileUp = () => {
     setIsEditing(false)
   }
 
+  if (loading) {
+    return (
+      <div
+        className='d-flex justify-content-center align-items-center'
+        style={{ height: '100vh' }}
+      >
+        <Spinner animation='border' variant='primary' />
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div
+        className='d-flex justify-content-center align-items-center'
+        style={{ height: '100vh' }}
+      >
+        <Alert variant='danger'>
+          Errore nel recupero dele esperienze {props.profileId}
+        </Alert>
+      </div>
+    )
+  }
+
+  if (!user) {
+    return (
+      <div
+        className='d-flex justify-content-center align-items-center'
+        style={{ height: '100vh' }}
+      >
+        <Alert variant='danger'>Utente {props.profileId} non trovato</Alert>
+      </div>
+    )
+  }
+
   return (
-    <div className=' p-4 rounded-top'>
-      <div className='card p-5 d-flex '>
+    <div className='p-4 rounded-top'>
+      <div className='card p-5 d-flex'>
         <img
           src={user.image}
           alt={`${user.name}'s profile`}
@@ -114,21 +167,21 @@ const ProfileUp = () => {
         </form>
       )}
 
-      {/* Sezione Consigliati per te */}
       <div className='mt-4'>
         <h3 className='h5'>Consigliati per te</h3>
-        <ul className=' card'>
-          {recommendedItems.map((item) => (
-            <li key={item.id} className='list-group-item'>
-              <a href={item.link} className='text-decoration-none text-primary'>
-                {item.title}
-              </a>
-            </li>
-          ))}
+        <ul className='card'>
+          {['Giovanni Bianchi', 'Laura Verdi', 'Marco Neri'].map(
+            (name, index) => (
+              <li key={index} className='list-group-item'>
+                <a href='#' className='text-decoration-none text-primary'>
+                  {name}
+                </a>
+              </li>
+            )
+          )}
         </ul>
       </div>
 
-      {/* Sezione Analisi del Profilo */}
       <div className='mt-4'>
         <h3 className='h5'>Analisi del Profilo</h3>
         <div className='card'>
@@ -152,8 +205,7 @@ const ProfileUp = () => {
         </div>
       </div>
 
-      {/* Sezione Attività del Profilo */}
-      <div className='mt-4 '>
+      <div className='mt-4'>
         <h3 className='h5'>Attività Recenti</h3>
         <ul className='card'>
           <li className='list-group-item'>

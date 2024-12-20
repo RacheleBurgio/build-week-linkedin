@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 import {
   Button,
@@ -17,11 +18,24 @@ import { LuGitCompareArrows } from 'react-icons/lu'
 import { BsFillSendFill } from 'react-icons/bs'
 
 import { fetchPosts } from '../redux/actions'
+import { formatDate } from './tools'
 
 const CardHome = () => {
-  // const [posts, setPosts] = useState([])
-  // const [isLoading, setIsLoading] = useState(true)
-  // const [isError, setIsError] = useState(false)
+  // ****************************************************
+  // NOTE
+  // ****************************************************
+  // Per rigenerare l'elenco dei post ricordarsi di:
+
+  // 1. Importare useDispatch e useSelector da react-redux
+  // 2. Importare fetchPosts da '../redux/actions'
+  // 3. Eseguire il dispatch di fetchPosts(false o true) all'avvio del componente (true forza il ricaricamento, false prende i post già caricati)
+
+  //  useEffect(() => {
+  //    // Carica i dati del profilo all'avvio dell'app
+  //      dispatch(fetchPosts(false)) // false o true impone il refresh dei posts all'interno dello stato redux
+  //    }, [dispatch])
+
+  // 4. Gestire il caricamento e l'errore dei post
 
   const myProfileId = useSelector((state) => state.profile.me._id)
   const posts = useSelector((state) => state.posts.posts)
@@ -29,31 +43,9 @@ const CardHome = () => {
   const postsError = useSelector((state) => state.posts.postsError)
   const dispatch = useDispatch()
 
-  // const apiKey = import.meta.env.VITE_LINKEDIN_API_KEY
-
-  // const fetchPosts = async () => {
-  //   try {
-  //     seposts(true)
-  //     const response = await axios.get(
-  //       `https://striveschool-api.herokuapp.com/api/posts`,
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${apiKey}`,
-  //         },
-  //       }
-  //     )
-  //     setPosts(response.data)
-  //     setIsLoading(false)
-  //   } catch (error) {
-  //     console.error('Error fetching posts:', error)
-  //     setIsLoading(false)
-  //     setIsError(true)
-  //   }
-  // }
-
   useEffect(() => {
     // Carica i dati del profilo all'avvio dell'app
-    dispatch(fetchPosts(false)).finally(() => {})
+    dispatch(fetchPosts(false)) // false o true impone il refresh dei posts all'interno dello stato redux
   }, [dispatch])
 
   if (postsLoading) {
@@ -95,10 +87,15 @@ const CardHome = () => {
                 roundedCircle
               />
               <div className='ms-3'>
-                <p className='m-0 fw-bold'>{post.username}</p>
-                <small className='text-muted'>
-                  {new Date(post.createdAt).toLocaleString()}
-                </small>
+                <Link
+                  to={`/profile/${post.user._id}`}
+                  className='m-0 fw-bold text-dark text-decoration-none'
+                >
+                  {post.username}
+                </Link>
+                <p className='text-muted fs-7'>
+                  {formatDate(new Date(post.createdAt))}
+                </p>
               </div>
             </div>
             <Button variant='outline-primary'>+ Segui</Button>

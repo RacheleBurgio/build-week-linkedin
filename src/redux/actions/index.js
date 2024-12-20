@@ -114,7 +114,7 @@ export const fetchPosts = (forceFetch = false) => {
     const fiveMinutes = 5 * 60 * 1000
 
     console.log('currentTime is:', currentTime)
-    console.log('fetchTime is:', fetchTime)
+    console.log('Posts fetchTime is:', fetchTime)
 
     if (currentTime - fetchTime < fiveMinutes && !forceFetch) {
       console.log('forceFetch is:', forceFetch)

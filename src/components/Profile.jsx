@@ -1,6 +1,7 @@
 import React from 'react'
 import ProfileUp from './ProfileUp'
 import ProfileDown from './ProfileDown'
+import ProfileContributes from './ProfileContributes'
 
 const Profile = (props) => {
   const { profileId } = props
@@ -9,7 +10,8 @@ const Profile = (props) => {
   return (
     <>
       <ProfileUp profileId={profileId} />
-      <ProfileDown profileId={profileId} section="experiences" />
+      <ProfileDown profileId={profileId} section='experiences' />
+      <ProfileContributes profileId={profileId} />
     </>
   )
 }

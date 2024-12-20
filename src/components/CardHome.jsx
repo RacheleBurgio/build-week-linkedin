@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import {
   Button,
@@ -16,57 +16,64 @@ import { FaRegCommentDots } from 'react-icons/fa6'
 import { LuGitCompareArrows } from 'react-icons/lu'
 import { BsFillSendFill } from 'react-icons/bs'
 
+import { fetchPosts } from '../redux/actions'
+
 const CardHome = () => {
-  const [posts, setPosts] = useState([])
-  const [isLoading, setIsLoading] = useState(true)
-  const [isError, setIsError] = useState(false)
+  // const [posts, setPosts] = useState([])
+  // const [isLoading, setIsLoading] = useState(true)
+  // const [isError, setIsError] = useState(false)
 
   const myProfileId = useSelector((state) => state.profile.me._id)
+  const posts = useSelector((state) => state.posts.posts)
+  const postsLoading = useSelector((state) => state.posts.postsLoading)
+  const postsError = useSelector((state) => state.posts.postsError)
+  const dispatch = useDispatch()
 
-  const apiKey = import.meta.env.VITE_LINKEDIN_API_KEY
+  // const apiKey = import.meta.env.VITE_LINKEDIN_API_KEY
 
-  const fetchPosts = async () => {
-    try {
-      setIsLoading(true)
-      const response = await axios.get(
-        `https://striveschool-api.herokuapp.com/api/posts`,
-        {
-          headers: {
-            Authorization: `Bearer ${apiKey}`,
-          },
-        }
-      )
-      setPosts(response.data)
-      setIsLoading(false)
-    } catch (error) {
-      console.error('Error fetching posts:', error)
-      setIsLoading(false)
-      setIsError(true)
-    }
-  }
+  // const fetchPosts = async () => {
+  //   try {
+  //     seposts(true)
+  //     const response = await axios.get(
+  //       `https://striveschool-api.herokuapp.com/api/posts`,
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${apiKey}`,
+  //         },
+  //       }
+  //     )
+  //     setPosts(response.data)
+  //     setIsLoading(false)
+  //   } catch (error) {
+  //     console.error('Error fetching posts:', error)
+  //     setIsLoading(false)
+  //     setIsError(true)
+  //   }
+  // }
 
   useEffect(() => {
-    fetchPosts()
-  }, [])
+    // Carica i dati del profilo all'avvio dell'app
+    dispatch(fetchPosts()).finally(() => {})
+  }, [dispatch])
 
-  if (isLoading) {
+  if (postsLoading) {
     return (
       <div
-        className="d-flex justify-content-center align-items-center"
+        className='d-flex justify-content-center align-items-center'
         style={{ height: '100vh' }}
       >
-        <Spinner animation="border" variant="primary" />
+        <Spinner animation='border' variant='primary' />
       </div>
     )
   }
 
-  if (isError) {
+  if (postsError) {
     return (
       <div
-        className="d-flex justify-content-center align-items-center"
+        className='d-flex justify-content-center align-items-center'
         style={{ height: '100vh' }}
       >
-        <Alert variant="danger">Errore nel recupero dei post</Alert>
+        <Alert variant='danger'>Errore nel recupero dei post</Alert>
       </div>
     )
   }
@@ -74,42 +81,42 @@ const CardHome = () => {
   return (
     <Container>
       {posts.map((post) => (
-        <Card key={post._id} className="post-card my-3">
+        <Card key={post._id} className='post-card my-3'>
           <Card.Img
-            variant="top"
+            variant='top'
             src={`https://picsum.photos/500/200?random=${post._id}`}
             alt={post._id}
           />
-          <Card.Header className="d-flex justify-content-between align-items-center">
-            <div className="d-flex align-items-center">
+          <Card.Header className='d-flex justify-content-between align-items-center'>
+            <div className='d-flex align-items-center'>
               <Image
                 src={`https://picsum.photos/50/50?random=${post.user._id}`}
                 alt={post.username}
                 roundedCircle
               />
-              <div className="ms-3">
-                <p className="m-0 fw-bold">{post.username}</p>
-                <small className="text-muted">
+              <div className='ms-3'>
+                <p className='m-0 fw-bold'>{post.username}</p>
+                <small className='text-muted'>
                   {new Date(post.createdAt).toLocaleString()}
                 </small>
               </div>
             </div>
-            <Button variant="outline-primary">+ Segui</Button>
+            <Button variant='outline-primary'>+ Segui</Button>
           </Card.Header>
           <Card.Body>
             <Card.Text>{post.text}</Card.Text>
           </Card.Body>
-          <Card.Footer className="d-flex justify-content-around">
-            <Button variant="light">
+          <Card.Footer className='d-flex justify-content-around'>
+            <Button variant='light'>
               <SlLike /> Consiglia
             </Button>
-            <Button variant="light">
+            <Button variant='light'>
               <FaRegCommentDots /> Commenta
             </Button>
-            <Button variant="light">
+            <Button variant='light'>
               <LuGitCompareArrows /> Diffondi il post
             </Button>
-            <Button variant="light">
+            <Button variant='light'>
               <BsFillSendFill /> Invia
             </Button>
           </Card.Footer>

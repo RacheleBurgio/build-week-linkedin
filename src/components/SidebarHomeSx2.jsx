@@ -1,6 +1,6 @@
-import 'bootstrap/dist/css/bootstrap.min.css'
-import 'bootstrap-icons/font/bootstrap-icons.css'
-import { BsPlusLg } from 'react-icons/bs'
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
+import { BsPlusLg } from "react-icons/bs";
 import {
   Card,
   ListGroup,
@@ -8,12 +8,12 @@ import {
   Container,
   Col,
   Row,
-} from 'react-bootstrap'
+} from "react-bootstrap";
 
 const ProfiloSidebar2 = () => {
   return (
     <Container className="mt-3">
-      <Card style={{ width: '15rem' }} className="border border-rounded">
+      <Card style={{ width: "15rem" }} className="border border-rounded">
         <Card.Body>
           <Card.Title className="fw-bold fs-7 pt-1 text-primary">
             Gruppi
@@ -34,7 +34,7 @@ const ProfiloSidebar2 = () => {
         </ListGroup>
       </Card>
     </Container>
-  )
-}
+  );
+};
 
-export default ProfiloSidebar2
+export default ProfiloSidebar2;

@@ -39,11 +39,11 @@ const PostPictureUpload = ({ onUpload }) => {
 
   return (
     <Form onSubmit={handleUpload}>
-      <Form.Group controlId="formFile">
+      <Form.Group controlId='formFile'>
         <Form.Label>Carica immagine del post</Form.Label>
-        <Form.Control type="file" onChange={handleFileChange} required />
+        <Form.Control type='file' onChange={handleFileChange} required />
       </Form.Group>
-      <Button variant="primary" type="submit">
+      <Button variant='primary' type='submit' className='my-2' size='sm'>
         Carica
       </Button>
     </Form>

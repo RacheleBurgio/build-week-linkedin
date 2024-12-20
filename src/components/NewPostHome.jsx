@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import {
   Form,
   Button,
@@ -10,7 +11,8 @@ import {
 } from 'react-bootstrap'
 import PostPictureUpload from './PostPictureUpload'
 
-const NewPost = ({ onPostCreated, userProfileImage }) => {
+const NewPost = ({ onPostCreated }) => {
+  const me = useSelector((state) => state.profile.me)
   const [postText, setPostText] = useState('')
   const [postImage, setPostImage] = useState(null)
   const [showModal, setShowModal] = useState(false)
@@ -71,19 +73,19 @@ const NewPost = ({ onPostCreated, userProfileImage }) => {
 
   return (
     <Card
-      className="mb-4"
+      className='mb-4'
       onClick={() => setShowModal(true)}
       style={{ cursor: 'pointer' }}
     >
       <Card.Body
-        className="button"
+        className='button'
         style={{ display: 'flex', alignItems: 'center' }}
       >
         <Image
-          src={userProfileImage}
+          src={me.image}
           roundedCircle
           style={{ width: '40px', height: '40px', marginRight: '10px' }}
-          alt="User  Profile"
+          alt='User  Profile'
         />
         <p style={{ margin: 0 }}>Crea un nuovo post</p>
       </Card.Body>
@@ -93,23 +95,29 @@ const NewPost = ({ onPostCreated, userProfileImage }) => {
           <Modal.Title>Nuovo post</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}{' '}
+          {errorMessage && <Alert variant='danger'>{errorMessage}</Alert>}{' '}
           {/* Display error message */}
           <PostPictureUpload onUpload={handleImageUpload} />
           <Form onSubmit={handleCreatePost}>
-            <Form.Group controlId="newPost">
+            <Form.Group controlId='newPost'>
               <Form.Control
-                as="textarea"
+                as='textarea'
                 rows={3}
                 value={postText}
                 onChange={(e) => setPostText(e.target.value)}
-                placeholder="Scrivi qualcosa..."
+                placeholder='Scrivi qualcosa...'
                 required
-                aria-label="Post content"
+                aria-label='Post content'
               />
             </Form.Group>
-            <Button variant="primary" type="submit" disabled={loading}>
-              {loading ? <Spinner animation="border" size="sm" /> : 'Pubblica'}
+            <Button
+              variant='primary'
+              type='submit'
+              disabled={loading}
+              className='my-2'
+              size='sm'
+            >
+              {loading ? <Spinner animation='border' size='sm' /> : 'Pubblica'}
             </Button>
           </Form>
         </Modal.Body>

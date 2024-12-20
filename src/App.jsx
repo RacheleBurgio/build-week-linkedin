@@ -102,13 +102,15 @@ function App() {
             <Sidebar type='sx' />
             <Col className={location.pathname === '/jobs' ? 'col-12' : 'col-6'}>
               <Routes>
-              <Route path='/' element={
-        <>
-            <NewPostHome /> {}
-            <Feed />
-        </>
-    }/>
-                <Route path='/' element={<Feed />} />
+                <Route
+                  path='/'
+                  element={
+                    <>
+                      <NewPostHome /> {}
+                      <Feed />
+                    </>
+                  }
+                />
                 <Route path='/feed' element={<Feed />} />
                 <Route path='/profile' element={<ProfileWrapper />} />
                 <Route

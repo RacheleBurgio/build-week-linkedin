@@ -3,15 +3,17 @@ import {
   SET_POSTS_LOADING,
   SET_POSTS_ERROR,
   SET_POSTFETCH_TIME,
-  SET_USER_POSTS_NUMBER
+  SET_USER_POSTS_NUMBER,
+  SET_USER_POSTS,
 } from '../actions'
 
 const initialState = {
-  posts: {},
+  posts: [],
   postsLoading: true,
   postsError: false,
   postFetchTime: new Date(0).toISOString(),
-  setUserPostsNumber: 0,
+  userPostsNumber: 0,
+  userPosts: [],
 }
 
 const postReducers = (state = initialState, action) => {
@@ -44,7 +46,14 @@ const postReducers = (state = initialState, action) => {
     case SET_USER_POSTS_NUMBER: {
       return {
         ...state,
-        setUserPostsNumber: action.payload,
+        userPostsNumber: action.payload,
+      }
+    }
+
+    case SET_USER_POSTS: {
+      return {
+        ...state,
+        userPosts: action.payload,
       }
     }
     default:

@@ -31,7 +31,7 @@ const JobPage = () => {
     setError(null)
     try {
       const response = await fetch(
-        `https://strive-benchmark.herokuapp.com/api/jobs?category=${category}&limit=10`
+        `https://strive-benchmark.herokuapp.com/api/jobs?category=${category}&limit=20`
       )
       if (response.ok) {
         const data = await response.json()

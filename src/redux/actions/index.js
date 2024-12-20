@@ -99,15 +99,27 @@ export const setUserPostsNumber = (number) => {
   }
 }
 
-export const fetchPosts = () => {
+export const setUserPosts = (posts) => {
+  return {
+    type: SET_USER_POSTS,
+    payload: posts,
+  }
+}
+
+export const fetchPosts = (forceFetch = false) => {
   return async (dispatch, getState) => {
-    const { postFetchTime } = getState()
+    const postFetchTime = getState().posts.postFetchTime
     const profileId = getState().profile.me._id
     const currentTime = new Date().getTime()
     const fetchTime = new Date(postFetchTime).getTime()
     const fiveMinutes = 5 * 60 * 1000
 
-    if (currentTime - fetchTime < fiveMinutes) {
+    console.log('currentTime is:', currentTime)
+    console.log('fetchTime is:', fetchTime)
+
+    if (currentTime - fetchTime < fiveMinutes && !forceFetch) {
+      console.log('forceFetch is:', forceFetch)
+      console.log('Posts already fetched in the last 5 minutes')
       return
     }
 
@@ -121,12 +133,17 @@ export const fetchPosts = () => {
           },
         }
       )
-      const sortedPosts = response.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-      const userPosts = sortedPosts.filter((post) => post.user._id === profileId)
+      const sortedPosts = response.data.sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+        .filter((post) => post.text.length > 49) // Filtro un po' di mondezza...
+
+      const userPosts = response.data.filter((post) => post.user._id === profileId)
+
       dispatch(setPosts(sortedPosts))
       dispatch(setPostsLoading(false))
       dispatch(setPostFetchTime(new Date().toISOString()))
       dispatch(setUserPostsNumber(userPosts.length))
+      dispatch(setUserPosts(userPosts))
     } catch (error) {
       console.error('Error fetching posts:', error)
       dispatch(setPostsLoading(false))

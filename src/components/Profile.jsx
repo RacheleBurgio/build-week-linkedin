@@ -10,8 +10,8 @@ const Profile = (props) => {
   return (
     <>
       <ProfileUp profileId={profileId} />
-      <ProfileDown profileId={profileId} section='experiences' />
       <ProfileContributes profileId={profileId} />
+      <ProfileDown profileId={profileId} section='experiences' />
     </>
   )
 }

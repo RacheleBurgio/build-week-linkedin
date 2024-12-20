@@ -53,7 +53,7 @@ const CardHome = () => {
 
   useEffect(() => {
     // Carica i dati del profilo all'avvio dell'app
-    dispatch(fetchPosts()).finally(() => {})
+    dispatch(fetchPosts(false)).finally(() => {})
   }, [dispatch])
 
   if (postsLoading) {

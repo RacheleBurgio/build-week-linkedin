@@ -23,25 +23,12 @@ const SidebarHomeDx = () => {
   const postsError = useSelector((state) => state.posts.postsError);
   const dispatch = useDispatch();
 
-  // const posts = [
-  //     { title: "Tech: le tendenze del 2025", date: "2 giorni fa", readers: "2.371 lettori" },
-  //     { title: "Come sarà il lavoro nel 2025", date: "1 giorno fa", readers: "442 lettori" },
-  //     { title: "\"Chiuso per festa\"", date: "22 minuti fa", readers: "" },
-  //     { title: "Big Ideas: 15 spunti per il 2025", date: "2 giorni fa", readers: "4.647 lettori" },
-  //     { title: "Unicredit-Banco Bpm", date: "1 giorno fa", readers: "3.743 lettori" },
-  //     { title: "Revolut diventa banca italiana", date: "2 giorni fa", readers: "1.048 lettori" },
-  //     { title: "Che cosa fa Gemini 2.0", date: "2 giorni fa", readers: "665 lettori" },
-  //     { title: "Istantanee dal Maximall Pompeii", date: "2 giorni fa", readers: "456 lettori" },
-  //     { title: "Approvato il Ddl Lavoro", date: "2 giorni fa", readers: "445 lettori" },
-  //     { title: "Censis fotografa gli italiani", date: "2 giorni fa", readers: "371 lettori" }
-  // ]
-
   const loadMore = () => {
     setVisiblePosts((prev) => Math.min(prev + 5, posts.length));
   };
 
   const showLess = () => {
-    setVisiblePosts(5);
+    setVisiblePosts((prev) => Math.max(prev - 5, 5));
   };
 
   const randomReaders = () => {
@@ -81,11 +68,13 @@ const SidebarHomeDx = () => {
   }
 
   return (
-    <Container style={{ width: "18rem" }}>
+    <Container style={{ width: "18rem" }} className="mt-3">
       <Card>
         <Card.Body>
           <Card.Title>In primo piano</Card.Title>
-          <Card.Subtitle>a cura di Linkedin Notizie</Card.Subtitle>
+          <Card.Subtitle className="pb-3">
+            a cura di Linkedin Notizie
+          </Card.Subtitle>
           {/* Post */}
           {posts.slice(0, visiblePosts).map((post, index) => (
             <div key={index} className="mb-2">
@@ -100,7 +89,7 @@ const SidebarHomeDx = () => {
           ))}
 
           {/* Pulsante "Vedi Altro" o "Meno dettagli" */}
-          {visiblePosts < posts.length ? (
+          {visiblePosts < 10 ? (
             <Button variant="link" onClick={loadMore}>
               Vedi Altro
             </Button>
@@ -111,26 +100,26 @@ const SidebarHomeDx = () => {
           )}
           <div>I giochi di oggi</div>
           <Row>
-            <Col>
+            <Col className="col-2">
               <PiGridFourFill />
             </Col>
-            <Col>
+            <Col className="col-8">
               Tango #74
               <div>Armonizza la griglia</div>
             </Col>
-            <Col>
+            <Col className="col-2">
               <SlArrowRight />
             </Col>
           </Row>
           <Row>
-            <Col>
+            <Col className="col-2">
               <BsGrid3X3GapFill />
             </Col>
-            <Col>
+            <Col className="col-8">
               Queens #234
               <div>Incorona ogni regione</div>
             </Col>
-            <Col>
+            <Col className="col-2">
               <SlArrowRight />
             </Col>
           </Row>

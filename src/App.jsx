@@ -46,10 +46,10 @@ const ProfileWrapper = () => {
   if (!profileId) {
     return (
       <div
-        className='d-flex justify-content-center align-items-center'
+        className="d-flex justify-content-center align-items-center"
         style={{ height: '100vh' }}
       >
-        <Spinner animation='border' variant='primary' />
+        <Spinner animation="border" variant="primary" />
       </div>
     )
   }
@@ -83,10 +83,10 @@ function App() {
   if (loading) {
     return (
       <div
-        className='d-flex justify-content-center align-items-center'
+        className="d-flex justify-content-center align-items-center"
         style={{ height: '100vh' }}
       >
-        <Spinner animation='border' variant='primary' />
+        <Spinner animation="border" variant="primary" />
       </div>
     )
   }
@@ -99,11 +99,11 @@ function App() {
       <main style={{ backgroundColor: '#F4F2EE' }}>
         <Container>
           <Row>
-            <Sidebar type='sx' />
+            <Sidebar type="sx" />
             <Col className={location.pathname === '/jobs' ? 'col-12' : 'col-6'}>
               <Routes>
                 <Route
-                  path='/'
+                  path="/"
                   element={
                     <>
                       <NewPostHome /> {}
@@ -111,30 +111,30 @@ function App() {
                     </>
                   }
                 />
-                <Route path='/feed' element={<Feed />} />
-                <Route path='/profile' element={<ProfileWrapper />} />
+                <Route path="/feed" element={<Feed />} />
+                <Route path="/profile" element={<ProfileWrapper />} />
                 <Route
-                  path='/profile/:profileId'
+                  path="/profile/:profileId"
                   element={<ProfileWrapper />}
                 />
-                <Route path='/post/:postId' element={<PostWrapper />} />
-                <Route path='/comment/:id' element={<CommentWrapper />} />
+                <Route path="/post/:postId" element={<PostWrapper />} />
+                <Route path="/comment/:id" element={<CommentWrapper />} />
                 <Route
-                  path='*'
-                  element={<Alert variant='danger'>Pagina non trovata</Alert>}
+                  path="*"
+                  element={<Alert variant="danger">Pagina non trovata</Alert>}
                 />
-                <Route path='/jobs' element={<JobPage />} />
+                <Route path="/jobs" element={<JobPage />} />
               </Routes>
             </Col>
-            <Sidebar type='dx' />
+            <Sidebar type="dx" />
           </Row>
+          {location.pathname !== '/jobs' && (
+            <footer>
+              <Footer />
+            </footer>
+          )}
         </Container>
       </main>
-      {location.pathname !== '/jobs' && (
-        <footer>
-          <Footer />
-        </footer>
-      )}
     </>
   )
 }

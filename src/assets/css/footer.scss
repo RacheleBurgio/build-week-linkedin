@@ -8,4 +8,68 @@
 
 @import '../scss/bootstrap.scss';
 
+.item {
+  display: flex;
+  align-items: flex-start;
+}
 
+ul {
+  list-style-type: none;
+}
+
+ul li {
+  display: flex;
+  align-items: center;
+  color: #00000078;
+  margin: 1em 0;
+}
+
+.footer-icon {
+  font-size: 50px;
+  margin-right: 10px;
+}
+
+.item div {
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  text-decoration: none;
+  font-size: 15px;
+  color: #000;
+}
+
+a:hover {
+  color: #007bff;
+}
+
+.item div p {
+  font-size: 12px;
+}
+
+li a {
+  font-size: 12px;
+}
+.fine {
+  font-size: 10px;
+  margin-left: 3em;
+}
+
+.select {
+  width: 200px;
+  padding: 5px;
+  margin-top: 1em;
+}
+
+.label {
+  font-size: 12px;
+}
+
+.item div a {
+  font-size: 15px;
+}
+
+//.main-container {
+//background-color: #8f8d8d;
+// }

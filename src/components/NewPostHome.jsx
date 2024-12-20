@@ -1,24 +1,24 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   Form,
   Button,
   Card,
   Modal,
   Image,
-  Alert,
   Spinner,
 } from 'react-bootstrap';
+import { fetchPosts } from '../redux/actions'; // Ensure correct import
 import PostPictureUpload from './PostPictureUpload';
 
-const NewPost = ({ onPostCreated }) => {
+const NewPost = () => { // Removed onClosePopup prop
   const me = useSelector((state) => state.profile.me);
   const [postText, setPostText] = useState('');
   const [postImage, setPostImage] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const apiKey = import.meta.env.VITE_LINKEDIN_API_KEY;
+  const dispatch = useDispatch();
 
   const handleCreatePost = async (e) => {
     e.preventDefault();
@@ -26,11 +26,10 @@ const NewPost = ({ onPostCreated }) => {
 
     const body = {
       text: postText,
-      ...(postImage && { image: postImage }), // Conditionally add image
+      ...(postImage && { image: postImage }), 
     };
 
     setLoading(true);
-    setErrorMessage(''); // Clear previous error messages
 
     try {
       const response = await fetch(
@@ -45,29 +44,31 @@ const NewPost = ({ onPostCreated }) => {
         }
       );
 
-      // Log the response for debugging
-      console.log('Response status:', response.status);
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Network response was not ok');
+        // Log the error but don't set an error message
+        console.error('Error creating post. Response not okay.');
+        return;
       }
 
-      const newPost = await response.json();
-      onPostCreated(newPost);
+      await response.json();
+      
+      // Dispatch the fetchPosts action directly here
+      dispatch(fetchPosts(true));
+
+      // Close the modal after successful post creation
       resetForm();
     } catch (error) {
+      // Log the error if you want, but do not set an error message state
       console.error('Error creating post:', error);
-      setErrorMessage('Errore nella creazione del post. Riprova.'); // Set error message
     } finally {
       setLoading(false);
     }
   };
 
   const resetForm = () => {
-    console.log("Resetting form and closing modal...");
     setPostText('');
     setPostImage(null);
-    setShowModal(false);
+    setShowModal(false); // Close the modal after resetting form
   };
 
   const handleImageUpload = (imageUrl) => {
@@ -75,27 +76,28 @@ const NewPost = ({ onPostCreated }) => {
   };
 
   return (
-    <Card
-      className='mb-4'
-      onClick={() => setShowModal(true)}
-      style={{ cursor: 'pointer' }}
-    >
-      <Card.Body style={{ display: 'flex', alignItems: 'center' }}>
-        <Image
-          src={me.image}
-          roundedCircle
-          style={{ width: '40px', height: '40px', marginRight: '10px' }}
-          alt='User Profile'
-        />
-        <p style={{ margin: 0 }}>Crea un nuovo post</p>
-      </Card.Body>
+    <>
+      <Card
+        className='mb-4'
+        onClick={() => setShowModal(true)}
+        style={{ cursor: 'pointer' }}
+      >
+        <Card.Body style={{ display: 'flex', alignItems: 'center' }}>
+          <Image
+            src={me.image}
+            roundedCircle
+            style={{ width: '40px', height: '40px', marginRight: '10px' }}
+            alt='User Profile'
+          />
+          <p style={{ margin: 0 }}>Crea un nuovo post</p>
+        </Card.Body>
+      </Card>
 
       <Modal show={showModal} onHide={resetForm}>
-        <Modal.Header closeButton onClick={resetForm}>
+        <Modal.Header closeButton>
           <Modal.Title>Nuovo post</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {errorMessage && <Alert variant='danger'>{errorMessage}</Alert>}
           <PostPictureUpload onUpload={handleImageUpload} />
           <Form onSubmit={handleCreatePost}>
             <Form.Group controlId='newPost'>
@@ -107,6 +109,7 @@ const NewPost = ({ onPostCreated }) => {
                 placeholder='Scrivi qualcosa...'
                 required
                 aria-label='Post content'
+                maxLength={500}
               />
             </Form.Group>
             <Button
@@ -121,7 +124,7 @@ const NewPost = ({ onPostCreated }) => {
           </Form>
         </Modal.Body>
       </Modal>
-    </Card>
+    </>
   );
 };
 

@@ -15,8 +15,6 @@ import {
   Alert,
 } from "react-bootstrap";
 import { SlArrowRight } from "react-icons/sl";
-import { BsGrid3X3GapFill } from "react-icons/bs";
-import { PiGridFourFill } from "react-icons/pi";
 
 const SidebarHomeDx = () => {
   const [visiblePosts, setVisiblePosts] = useState(5);

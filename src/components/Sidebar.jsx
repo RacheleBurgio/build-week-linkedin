@@ -9,8 +9,14 @@ import SidebarHomeDx from "./SidebarHomeDx";
 import { useLocation } from "react-router";
 import { Col } from "react-bootstrap";
 
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+
 const Sidebar = (props) => {
   const location = useLocation();
+  const profile = useSelector((state) => state.profile.me);
+  console.log("Profile Sidebar", profile);
+  useEffect(() => {}, [profile]);
 
   if (location.pathname === "/jobs") {
     return <></>;
@@ -36,7 +42,7 @@ const Sidebar = (props) => {
     );
   }
 
-  if (props.type === "dx" && location.pathname === "/profile") {
+  if (props.type === "dx" && location.pathname.startsWith("/profile")) {
     return (
       <Col className="col-3">
         <ImpostazioniProfilo />

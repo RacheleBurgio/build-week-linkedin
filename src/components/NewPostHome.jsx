@@ -11,7 +11,7 @@ import {
 } from 'react-bootstrap';
 import PostPictureUpload from './PostPictureUpload';
 
-const NewPost = ({ onPostCreated }) => {
+const NewPost = ({ onPostCreated, onClosePopup }) => {
   const me = useSelector((state) => state.profile.me);
   const [postText, setPostText] = useState('');
   const [postImage, setPostImage] = useState(null);
@@ -30,7 +30,7 @@ const NewPost = ({ onPostCreated }) => {
     };
 
     setLoading(true);
-    setErrorMessage(''); // Clear previous error messages
+    setErrorMessage('');
 
     try {
       const response = await fetch(
@@ -45,8 +45,6 @@ const NewPost = ({ onPostCreated }) => {
         }
       );
 
-      // Log the response for debugging
-      console.log('Response status:', response.status);
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.message || 'Network response was not ok');
@@ -54,7 +52,7 @@ const NewPost = ({ onPostCreated }) => {
 
       const newPost = await response.json();
       onPostCreated(newPost);
-      resetForm();
+      resetForm(); // Reset form after post creation
     } catch (error) {
       console.error('Error creating post:', error);
       setErrorMessage('Errore nella creazione del post. Riprova.'); // Set error message
@@ -64,10 +62,10 @@ const NewPost = ({ onPostCreated }) => {
   };
 
   const resetForm = () => {
-    console.log("Resetting form and closing modal...");
     setPostText('');
     setPostImage(null);
     setShowModal(false);
+    onClosePopup(); // Close any popup or navigate back to home
   };
 
   const handleImageUpload = (imageUrl) => {
@@ -91,7 +89,7 @@ const NewPost = ({ onPostCreated }) => {
       </Card.Body>
 
       <Modal show={showModal} onHide={resetForm}>
-        <Modal.Header closeButton onClick={resetForm}>
+        <Modal.Header closeButton>
           <Modal.Title>Nuovo post</Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -107,6 +105,7 @@ const NewPost = ({ onPostCreated }) => {
                 placeholder='Scrivi qualcosa...'
                 required
                 aria-label='Post content'
+                maxLength={500} // Limita a 500 caratteri
               />
             </Form.Group>
             <Button

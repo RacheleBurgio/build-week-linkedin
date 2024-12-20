@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   Form,
   Button,
@@ -9,9 +9,10 @@ import {
   Alert,
   Spinner,
 } from 'react-bootstrap';
+import { fetchPosts } from '../redux/actions'; // Ensure correct import
 import PostPictureUpload from './PostPictureUpload';
 
-const NewPost = ({ onPostCreated, onClosePopup }) => {
+const NewPost = ({ onClosePopup }) => {
   const me = useSelector((state) => state.profile.me);
   const [postText, setPostText] = useState('');
   const [postImage, setPostImage] = useState(null);
@@ -19,6 +20,7 @@ const NewPost = ({ onPostCreated, onClosePopup }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const apiKey = import.meta.env.VITE_LINKEDIN_API_KEY;
+  const dispatch = useDispatch();
 
   const handleCreatePost = async (e) => {
     e.preventDefault();
@@ -26,7 +28,7 @@ const NewPost = ({ onPostCreated, onClosePopup }) => {
 
     const body = {
       text: postText,
-      ...(postImage && { image: postImage }), // Conditionally add image
+      ...(postImage && { image: postImage }), 
     };
 
     setLoading(true);
@@ -51,11 +53,14 @@ const NewPost = ({ onPostCreated, onClosePopup }) => {
       }
 
       const newPost = await response.json();
-      onPostCreated(newPost);
-      resetForm(); // Reset form after post creation
+
+      // Dispatch the fetchPosts action directly here
+      dispatch(fetchPosts(true));
+
+      resetForm();
     } catch (error) {
       console.error('Error creating post:', error);
-      setErrorMessage('Errore nella creazione del post. Riprova.'); // Set error message
+      setErrorMessage('Errore nella creazione del post. Riprova.');
     } finally {
       setLoading(false);
     }
@@ -65,7 +70,7 @@ const NewPost = ({ onPostCreated, onClosePopup }) => {
     setPostText('');
     setPostImage(null);
     setShowModal(false);
-    onClosePopup(); // Close any popup or navigate back to home
+    onClosePopup();
   };
 
   const handleImageUpload = (imageUrl) => {
@@ -105,7 +110,7 @@ const NewPost = ({ onPostCreated, onClosePopup }) => {
                 placeholder='Scrivi qualcosa...'
                 required
                 aria-label='Post content'
-                maxLength={500} // Limita a 500 caratteri
+                maxLength={500}
               />
             </Form.Group>
             <Button

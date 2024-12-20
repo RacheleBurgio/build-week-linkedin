@@ -43,7 +43,6 @@ export const getMe = (query = 'me') => {
   return async (dispatch) => {
     dispatch(setMeLoading(true))
     try {
-
       const baseEndpoint = 'https://striveschool-api.herokuapp.com/api/profile'
 
       const response = await axios.get(`${baseEndpoint}/${query}`, {
@@ -133,11 +132,13 @@ export const fetchPosts = (forceFetch = false) => {
           },
         }
       )
-      const sortedPosts = response.data.sort(
-        (a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+      const sortedPosts = response.data
+        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
         .filter((post) => post.text.length > 49) // Filtro un po' di mondezza...
 
-      const userPosts = response.data.filter((post) => post.user._id === profileId)
+      const userPosts = response.data.filter(
+        (post) => post.user._id === profileId
+      )
 
       dispatch(setPosts(sortedPosts))
       dispatch(setPostsLoading(false))

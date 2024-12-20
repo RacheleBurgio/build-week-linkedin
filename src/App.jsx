@@ -28,6 +28,7 @@ import Comment from './components/Comment'
 import JobPage from './components/JobPage'
 import NewPostHome from './components/NewPostHome'
 
+
 // Wrapper per il profilo
 const ProfileWrapper = () => {
   const { profileId: paramProfileId } = useParams()
